@@ -1,0 +1,85 @@
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import java.awt.Canvas;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.border.EmptyBorder;
+
+
+public class Login extends JFrame {
+
+	private JPanel contentPane;
+	private JFrame frmMicroorg;
+	private JTextField textField;
+	private JTextField textField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Login frame = new Login();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Login() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		frmMicroorg = new JFrame();
+		frmMicroorg.setTitle("MicroOrg");
+		frmMicroorg.getContentPane().setBackground(Color.WHITE);
+		frmMicroorg.getContentPane().setLayout(null);
+		
+		JButton btnPrijaviSe = new JButton("Prijavi se!");
+		btnPrijaviSe.setBounds(195, 222, 89, 23);
+		frmMicroorg.getContentPane().add(btnPrijaviSe);
+		
+		textField = new JTextField();
+		textField.setBounds(195, 160, 86, 20);
+		frmMicroorg.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(195, 191, 86, 20);
+		frmMicroorg.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblKorisnikoIme = new JLabel("Korisni\u010Dko ime:");
+		lblKorisnikoIme.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKorisnikoIme.setBounds(20, 163, 158, 14);
+		frmMicroorg.getContentPane().add(lblKorisnikoIme);
+		
+		JLabel lblifra = new JLabel("\u0160ifra:");
+		lblifra.setBounds(152, 194, 33, 14);
+		frmMicroorg.getContentPane().add(lblifra);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\logo.jpg"));
+		label.setBounds(81, 18, 200, 114);
+		frmMicroorg.getContentPane().add(label);
+		frmMicroorg.setBounds(100, 100, 402, 320);
+		frmMicroorg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+}

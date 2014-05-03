@@ -1,0 +1,23 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Login novi=new Login();
+		novi.setVisible(true); //postavlja vidljivost frame-a, mora ovako jer je po defaultu false
+		novi.setLocationRelativeTo(null); // postavlja lokaciju frame-a na sredinu ekrana
+		
+		/*SefGui.Pocetni novi=new SefGui.Pocetni();
+		novi.setVisible(true);
+		SluzbenikGui.Pocetni nova=new SluzbenikGui.Pocetni();
+		nova.setVisible(true);
+		//novi.setVisible(true);
+		
+		//SefGui.Pocetni l=new SefGui.Pocetni();
+		//SluzbenikGui.Pocetni lik=new SluzbenikGui.Pocetni();*/
+		
+		
+		
+	}
+
+}

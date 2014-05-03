@@ -1,0 +1,148 @@
+package SefGui;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
+
+	
+public class Pocetni {
+
+	private JFrame frmMicroorgPoetni;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Pocetni window = new Pocetni();
+					window.frmMicroorgPoetni.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public PocetniSef() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmMicroorgPoetni = new JFrame();
+		frmMicroorgPoetni.getContentPane().setBackground(new Color(255, 255, 255));
+		frmMicroorgPoetni.getContentPane().setLayout(null);
+		
+		JButton btnKlijenti = new JButton("Klijenti");
+		btnKlijenti.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnKlijenti.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\ikone\\users (1).png"));
+		btnKlijenti.setHorizontalAlignment(SwingConstants.TRAILING);
+		btnKlijenti.setBounds(22, 11, 140, 50);
+		frmMicroorgPoetni.getContentPane().add(btnKlijenti);
+		
+		JButton btnUposlenici = new JButton("Uposlenici");
+		btnUposlenici.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\Workers.png"));
+		btnUposlenici.setBackground(UIManager.getColor("Button.background"));
+		btnUposlenici.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnUposlenici.setBounds(22, 255, 150, 50);
+		frmMicroorgPoetni.getContentPane().add(btnUposlenici);
+		
+		JButton btnKrediti = new JButton("Krediti");
+		btnKrediti.setBackground(UIManager.getColor("Button.background"));
+		btnKrediti.setHorizontalAlignment(SwingConstants.TRAILING);
+		btnKrediti.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\ikone\\kredit.png"));
+		btnKrediti.setBounds(22, 133, 140, 50);
+		frmMicroorgPoetni.getContentPane().add(btnKrediti);
+		
+		JButton btnPonude = new JButton("Ponude");
+		btnPonude.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\ikone\\poooonuda.png"));
+		btnPonude.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnPonude.setBounds(22, 72, 140, 50);
+		frmMicroorgPoetni.getContentPane().add(btnPonude);
+		
+		JButton btnNewButton = new JButton("Transakcije");
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\kredit.jpg"));
+		btnNewButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnNewButton.setBounds(22, 316, 160, 50);
+		frmMicroorgPoetni.getContentPane().add(btnNewButton);
+		
+		JButton btnIzvjetaji = new JButton("Izvje\u0161taji");
+		btnIzvjetaji.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\ikone\\report.png"));
+		btnIzvjetaji.setBackground(UIManager.getColor("Button.background"));
+		btnIzvjetaji.setHorizontalAlignment(SwingConstants.TRAILING);
+		btnIzvjetaji.setBounds(22, 194, 140, 50);
+		frmMicroorgPoetni.getContentPane().add(btnIzvjetaji);
+		
+		JButton btnPoslovanjeOrganizacije = new JButton("Poslovanje organizacije");
+		btnPoslovanjeOrganizacije.setBounds(22, 377, 190, 50);
+		frmMicroorgPoetni.getContentPane().add(btnPoslovanjeOrganizacije);
+		
+		JLabel lblImeIPrezime = new JLabel("Ime:");
+		lblImeIPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblImeIPrezime.setBounds(214, 228, 79, 14);
+		frmMicroorgPoetni.getContentPane().add(lblImeIPrezime);
+		
+		JLabel lblPozicija = new JLabel("Pozicija:");
+		lblPozicija.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPozicija.setBounds(214, 281, 79, 14);
+		frmMicroorgPoetni.getContentPane().add(lblPozicija);
+		
+		JLabel lblDatum = new JLabel("Datum:");
+		lblDatum.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDatum.setBounds(214, 306, 79, 14);
+		frmMicroorgPoetni.getContentPane().add(lblDatum);
+		
+		JLabel lblPrezime = new JLabel("Prezime:");
+		lblPrezime.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPrezime.setBounds(214, 253, 79, 14);
+		frmMicroorgPoetni.getContentPane().add(lblPrezime);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\logo.jpg"));
+		label.setBounds(222, 47, 200, 114);
+		frmMicroorgPoetni.getContentPane().add(label);
+		
+		JButton btnOdjaviSe = new JButton("Odjavi se!");
+		btnOdjaviSe.setIcon(new ImageIcon("C:\\Users\\Elvis\\Downloads\\ikone\\logout (1).png"));
+		btnOdjaviSe.setHorizontalAlignment(SwingConstants.TRAILING);
+		btnOdjaviSe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnOdjaviSe.setBounds(262, 377, 160, 50);
+		frmMicroorgPoetni.getContentPane().add(btnOdjaviSe);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		panel.setBorder(new LineBorder(new Color(128, 0, 0)));
+		panel.setForeground(new Color(128, 0, 0));
+		panel.setBounds(224, 216, 190, 114);
+		frmMicroorgPoetni.getContentPane().add(panel);
+		frmMicroorgPoetni.setTitle("MicroOrg - \u0160ef");
+		frmMicroorgPoetni.setBounds(100, 100, 448, 470);
+		frmMicroorgPoetni.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+}
