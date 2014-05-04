@@ -23,6 +23,8 @@ import SefGui.Pocetni;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
+
 import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
@@ -105,7 +107,10 @@ public class Login extends JFrame {
 		contentPane.add(button);
 		
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon("slike\\logo.jpg"));
+		//label_2.setIcon(new ImageIcon("slike\\logo.jpg"));
+		ImageIcon _imageIcon= new ImageIcon(getClass().getResource("/resources/logo.jpg"));
+		label_2.setIcon(_imageIcon);
+		
 		label_2.setBounds(93, 37, 200, 114);
 		contentPane.add(label_2);
 		
