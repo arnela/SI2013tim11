@@ -72,7 +72,7 @@ public class Pocetni extends JFrame {
 				SefGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
 		});
-		button.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\users (1).png"));
+		button.setIcon(new ImageIcon("slike\\users (1).png"));
 		button.setHorizontalAlignment(SwingConstants.TRAILING);
 		button.setBounds(10, 11, 153, 50);
 		contentPane.add(button);
@@ -88,7 +88,7 @@ public class Pocetni extends JFrame {
 			}
 		});
 		button_1.setBackground(UIManager.getColor("Button.background"));
-		button_1.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\poooonuda.png"));
+		button_1.setIcon(new ImageIcon("slike\\poooonuda.png"));
 		button_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		button_1.setBounds(10, 72, 153, 50);
 		contentPane.add(button_1);
@@ -103,7 +103,7 @@ public class Pocetni extends JFrame {
 				SefGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
 		});
-		button_2.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\kredit.png"));
+		button_2.setIcon(new ImageIcon("slike\\kredit.png"));
 		button_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		button_2.setBackground(UIManager.getColor("Button.background"));
 		button_2.setBounds(10, 133, 153, 50);
@@ -119,7 +119,7 @@ public class Pocetni extends JFrame {
 				SefGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
 		});
-		button_3.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\report.png"));
+		button_3.setIcon(new ImageIcon("slike\\report.png"));
 		button_3.setHorizontalAlignment(SwingConstants.TRAILING);
 		button_3.setBackground(UIManager.getColor("Button.background"));
 		button_3.setBounds(10, 194, 153, 50);
@@ -135,7 +135,7 @@ public class Pocetni extends JFrame {
 				SefGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
 		});
-		button_4.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\Workers.png"));
+		button_4.setIcon(new ImageIcon("slike\\Workers.png"));
 		button_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		button_4.setBackground(UIManager.getColor("Button.background"));
 		button_4.setBounds(10, 255, 153, 50);
@@ -152,7 +152,7 @@ public class Pocetni extends JFrame {
 			}
 		});
 		button_5.setBackground(UIManager.getColor("Button.background"));
-		button_5.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\kredit.jpg"));
+		button_5.setIcon(new ImageIcon("slike\\kredit.jpg"));
 		button_5.setHorizontalAlignment(SwingConstants.RIGHT);
 		button_5.setBounds(10, 316, 153, 50);
 		contentPane.add(button_5);
@@ -245,13 +245,13 @@ public class Pocetni extends JFrame {
 				SefGui.Pocetni.this.dispose();
 			}
 		});
-		button_7.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\logout (1).png"));
+		button_7.setIcon(new ImageIcon("slike\\logout (1).png"));
 		button_7.setHorizontalAlignment(SwingConstants.TRAILING);
 		button_7.setBounds(257, 377, 153, 50);
 		contentPane.add(button_7);
 		
 		JLabel label_4 = new JLabel("");
-		label_4.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\logo.jpg"));
+		label_4.setIcon(new ImageIcon("slike\\logo.jpg"));
 		label_4.setBounds(210, 47, 200, 114);
 		contentPane.add(label_4);
 	}

@@ -102,7 +102,7 @@ public class Login extends JFrame {
 		contentPane.add(button);
 		
 		JLabel label_2 = new JLabel("");
-		label_2.setIcon(new ImageIcon("D:\\MikroOrg\\MicroOrg\\slike\\logo.jpg"));
+		label_2.setIcon(new ImageIcon("slike\\logo.jpg"));
 		label_2.setBounds(93, 37, 200, 114);
 		contentPane.add(label_2);
 		
