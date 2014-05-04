@@ -6,11 +6,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -19,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -48,6 +52,7 @@ public class Ponude extends JFrame {
 				try {
 					Ponude frame = new Ponude();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,6 +70,7 @@ public class Ponude extends JFrame {
 				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi poèetni gui za sluzbenika
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setTitle("MicroOrg - Ponude");
@@ -247,6 +253,11 @@ public class Ponude extends JFrame {
 		});
 		
 		JButton button_1 = new JButton("Kreiraj ponudu");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -301,6 +312,11 @@ public class Ponude extends JFrame {
 		panel_3.add(label_12);
 		
 		JButton btnPretraiPo = new JButton("Pretra\u017Ei po:");
+		btnPretraiPo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		btnPretraiPo.setBounds(398, 11, 121, 23);
 		panel_2.add(btnPretraiPo);
 		
@@ -331,10 +347,20 @@ public class Ponude extends JFrame {
 		panel_2.add(btnNazad_1);
 		
 		JButton button_4 = new JButton("Izbri\u0161i");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_4.setBounds(256, 340, 78, 23);
 		panel_2.add(button_4);
 		
 		JButton button_5 = new JButton("Print");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_5.setBounds(159, 340, 87, 23);
 		panel_2.add(button_5);
 		
@@ -450,6 +476,11 @@ public class Ponude extends JFrame {
 		panel_5.setLayout(gl_panel_5);
 		
 		JButton button_8 = new JButton("Po\u0161alji na E-mail");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_8.setBounds(10, 340, 139, 23);
 		panel_2.add(button_8);
 	}

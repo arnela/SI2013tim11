@@ -34,6 +34,7 @@ public class Pocetni extends JFrame {
 				try {
 					Pocetni frame = new Pocetni();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,6 +52,7 @@ public class Pocetni extends JFrame {
 			public void windowClosed(WindowEvent e) {
 				osnovni.Login l=new osnovni.Login();
 				l.setVisible(true);
+				l.setResizable(false);
 				l.setLocationRelativeTo(null);
 			}
 		});
@@ -84,6 +86,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Klijenti n =new SluzbenikGui.Klijenti();  //kreira klijenti gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
@@ -99,6 +102,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Krediti n =new SluzbenikGui.Krediti();  //kreira klijenti gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
@@ -115,6 +119,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Ponude n =new SluzbenikGui.Ponude();  //kreira klijenti gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
@@ -131,6 +136,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Transakcije n =new SluzbenikGui.Transakcije();  //kreira klijenti gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}
@@ -147,6 +153,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Izvjestaji n =new SluzbenikGui.Izvjestaji();  //kreira klijenti gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rješenje jer ga skriva negdje...
 			}

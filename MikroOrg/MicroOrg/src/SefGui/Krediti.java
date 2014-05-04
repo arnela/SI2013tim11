@@ -6,16 +6,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +47,7 @@ public class Krediti extends JFrame {
 				try {
 					Krediti frame = new Krediti();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,6 +65,7 @@ public class Krediti extends JFrame {
 				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setTitle("MicroOrg - Krediti");
@@ -87,6 +93,11 @@ public class Krediti extends JFrame {
 		});
 		
 		JButton button_1 = new JButton("Kreiraj tip kredita");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
@@ -250,6 +261,11 @@ public class Krediti extends JFrame {
 		panel_4.add(textField_8);
 		
 		JButton button_2 = new JButton("Pretra\u017Ei");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_2.setBounds(289, 20, 93, 23);
 		panel_3.add(button_2);
 		
@@ -263,6 +279,11 @@ public class Krediti extends JFrame {
 		panel_3.add(btnNazad_1);
 		
 		JButton button_4 = new JButton("Izbri\u0161i");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_4.setBounds(192, 289, 91, 23);
 		panel_3.add(button_4);
 		

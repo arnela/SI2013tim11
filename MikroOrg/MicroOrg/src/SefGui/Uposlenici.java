@@ -6,13 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -43,6 +47,7 @@ public class Uposlenici extends JFrame {
 				try {
 					Uposlenici frame = new Uposlenici();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,6 +65,7 @@ public class Uposlenici extends JFrame {
 				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setTitle("MicroOrg - Uposlenici");
@@ -90,6 +96,11 @@ public class Uposlenici extends JFrame {
 		panel.add(btnNazad);
 		
 		JButton button_1 = new JButton("Unesi zaposlenika");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_1.setBounds(10, 324, 142, 23);
 		panel.add(button_1);
 		
@@ -217,14 +228,29 @@ public class Uposlenici extends JFrame {
 		panel_2.add(panel_3);
 		
 		JButton button = new JButton("PDF prikaz");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button.setBounds(10, 326, 101, 23);
 		panel_2.add(button);
 		
 		JButton button_2 = new JButton("Promijeni informacije");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_2.setBounds(121, 326, 202, 23);
 		panel_2.add(button_2);
 		
 		JButton button_3 = new JButton("Izbri\u0161i ");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_3.setBounds(333, 326, 79, 23);
 		panel_2.add(button_3);
 		
@@ -249,6 +275,11 @@ public class Uposlenici extends JFrame {
 		panel_4.add(label_11);
 		
 		JButton button_4 = new JButton("Pretraga");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_4.setBounds(400, 11, 112, 32);
 		panel_2.add(button_4);
 		

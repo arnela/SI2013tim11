@@ -6,13 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +36,7 @@ public class Izvjestaji extends JFrame {
 				try {
 					Izvjestaji frame = new Izvjestaji();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,6 +54,7 @@ public class Izvjestaji extends JFrame {
 				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setTitle("MicroOrg - Izvje\u0161taji");
@@ -76,6 +82,11 @@ public class Izvjestaji extends JFrame {
 		panel.add(panel_1);
 		
 		JButton button = new JButton("PDF prikaz");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button.setBounds(10, 289, 112, 23);
 		panel.add(button);
 		
@@ -100,6 +111,11 @@ public class Izvjestaji extends JFrame {
 		panel_2.add(label_1);
 		
 		JButton button_1 = new JButton("Pretra\u017Ei po:");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_1.setBounds(405, 11, 121, 32);
 		panel.add(button_1);
 		

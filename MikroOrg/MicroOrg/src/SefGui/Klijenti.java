@@ -13,6 +13,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
@@ -37,6 +38,7 @@ public class Klijenti extends JFrame {
 				try {
 					Klijenti frame = new Klijenti();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,6 +57,7 @@ public class Klijenti extends JFrame {
 				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setTitle("MicroOrg - Klijenti");
@@ -81,6 +84,11 @@ public class Klijenti extends JFrame {
 		panel.add(panel_1);
 		
 		JButton button = new JButton("PDF prikaz");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button.setBounds(10, 315, 112, 23);
 		panel.add(button);
 		
@@ -90,6 +98,11 @@ public class Klijenti extends JFrame {
 		panel.add(button_1);
 		
 		JButton button_2 = new JButton("Izbri\u0161i ");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_2.setBounds(294, 315, 79, 23);
 		panel.add(button_2);
 		
@@ -114,6 +127,11 @@ public class Klijenti extends JFrame {
 		panel_2.add(label_1);
 		
 		JButton btnPretraiPo = new JButton("Pretra\u017Ei po:");
+		btnPretraiPo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		btnPretraiPo.setBounds(455, 11, 121, 23);
 		panel.add(btnPretraiPo);
 		

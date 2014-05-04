@@ -6,7 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -14,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +36,7 @@ public class Izvjestaji extends JFrame {
 				try {
 					Izvjestaji frame = new Izvjestaji();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,6 +55,7 @@ public class Izvjestaji extends JFrame {
 				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi poèetni gui za sluzbenika
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setBackground(Color.WHITE);
@@ -121,10 +127,20 @@ public class Izvjestaji extends JFrame {
 		panel.add(label_7);
 		
 		JButton button = new JButton("PDF prikaz");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button.setBounds(10, 285, 110, 23);
 		panel.add(button);
 		
 		JButton button_1 = new JButton("Unesi izvje\u0161taj");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_1.setBounds(142, 285, 163, 23);
 		panel.add(button_1);
 		

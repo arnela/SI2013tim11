@@ -6,15 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +40,7 @@ public class Transakcije extends JFrame {
 				try {
 					Transakcije frame = new Transakcije();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,6 +58,7 @@ public class Transakcije extends JFrame {
 				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi poèetni gui za sluzbenika
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setTitle("MicroOrg - Transakcije");
@@ -104,6 +110,11 @@ public class Transakcije extends JFrame {
 		panel.add(label_4);
 		
 		JButton button = new JButton("Provjeri");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button.setBounds(234, 94, 89, 23);
 		panel.add(button);
 		
@@ -142,10 +153,20 @@ public class Transakcije extends JFrame {
 		panel_1.add(radioButton_1);
 		
 		JButton button_1 = new JButton("PDF prikaz");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_1.setBounds(10, 280, 125, 23);
 		panel.add(button_1);
 		
 		JButton button_2 = new JButton("Unesi transakciju");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_2.setBounds(145, 280, 147, 23);
 		panel.add(button_2);
 		
@@ -170,6 +191,11 @@ public class Transakcije extends JFrame {
 		panel_2.add(panel_3);
 		
 		JButton button_4 = new JButton("PDF prikaz");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_4.setBounds(10, 278, 112, 23);
 		panel_2.add(button_4);
 		
@@ -194,6 +220,11 @@ public class Transakcije extends JFrame {
 		panel_4.add(label_8);
 		
 		JButton button_5 = new JButton("Pretra\u017Ei po:");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_5.setBounds(405, 11, 121, 32);
 		panel_2.add(button_5);
 		
@@ -228,10 +259,20 @@ public class Transakcije extends JFrame {
 		panel_2.add(button_6);
 		
 		JButton button_7 = new JButton("Obri\u0161i");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_7.setBounds(283, 278, 112, 23);
 		panel_2.add(button_7);
 		
 		JButton button_8 = new JButton("Po\u0161alji na E-mail");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_8.setBounds(132, 278, 135, 23);
 		panel_2.add(button_8);
 	}

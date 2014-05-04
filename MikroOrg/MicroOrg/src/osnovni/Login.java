@@ -39,6 +39,7 @@ public class Login extends JFrame {
 				try {
 					Login novi = new Login();
 					novi.setVisible(true); //za svaki slucaj ako bude pozvan iz neke druge forme...
+					novi.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -85,6 +86,7 @@ public class Login extends JFrame {
 					SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
 					n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 					n.setVisible(true);  // upali vidljivost
+					n.setResizable(false);
 					Login.this.dispose(); //zatvara ovu login formu
 					}
 				String b="sluzbenik";
@@ -93,6 +95,7 @@ public class Login extends JFrame {
 					SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi poèetni gui za šefa
 					n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 					n.setVisible(true);  // upali vidljivost
+					n.setResizable(false);
 					Login.this.dispose(); //zatvara ovu login formu
 					}
 			}

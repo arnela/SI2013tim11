@@ -6,10 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -17,6 +20,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +40,7 @@ public class Ponude extends JFrame {
 				try {
 					Ponude frame = new Ponude();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,6 +58,7 @@ public class Ponude extends JFrame {
 				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
+				n.setResizable(false);
 			}
 		});
 		setTitle("MicroOrg - Ponude");
@@ -95,6 +101,11 @@ public class Ponude extends JFrame {
 		panel_1.add(label_1);
 		
 		JButton button = new JButton("Pretra\u017Ei po:");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button.setBounds(449, 11, 121, 23);
 		panel.add(button);
 		
@@ -121,6 +132,11 @@ public class Ponude extends JFrame {
 		panel.add(btnNazad);
 		
 		JButton button_2 = new JButton("PDF prikaz");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
 		button_2.setBounds(23, 373, 171, 23);
 		panel.add(button_2);
 		
