@@ -1,0 +1,17 @@
+- Pokrenite instalacioni fajl install.jar
+
+- Obavite jednostavnu instalaciju
+
+- Nakon uspješno obavljene instalacije otvorite MicroOrg aplikaciju
+ klikom na ikonu koja bi se trebala nalaziti na desktopu
+ ukoliko ste ostavili defaultne postavke
+
+- Log in podaci za šefa
+	
+Korisnièko ime: šef
+Šifra: šef
+
+- Log in podaci za kreditnog službenika
+
+Korisnièko ime: sluzbenik
+Šifra: sluzbenik
