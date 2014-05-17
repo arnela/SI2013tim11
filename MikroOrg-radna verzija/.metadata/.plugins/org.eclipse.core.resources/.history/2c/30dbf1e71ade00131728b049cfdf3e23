@@ -108,7 +108,11 @@ public class Login extends JFrame {
 		
 		JLabel label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(Login.class.getResource("/slike/logo.jpg")));
-		
+		//label_2.setIcon(new ImageIcon("D:\\MikroOrg-radna verzija\\MicroOrg\\resources\\logo.jpg"));
+		//label_2.setIcon(new ImageIcon("slike\\logo.jpg"));
+		//ImageIcon _imageIcon= new ImageIcon(getClass().getResource("/resources/logo.jpg"));
+		//ImageIcon _imageIcon= new ImageIcon(getClass().getResource("MicroOrg/resources/logo.jpg"));
+		//label_2.setIcon(_imageIcon);
 		
 		label_2.setBounds(93, 37, 200, 114);
 		contentPane.add(label_2);
