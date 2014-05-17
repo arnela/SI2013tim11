@@ -72,12 +72,12 @@ public class Pocetni extends JFrame {
 			}
 		});
 		ImageIcon _imageIcon= new ImageIcon(getClass().getResource("/resources/logout (1).png"));
-		button_5.setIcon(_imageIcon);
+		button_5.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/logout (1).png")));
 		button_5.setBounds(309, 302, 122, 50);
 		contentPane.add(button_5);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(getClass().getResource("/resources/logo.jpg")));
+		label.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/logo.jpg")));
 		label.setBounds(231, 42, 200, 114);
 		contentPane.add(label);
 		
@@ -92,7 +92,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
 			}
 		});
-		button.setIcon(new ImageIcon(getClass().getResource("/resources/users (1).png")));
+		button.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/users (1).png")));
 		button.setHorizontalAlignment(SwingConstants.TRAILING);
 		button.setBounds(10, 11, 153, 60);
 		contentPane.add(button);
@@ -108,7 +108,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
 			}
 		});
-		button_1.setIcon(new ImageIcon(getClass().getResource("/resources/kredit.png")));
+		button_1.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/kredit.png")));
 		button_1.setHorizontalAlignment(SwingConstants.TRAILING);
 		button_1.setBackground(UIManager.getColor("Button.background"));
 		button_1.setBounds(10, 150, 153, 60);
@@ -125,7 +125,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
 			}
 		});
-		button_2.setIcon(new ImageIcon(getClass().getResource("/resources/poooonuda.png")));
+		button_2.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/poooonuda.png")));
 		button_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		button_2.setBackground(UIManager.getColor("Button.background"));
 		button_2.setBounds(10, 79, 153, 60);
@@ -142,7 +142,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
 			}
 		});
-		button_3.setIcon(new ImageIcon(getClass().getResource("/resources/kredit.jpg")));
+		button_3.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/kredit.jpg")));
 		button_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		button_3.setBackground(UIManager.getColor("Button.background"));
 		button_3.setBounds(10, 292, 153, 60);
@@ -159,7 +159,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
 			}
 		});
-		button_4.setIcon(new ImageIcon(getClass().getResource("/resources/report.png")));
+		button_4.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/report.png")));
 		button_4.setHorizontalAlignment(SwingConstants.TRAILING);
 		button_4.setBackground(UIManager.getColor("Button.background"));
 		button_4.setBounds(10, 221, 153, 60);
