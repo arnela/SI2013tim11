@@ -71,7 +71,7 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Pocetni.this.dispose();
 			}
 		});
-		
+		ImageIcon _imageIcon= new ImageIcon(getClass().getResource("/resources/logout (1).png"));
 		button_5.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/logout (1).png")));
 		button_5.setBounds(309, 302, 122, 50);
 		contentPane.add(button_5);
