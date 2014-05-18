@@ -1,45 +1,47 @@
 package domainModels;
+import java.io.Serializable; 
+import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity; 
+import javax.persistence.GeneratedValue; 
+import javax.persistence.Id; 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+@Entity
+@Table
 public class Transakcija {
-	private int transakcijaId;
+	@Id
+	@GeneratedValue
+	private Long transakcijaId;
+	@ManyToOne
+    @JoinColumn(name="klijentId")
 	private Klijent klijent;
-	private Kredit kredit;
-	private Uposlenik kreditniSluzbenik;
 	private Double iznosUplate;
 	private String datumUplate;
 	//gotovina ili uplatnica iz banke
 	private String nacinUplate;
 	private int redniBrUplate;
+	@ManyToOne
+    @JoinColumn(name="kreditId")
+	private Kredit kredit;
+	@ManyToOne
+    @JoinColumn(name="uposlenikId")
+	private Uposlenik kreditniSluzbenik;
 	public Transakcija(){
 		
 	}
 	public Transakcija(
-			int transakcijaId,
 			Klijent klijent,
 			Kredit kredit,
 			Double iznosUplate,
 			String datumUplate,
 			int redniBrUplate,
-			Uposlenik kreditniSluzbenik,
-			String nacinUplate
-			)
-	{
-		this.transakcijaId=transakcijaId;
-		this.klijent=klijent;
-		this.kredit=kredit;
-		this.iznosUplate=iznosUplate;
-		this.datumUplate=datumUplate;
-		this.redniBrUplate=redniBrUplate;
-		this.kreditniSluzbenik=kreditniSluzbenik;
-		this.nacinUplate=nacinUplate;
-	}
-	public Transakcija(
-			Klijent klijent,
-			Kredit kredit,
-			Double iznosUplate,
-			String datumUplate,
-			int redniBrUplate,
-			Uposlenik kreditniSluzbenik,
+		
 			String nacinUplate
 			)
 	{
@@ -48,7 +50,7 @@ public class Transakcija {
 		this.iznosUplate=iznosUplate;
 		this.datumUplate=datumUplate;
 		this.redniBrUplate=redniBrUplate;
-		this.kreditniSluzbenik=kreditniSluzbenik;
+	
 		this.nacinUplate=nacinUplate;
 	}
 
@@ -116,13 +118,13 @@ public class Transakcija {
 	/**
 	 * @return the transakcijaId
 	 */
-	public int getTransakcijaId() {
+	public Long getTransakcijaId() {
 		return transakcijaId;
 	}
 	/**
 	 * @param transakcijaId the transakcijaId to set
 	 */
-	public void setTransakcijaId(int transakcijaId) {
+	public void setTransakcijaId(Long transakcijaId) {
 		this.transakcijaId = transakcijaId;
 	}
 	/**

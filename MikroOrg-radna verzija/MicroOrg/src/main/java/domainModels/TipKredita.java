@@ -1,7 +1,22 @@
 package domainModels;
 
+import java.io.Serializable; 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity; 
+import javax.persistence.GeneratedValue; 
+import javax.persistence.Id; 
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+@Entity
+@Table
 public class TipKredita {
-	private int tipKreditaId;
+	@Id
+	@GeneratedValue
+	private Long tipKreditaId;
 	private String naziv;
 	private String namjena;
 	private Double iznos;
@@ -11,34 +26,13 @@ public class TipKredita {
 	private String instrumentiObezbjedjenja;
 	private String gracePeriod;
 	private Double troskoviObrade;
+	@OneToMany(mappedBy="tipKredita")
+    private Set<Kredit> krediti;
 	public TipKredita(){
 		
 	}
 	public TipKredita(
-			int tipKreditaId,
-			String naziv,
-			String namjena,
-			Double iznos,
-			String rok,
-			Double kamatnaStopa,
-			String garancija,
-			String instrumentiObezbjedjenja,
-			String gracePeriod,
-			Double troskoviObrade
-			)
-	{
-		this.tipKreditaId=tipKreditaId;
-		this.naziv=naziv;
-		this.namjena=namjena;
-		this.iznos=iznos;
-		this.rok=rok;
-		this.kamatnaStopa=kamatnaStopa;
-		this.garancija=garancija;
-		this.instrumentiObezbjedjenja=instrumentiObezbjedjenja;
-		this.gracePeriod=gracePeriod;
-		this.troskoviObrade=troskoviObrade;
-	}
-	public TipKredita(
+
 			String naziv,
 			String namjena,
 			Double iznos,
@@ -60,6 +54,7 @@ public class TipKredita {
 		this.gracePeriod=gracePeriod;
 		this.troskoviObrade=troskoviObrade;
 	}
+
 
 	/**
 	 * @return the naziv
@@ -172,13 +167,13 @@ public class TipKredita {
 	/**
 	 * @return the tipKreditaId
 	 */
-	public int getTipKreditaId() {
+	public Long getTipKreditaId() {
 		return tipKreditaId;
 	}
 	/**
 	 * @param tipKreditaId the tipKreditaId to set
 	 */
-	public void setTipKreditaId(int tipKreditaId) {
+	public void setTipKreditaId(Long tipKreditaId) {
 		this.tipKreditaId = tipKreditaId;
 	}
 }

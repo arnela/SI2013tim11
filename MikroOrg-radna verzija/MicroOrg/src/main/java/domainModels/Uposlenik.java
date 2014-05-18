@@ -1,10 +1,14 @@
 package domainModels;
 import java.io.Serializable; 
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity; 
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue; 
 import javax.persistence.Id; 
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -12,24 +16,32 @@ import javax.persistence.Table;
 
 @Entity 
 @Table
-public class Uposlenik {
-	@Id 
-	 @GeneratedValue
+public class Uposlenik implements Serializable{
+	/**
+	 * 
+	 */
+	@Id
+	@GeneratedValue
 	private Long uposlenikId;
+	private static final Long serialVersionUID = 1L;
 	private Boolean privilegije;
 	private String username;
 	private String password;
 	private int ukupanBrKredita;
 	private int ukupanBrTransakcija;
-	@OneToOne(mappedBy="uposlenik", cascade=CascadeType.ALL)
-	private Osoba osoba;
+	private Long osobaId;
+	@OneToMany(mappedBy="kreditniSluzbenik" , targetEntity = Kredit.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Kredit> krediti;
+	
+	@OneToMany(mappedBy="kreditniSluzbenik" , targetEntity = Transakcija.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Transakcija> transakcije;
 	public Uposlenik(
 			Boolean privilegije,
 			String username,
 			String password,
 			int ukupanBrKredita,
 			int ukupanBrTransakcija,
-			Osoba osoba
+			Long osobaId
 			)
 	{
 		this.privilegije=privilegije;
@@ -37,7 +49,7 @@ public class Uposlenik {
 		this.password=password;
 		this.ukupanBrKredita=ukupanBrKredita;
 		this.ukupanBrTransakcija=ukupanBrTransakcija;
-		this.osoba=	osoba;
+		this.osobaId=osobaId;
 	}
 	public Uposlenik(){
 		
@@ -103,21 +115,19 @@ public class Uposlenik {
 	public void setUkupanBrTransakcija(int ukupanBrTransakcija) {
 		this.ukupanBrTransakcija = ukupanBrTransakcija;
 	}
-	/**
-	 * @return the osoba
-	 */
-	public Osoba getOsoba() {
-		return osoba;
+
+	public Set<Kredit> getKrediti() {
+		return krediti;
 	}
-	/**
-	 * @param osoba the osoba to set
-	 */
-	public void setOsoba(Osoba osoba) {
-		this.osoba = osoba;
+	public void setKrediti(Set<Kredit> krediti) {
+		this.krediti = krediti;
 	}
-	/**
-	 * @return the uposlenikId
-	 */
+	public Long getOsobaId() {
+		return osobaId;
+	}
+	public void setOsobaId(Long osobaId) {
+		this.osobaId = osobaId;
+	}
 	public Long getUposlenikId() {
 		return uposlenikId;
 	}

@@ -1,17 +1,16 @@
 package domainModels;
-import java.io.Serializable; 
+import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity; 
-import javax.persistence.GeneratedValue; 
-import javax.persistence.Id; 
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Parameter;
-import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity 
@@ -21,11 +20,9 @@ public class Osoba implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-		@Id
-		@Column(unique=true, nullable=false)
-	    @GeneratedValue(generator="gen")
-	    @GenericGenerator(name="gen", strategy="foreign", parameters=@Parameter(name="property", value="uposlenik"))
-	private Long uposlenikId;
+	@Id
+	@GeneratedValue
+	private Long osobaId;
 	private String imePrezime;
 	private String jmbg;
 	private String datumRodjenja;
@@ -35,10 +32,6 @@ public class Osoba implements Serializable{
 	private String email;
 	private Boolean aktivan;
 	private String datumUnosa;
-	 @OneToOne
-	    @PrimaryKeyJoinColumn
-	    private Uposlenik uposlenik;
-
 	
 	public Osoba(){
 		
@@ -175,14 +168,11 @@ public class Osoba implements Serializable{
 	public void setDatumUnosa(String datumUnosa) {
 		this.datumUnosa = datumUnosa;
 	}
+	public Long getOsobaId() {
+		return osobaId;
+	}
+	public void setOsobaId(Long osobaId) {
+		this.osobaId = osobaId;
+	}
 
-	public void setUposlenik(Uposlenik uposlenik) {
-		this.uposlenik = uposlenik;
-	}
-	public Long getUposlenikId() {
-		return uposlenikId;
-	}
-	public void setUposlenikId(Long uposlenikId) {
-		this.uposlenikId = uposlenikId;
-	}
 }

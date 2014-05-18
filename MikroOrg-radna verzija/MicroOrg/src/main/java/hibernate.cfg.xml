@@ -10,6 +10,10 @@
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
   <mapping class="domainModels.Uposlenik"/>
+  <mapping class="domainModels.Kredit"/>
+  <mapping class="domainModels.Klijent"/>
+  <mapping class="domainModels.TipKredita"/>
   <mapping class="domainModels.Osoba"/>
+  <mapping class="domainModels.Transakcija"/>
  </session-factory>
 </hibernate-configuration>

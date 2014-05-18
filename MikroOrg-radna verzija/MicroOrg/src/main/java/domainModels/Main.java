@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.hibernate.Transaction; 
 import org.hibernate.Session; 
+
 import domainModels.HibernateUtil; 
 
  
@@ -20,17 +21,18 @@ public class Main {
  private static void dodajOsobu(Session session) { 
  Transaction t = session.beginTransaction(); 
  
- Osoba o = new Osoba(); 
- o.setImePrezime("Mirza Sehovic");
- o.setEmail("msehovic92@gmail.com");
- 
- Uposlenik u= new Uposlenik();
+Osoba o= new Osoba();
+o.setImePrezime("Mirza Sehovic2");
+o.setEmail("2msehovic92@gmail.com");
+Long osobaId= (Long) session.save(o);
+
+Uposlenik u= new Uposlenik();
+ u.setOsobaId(osobaId);
  u.setUkupanBrKredita(200);
- session.save(u);
- o.setUposlenik(u);
+
  
- Long id = (Long) session.save(o); 
- System.out.println("Dodana osoba sa IDom "+id); 
+ Long id = (Long) session.save(u); 
+ System.out.println("Dodana osoba sa IDom "+osobaId); 
  t.commit(); 
  } 
  
