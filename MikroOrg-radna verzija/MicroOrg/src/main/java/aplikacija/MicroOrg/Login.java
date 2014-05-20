@@ -27,6 +27,9 @@ import java.io.File;
 
 import javax.swing.JPasswordField;
 
+//ovo je komentar za Arnelu... Arnela odgovor je jasan.
+
+
 public class Login extends JFrame {
 
 	private JPanel contentPane;
