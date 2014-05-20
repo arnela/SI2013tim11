@@ -28,9 +28,6 @@ import java.io.File;
 import javax.swing.JPasswordField;
 
 
-//komentar za arnelu
-//Ajlin komentar 
-//hvala Bogu
 public class Login extends JFrame {
 
 	private JPanel contentPane;
