@@ -35,6 +35,7 @@ public class TransakcijaLogika {
 				transakcija.getNacinUplate(),
 				transakcija.getKlijent(),
 				transakcija.getKredit(),
+				
 				transakcija.getUposlenik()
 				
 				);
