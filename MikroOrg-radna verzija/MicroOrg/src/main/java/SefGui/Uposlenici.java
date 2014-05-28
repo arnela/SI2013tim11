@@ -2,6 +2,7 @@ package SefGui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,48 +13,73 @@ import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import aplikacija.MicroOrg.Spremnik;
+import viewModels.KreditniSluzbenik;
+import viewModels.SluzbenikTableModel;
+//import viewModels.SluzbenikTableModel;
+import domainModels.Uposlenik;
 
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import logic.UposlenikLogika;
+
+import javax.swing.JTable;
+import javax.swing.JTextPane;
 
 public class Uposlenici extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
+	private JTextField tf_adresa;
+	private JTextField tf_ime;
+	private JTextField tf_prezime;
+	private JTextField tf_datum;
+	private JTextField tf_jmbg;
+	private JTextField tf_email;
+	private JTextField tf_telefon;
+	private JTextField tf_sifra;
+	private JTextField tf_plata;
+	private JTextField tf_mjestoRodjenja;
+	private JTextField tf_pretraga;
+	private  JTable _table=null;
+	private  List<KreditniSluzbenik> _kreditniSluzbenici=null;
+	private JScrollPane _scrollPane=null;
+	private Uposlenik trenutni;
+	static Uposlenici frame; 
+	private KreditniSluzbenik _kreditniSluzbenik=null;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Uposlenici frame = new Uposlenici();
-					frame.setVisible(true);
-					frame.setResizable(false);
-				} catch (Exception e) {
-					e.printStackTrace();
+	//ovaj konstruktor je samo u slucaju da se aplikacija pokrece iz ove forme a nama to ne treba
+		public static void main(String[] args) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						frame = new Uposlenici();
+						frame.setVisible(true);
+						frame.setResizable(false);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
-	}
+			});
+		}
 
 	/**
 	 * Create the frame.
@@ -62,12 +88,13 @@ public class Uposlenici extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi po�etni gui za �efa
+				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi po�etni gui za �efa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
 				n.setResizable(false);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Uposlenici");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 550, 427);
@@ -95,10 +122,69 @@ public class Uposlenici extends JFrame {
 		btnNazad.setBounds(421, 324, 98, 23);
 		panel.add(btnNazad);
 		
-		JButton button_1 = new JButton("Unesi zaposlenika");
+		JButton button_1 = new JButton("Unesi zaposlenika ");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				
+			
+				//TODO: Uraditi validaciju jmbg-a, datuma , email-a
+				
+				
+				UposlenikLogika _uposlenikLogika = new UposlenikLogika();
+
+				//formatiranje i parsiranje datuma
+				java.sql.Date _datum = null;
+				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date _date;
+				try 
+				{
+					_date = _sdf1.parse(tf_datum.getText());
+					_datum=new java.sql.Date(_date.getTime());  
+				}
+				
+				catch (ParseException e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				KreditniSluzbenik _kreditniSluzbenik= new KreditniSluzbenik
+						(
+							tf_ime.getText()+" "+tf_prezime.getText(),
+							tf_jmbg.getText(),
+							_datum,
+							"null",
+							tf_telefon.getText(),
+							tf_adresa.getText(),
+							tf_email.getText(),
+							tf_sifra.getText(),
+							tf_mjestoRodjenja.getText(),
+							Double.parseDouble(tf_plata.getText())
+						);
+				
+				try {
+						if(!_uposlenikLogika.daLiPostoji(tf_jmbg.getText())){
+							_uposlenikLogika.dodajUposlenika(_kreditniSluzbenik);
+						//ocisti formu
+						tf_ime.setText("");
+						tf_prezime.setText("");
+						tf_jmbg.setText("");
+						tf_datum.setText("");
+						tf_telefon.setText("");
+						tf_adresa.setText("");
+						tf_email.setText("");
+						tf_sifra.setText("");
+						tf_mjestoRodjenja.setText("");
+						tf_plata.setText("");
+						JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Uposlenik sa unesenim jmbg-om već postoji !");
+					}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
+				}
+
 			}
 		});
 		button_1.setBounds(10, 324, 142, 23);
@@ -131,10 +217,10 @@ public class Uposlenici extends JFrame {
 		label_3.setBounds(25, 251, 64, 14);
 		panel_1.add(label_3);
 		
-		JLabel label_4 = new JLabel("Datum ro\u0111enja:");
-		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_4.setBounds(-13, 112, 102, 14);
-		panel_1.add(label_4);
+		JLabel lblDdmmyyyy = new JLabel("dd-MM-yyyy");
+		lblDdmmyyyy.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDdmmyyyy.setBounds(92, 87, 102, 14);
+		panel_1.add(lblDdmmyyyy);
 		
 		JLabel label_5 = new JLabel("Ime:");
 		label_5.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -146,82 +232,87 @@ public class Uposlenici extends JFrame {
 		label_6.setBounds(270, 62, 64, 14);
 		panel_1.add(label_6);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(341, 154, 155, 20);
-		panel_1.add(textField);
+		tf_adresa = new JTextField();
+		tf_adresa.setColumns(10);
+		tf_adresa.setBounds(341, 154, 155, 20);
+		panel_1.add(tf_adresa);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(92, 56, 155, 20);
-		panel_1.add(textField_1);
+		tf_ime = new JTextField();
+		tf_ime.setColumns(10);
+		tf_ime.setBounds(92, 56, 155, 20);
+		panel_1.add(tf_ime);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(341, 56, 155, 20);
-		panel_1.add(textField_2);
+		tf_prezime = new JTextField();
+		tf_prezime.setColumns(10);
+		tf_prezime.setBounds(341, 56, 155, 20);
+		panel_1.add(tf_prezime);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(92, 106, 155, 20);
-		panel_1.add(textField_3);
+		tf_datum = new JTextField();
+		tf_datum.setColumns(10);
+		tf_datum.setBounds(92, 106, 155, 20);
+		panel_1.add(tf_datum);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(92, 245, 155, 20);
-		panel_1.add(textField_4);
+		tf_jmbg = new JTextField();
+		tf_jmbg.setColumns(10);
+		tf_jmbg.setBounds(92, 245, 155, 20);
+		panel_1.add(tf_jmbg);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(92, 154, 155, 20);
-		panel_1.add(textField_5);
+		tf_email = new JTextField();
+		tf_email.setColumns(10);
+		tf_email.setBounds(92, 154, 155, 20);
+		panel_1.add(tf_email);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(341, 198, 155, 20);
-		panel_1.add(textField_6);
+		tf_telefon = new JTextField();
+		tf_telefon.setColumns(10);
+		tf_telefon.setBounds(341, 198, 155, 20);
+		panel_1.add(tf_telefon);
 		
 		JLabel label_7 = new JLabel("\u0160ifra:");
 		label_7.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_7.setBounds(288, 246, 46, 19);
 		panel_1.add(label_7);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(341, 244, 86, 22);
-		panel_1.add(textField_7);
+		tf_sifra = new JTextField();
+		tf_sifra.setColumns(10);
+		tf_sifra.setBounds(341, 244, 86, 22);
+		panel_1.add(tf_sifra);
 		
 		JLabel label_8 = new JLabel("Plata:");
 		label_8.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_8.setBounds(19, 204, 70, 14);
 		panel_1.add(label_8);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(92, 198, 155, 20);
-		panel_1.add(textField_8);
+		tf_plata = new JTextField();
+		tf_plata.setColumns(10);
+		tf_plata.setBounds(92, 198, 155, 20);
+		panel_1.add(tf_plata);
 		
 		JLabel label_9 = new JLabel("Mjesto ro\u0111enja:");
 		label_9.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_9.setBounds(232, 112, 102, 14);
 		panel_1.add(label_9);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(341, 106, 155, 20);
-		panel_1.add(textField_9);
+		tf_mjestoRodjenja = new JTextField();
+		tf_mjestoRodjenja.setColumns(10);
+		tf_mjestoRodjenja.setBounds(341, 106, 155, 20);
+		panel_1.add(tf_mjestoRodjenja);
 		
-		JLabel lblPodaciONovom = new JLabel("Podaci o novom uposlenik-u:");
+		JLabel lblPodaciONovom = new JLabel("Podaci o novom uposleniku:");
 		lblPodaciONovom.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPodaciONovom.setBounds(162, 0, 208, 33);
 		panel_1.add(lblPodaciONovom);
+		
+		JLabel label_12 = new JLabel("Datum rođenja:");
+		label_12.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_12.setBounds(-14, 109, 102, 14);
+		panel_1.add(label_12);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(Color.WHITE);
 		tabbedPane.addTab("Pretraga i prikaz uposlenika", null, panel_2, null);
 		
-		JPanel panel_3 = new JPanel();
+		final JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_3.setBackground(Color.WHITE);
 		panel_3.setBounds(10, 54, 503, 261);
@@ -239,7 +330,51 @@ public class Uposlenici extends JFrame {
 		JButton button_2 = new JButton("Promijeni informacije");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				java.sql.Date _datum = null;
+				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date _date;
+				try 
+				{
+					_date = _sdf1.parse("07-09-1992");
+					_datum=new java.sql.Date(_date.getTime());  
+				}
+				
+				catch (ParseException e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				KreditniSluzbenik _toBeEdited=null;
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+						//JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika čije podatke želite promijeniti!");
+					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
+					
+					
+						for(KreditniSluzbenik k : _kreditniSluzbenici){
+							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
+								_toBeEdited=k;
+							}
+
+						}
+						SefGui.EditUposlenici n =new SefGui.EditUposlenici(_toBeEdited);  //kreira Uposlenici gui za �efa
+						n.setLocationRelativeTo(null);   // postavlja ga na sredinu
+						n.setVisible(true);  // upali vidljivost
+						n.setResizable(false);
+						frame.setEnabled(false);
+		
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika čije podatke želite promijeniti!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr0mjen4 3rr0r");
+				}
+	
+				
+				
+
 			}
 		});
 		button_2.setBounds(121, 326, 202, 23);
@@ -248,7 +383,35 @@ public class Uposlenici extends JFrame {
 		JButton button_3 = new JButton("Izbri\u0161i ");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika kojeg želite obrisati!");
+					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
+					KreditniSluzbenik _toBeDeleted=null;
+					
+						for(KreditniSluzbenik k : _kreditniSluzbenici){
+							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
+								_toBeDeleted=k;
+								new UposlenikLogika().softDeleteByJMBG(k.getJmbg());
+							}
+
+						}
+						_kreditniSluzbenici.remove(_toBeDeleted);
+						_table.setModel(new SluzbenikTableModel(_kreditniSluzbenici));
+						JOptionPane.showMessageDialog(null, "Uspješno obrisano!");
+						
+						//refresh tabele
+						_table.invalidate();
+						_table.revalidate();
+						_table.repaint();
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika kojeg želite obrisati!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: d3l3t4 3rr0r");
+				}
 			}
 		});
 		button_3.setBounds(333, 326, 79, 23);
@@ -265,10 +428,10 @@ public class Uposlenici extends JFrame {
 		label_10.setBounds(6, 9, 131, 14);
 		panel_4.add(label_10);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(125, 6, 245, 20);
-		panel_4.add(textField_10);
+		tf_pretraga = new JTextField();
+		tf_pretraga.setColumns(10);
+		tf_pretraga.setBounds(125, 6, 245, 20);
+		panel_4.add(tf_pretraga);
 		
 		JLabel label_11 = new JLabel("");
 		label_11.setBounds(196, 16, 0, 0);
@@ -277,7 +440,28 @@ public class Uposlenici extends JFrame {
 		JButton button_4 = new JButton("Pretraga");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				try {
+					_kreditniSluzbenici=new UposlenikLogika().getByName(tf_pretraga.getText());
+					if(_kreditniSluzbenici.size()!=0){
+
+						if(_table==null){ 
+							_table = new JTable();
+							_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+						}
+						_table.setModel(new SluzbenikTableModel(_kreditniSluzbenici));
+						if(_scrollPane==null){
+							_scrollPane = new JScrollPane(_table);
+							_scrollPane.setViewportView(_table);
+							panel_3.add(_scrollPane);
+						}
+						panel_3.revalidate();
+						panel_3.repaint();
+					}
+					else JOptionPane.showMessageDialog(null, "Ne postoji uposlenik sa tim imenom.");
+				} catch (HeadlessException e1) {
+					 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
+				}
+	
 			}
 		});
 		button_4.setBounds(400, 11, 112, 32);
@@ -292,5 +476,4 @@ public class Uposlenici extends JFrame {
 		button_5.setBounds(424, 326, 89, 23);
 		panel_2.add(button_5);
 	}
-
 }

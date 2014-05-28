@@ -1,21 +1,32 @@
 package SluzbenikGui;
 import aplikacija.MicroOrg.Login;
+import aplikacija.MicroOrg.Spremnik;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JButton;
+
 import java.awt.SystemColor;
+
 import javax.swing.JLabel;
+
 import java.awt.Canvas;
 import java.awt.Panel;
 import java.awt.ScrollPane;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.UIManager;
+
+import domainModels.Uposlenik;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -24,10 +35,11 @@ import java.awt.event.WindowEvent;
 public class Pocetni extends JFrame {
 
 	private JPanel contentPane;
-
+	private Uposlenik trenutni;
 	/**
 	 * Launch the application.
 	 */
+	//ovaj nam konstruktor ne treba jer se ne pokrece aplikacija iz ove forme
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,6 +68,7 @@ public class Pocetni extends JFrame {
 				l.setLocationRelativeTo(null);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Kreditni slu\u017Ebenik ");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 472, 400);

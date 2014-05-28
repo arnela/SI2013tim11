@@ -27,6 +27,8 @@ public class Uposlenik implements Serializable{
 	private Boolean privilegije;
 	private String username;
 	private String password;
+	private String mjestoRodjenja;
+	private Double plata;
 	private int ukupanBrKredita;
 	private int ukupanBrTransakcija;
 	private Long osobaId;
@@ -41,7 +43,9 @@ public class Uposlenik implements Serializable{
 			String password,
 			int ukupanBrKredita,
 			int ukupanBrTransakcija,
-			Long osobaId
+			Long osobaId,
+			String mjestoRodjenja,
+			Double plata
 			)
 	{
 		this.privilegije=privilegije;
@@ -50,6 +54,8 @@ public class Uposlenik implements Serializable{
 		this.ukupanBrKredita=ukupanBrKredita;
 		this.ukupanBrTransakcija=ukupanBrTransakcija;
 		this.osobaId=osobaId;
+		this.mjestoRodjenja=mjestoRodjenja;
+		this.plata=plata;
 	}
 	public Uposlenik(){
 		
@@ -133,6 +139,18 @@ public class Uposlenik implements Serializable{
 	}
 	public void setUposlenikId(Long uposlenikId) {
 		this.uposlenikId = uposlenikId;
+	}
+	public String getMjestoRodjenja() {
+		return mjestoRodjenja;
+	}
+	public void setMjestoRodjenja(String mjestoRodjenja) {
+		this.mjestoRodjenja = mjestoRodjenja;
+	}
+	public Double getPlata() {
+		return plata;
+	}
+	public void setPlata(Double plata) {
+		this.plata = plata;
 	}
 
 }

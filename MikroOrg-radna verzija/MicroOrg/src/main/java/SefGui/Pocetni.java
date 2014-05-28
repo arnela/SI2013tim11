@@ -1,19 +1,28 @@
 package SefGui;
 
 import aplikacija.MicroOrg.Login; 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
 import java.awt.SystemColor;
+
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
+
+import domainModels.Uposlenik;
+import aplikacija.MicroOrg.Spremnik;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -22,21 +31,22 @@ import java.awt.event.WindowEvent;
 public class Pocetni extends JFrame {
 
 	private JPanel contentPane;
-
 	/**
 	 * Launch the application.
 	 */
+	
+	//ovo je konstruktor koji bi sluzio da ova klasa bude runnable from start, a to nam ne treba tako da...
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+		EventQueue.invokeLater(new Runnable() 
+		{
+			public void run() 
+				{
 				try {
 					Pocetni frame = new Pocetni();
 					frame.setVisible(true);
 					frame.setResizable(false);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (Exception e) {e.printStackTrace();}
 				}
-			}
 		});
 	}
 

@@ -1,5 +1,6 @@
 package domainModels;
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -25,13 +26,13 @@ public class Osoba implements Serializable{
 	private Long osobaId;
 	private String imePrezime;
 	private String jmbg;
-	private String datumRodjenja;
+	private Date datumRodjenja;
 	private String obrazovanje;
 	private String telefon;
 	private String adresa;
 	private String email;
 	private Boolean aktivan;
-	private String datumUnosa;
+	private Date datumUnosa;
 	
 	public Osoba(){
 		
@@ -39,13 +40,13 @@ public class Osoba implements Serializable{
 	public Osoba(
 			String imePrezime,
 			String jmbg,
-			String datumRodjenja,
+			Date datumRodjenja,
 			String obrazovanje,
 			String telefon,
 			String adresa,
 			String email,
 			Boolean aktivan,
-			String datumUnosa
+			Date datumUnosa
 			){
 		this.imePrezime= imePrezime;
 		this.jmbg=jmbg;
@@ -86,13 +87,13 @@ public class Osoba implements Serializable{
 	/**
 	 * @return the datumRodjenja
 	 */
-	public String getDatumRodjenja() {
+	public Date getDatumRodjenja() {
 		return datumRodjenja;
 	}
 	/**
 	 * @param datumRodjenja the datumRodjenja to set
 	 */
-	public void setDatumRodjenja(String datumRodjenja) {
+	public void setDatumRodjenja(Date datumRodjenja) {
 		this.datumRodjenja = datumRodjenja;
 	}
 	/**
@@ -159,13 +160,13 @@ public class Osoba implements Serializable{
 	/**
 	 * @return the datumUnosa
 	 */
-	public String getDatumUnosa() {
+	public Date getDatumUnosa() {
 		return datumUnosa;
 	}
 	/**
 	 * @param datumUnosa the datumUnosa to set
 	 */
-	public void setDatumUnosa(String datumUnosa) {
+	public void setDatumUnosa(Date datumUnosa) {
 		this.datumUnosa = datumUnosa;
 	}
 	public Long getOsobaId() {

@@ -18,6 +18,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+import aplikacija.MicroOrg.Spremnik;
+import domainModels.Uposlenik;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -26,10 +29,11 @@ import java.awt.event.ActionEvent;
 public class Izvjestaji extends JFrame {
 
 	private JPanel contentPane;
-
+	private Uposlenik trenutni;
 	/**
 	 * Launch the application.
 	 */
+	//ovaj konstruktor nam ne treba jer se ne pokrece aplikacija iz ove forme
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -52,12 +56,13 @@ public class Izvjestaji extends JFrame {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi poèetni gui za sluzbenika
+				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi poï¿½etni gui za sluzbenika
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
 				n.setResizable(false);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
 		setBackground(Color.WHITE);
 		setTitle("MicroOrg - Izvje\u0161taji");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

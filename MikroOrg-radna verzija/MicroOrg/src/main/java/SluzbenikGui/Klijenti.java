@@ -2,6 +2,7 @@ package SluzbenikGui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,36 +11,59 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.GroupLayout;
+import javax.swing.ListSelectionModel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import aplikacija.MicroOrg.Spremnik;
+import viewModels.KlijentSluzbenik;
+import viewModels.KlijentTableModel;
+import viewModels.KreditniSluzbenik;
+import viewModels.SluzbenikTableModel;
+import logic.KlijentLogika;
+import logic.UposlenikLogika;
+import domainModels.Klijent;
+import domainModels.Uposlenik;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Klijenti extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-
+	private JTextField tf_adresa;
+	private JTextField tf_ime;
+	private JTextField tf_prezime;
+	private JTextField tf_datum;
+	private JTextField tf_jmbg;
+	private JTextField tf_email;
+	private JTextField tf_telefon;
+	private JTextField tf_pretraga;
+	private Uposlenik trenutni;
+	JScrollPane _scrollPane = null;
+	private  List<KlijentSluzbenik> _sviKlijenti=null;
+	JTable _table = null;
+	static Klijenti frame;
 	/**
 	 * Launch the application.
 	 */
+	//ovaj nam konstruktor ne treba jer se aplikacija ne pokrece iz ove forme
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -62,12 +86,13 @@ public class Klijenti extends JFrame {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi po�etni gui za sluzbenika
+				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi po�etni gui za sluzbenika
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
 				n.setResizable(false);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
 		setTitle("MikroOrg - Klijenti");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 460, 468);
@@ -97,9 +122,54 @@ public class Klijenti extends JFrame {
 		JButton button_1 = new JButton("Unesi klijenta");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				KlijentLogika _klijentLogika = new KlijentLogika();
+				java.sql.Date _datum = null;
+				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date _date;
+				try 
+				{
+					_date = _sdf1.parse(tf_datum.getText());
+					_datum=new java.sql.Date(_date.getTime());  
+				}
+				
+				catch (ParseException e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				KlijentSluzbenik _klijenti = new KlijentSluzbenik(
+						tf_ime.getText()+" " + tf_prezime.getText(),
+						tf_jmbg.getText(),
+						_datum,
+						tf_telefon.getText(),
+						tf_adresa.getText(),
+						tf_email.getText(),
+						"null"
+						);
+
+				try {
+				//		if(!_klijentLogika.daLiPostoji(tf_jmbg.getText())){
+							_klijentLogika.dodajKlijenta(_klijenti);
+						//ocisti formu
+						tf_ime.setText("");
+						tf_prezime.setText("");
+						tf_jmbg.setText("");
+						tf_datum.setText("");
+						tf_telefon.setText("");
+						tf_adresa.setText("");
+						tf_email.setText("");
+						JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
+			//		}
+			//		else{
+			//			JOptionPane.showMessageDialog(null, "Klijent sa unesenim jmbg-om već postoji !");
+			//		}
+						}
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
+				}
 			}
-		});
+			});
 		button_1.setBounds(152, 295, 124, 23);
 		panel.setLayout(null);
 		
@@ -123,26 +193,26 @@ public class Klijenti extends JFrame {
 		
 		JLabel label_6 = new JLabel("Prezime:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		tf_adresa = new JTextField();
+		tf_adresa.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		tf_ime = new JTextField();
+		tf_ime.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		tf_prezime = new JTextField();
+		tf_prezime.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		tf_datum = new JTextField();
+		tf_datum.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		tf_jmbg = new JTextField();
+		tf_jmbg.setColumns(10);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		tf_email = new JTextField();
+		tf_email.setColumns(10);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
+		tf_telefon = new JTextField();
+		tf_telefon.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -163,13 +233,13 @@ public class Klijenti extends JFrame {
 							.addComponent(label_6, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_adresa, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_ime, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_prezime, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_datum, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_jmbg, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_email, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_telefon, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
 					.addGap(41))
 		);
 		gl_panel_1.setVerticalGroup(
@@ -178,31 +248,31 @@ public class Klijenti extends JFrame {
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_ime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_5))
 					.addGap(5)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_prezime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_6))
 					.addGap(6)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_datum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_4))
 					.addGap(6)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_jmbg, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_3))
 					.addGap(6)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_2))
 					.addGap(6)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_telefon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_1))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tf_adresa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label))
 					.addContainerGap(14, Short.MAX_VALUE))
 		);
@@ -216,7 +286,7 @@ public class Klijenti extends JFrame {
 		tabbedPane.addTab("Prikaz i pretraga klijenata", null, panel_2, null);
 		panel_2.setLayout(null);
 		
-		JPanel panel_3 = new JPanel();
+		final JPanel panel_3 = new JPanel();
 		panel_3.setBounds(10, 54, 403, 261);
 		panel_3.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_3.setBackground(Color.WHITE);
@@ -239,13 +309,88 @@ public class Klijenti extends JFrame {
 		JButton button_4 = new JButton("Promjeni podatke");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				java.sql.Date _datum = null;
+				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date _date;
+				try 
+				{
+					_date = _sdf1.parse("07-09-1992");
+					_datum=new java.sql.Date(_date.getTime());  
+				}
+				
+				catch (ParseException e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				KlijentSluzbenik _toBeEdited=null;
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+						//JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika čije podatke želite promijeniti!");
+					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
+					
+					
+						for(KlijentSluzbenik k : _sviKlijenti){
+							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
+								_toBeEdited=k;
+							}
+
+						}
+						SluzbenikGui.EditKlijenti n =new SluzbenikGui.EditKlijenti(_toBeEdited);  //kreira Uposlenici gui za �efa
+						n.setLocationRelativeTo(null);   // postavlja ga na sredinu
+						n.setVisible(true);  // upali vidljivost
+						n.setResizable(false);
+						frame.setEnabled(false);
+		
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali klijenta čije podatke želite promijeniti!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr0mjen4 3rr0r");
+				}
+	
 			}
 		});
 		button_4.setBounds(132, 326, 150, 23);
 		panel_2.add(button_4);
 		
 		JButton button_5 = new JButton("Izbri\u0161i ");
+		
+		button_5.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali klijenta kojeg želite obrisati!");
+					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
+					KlijentSluzbenik _toBeDeleted=null;
+					
+						for(KlijentSluzbenik k : _sviKlijenti){
+							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
+								_toBeDeleted=k;
+								new KlijentLogika().softDeleteByJMBG(k.getJmbg());
+							}
+
+						}
+						_sviKlijenti.remove(_toBeDeleted);
+						_table.setModel(new KlijentTableModel(_sviKlijenti));
+						JOptionPane.showMessageDialog(null, "Uspješno obrisano!");
+						
+						//refresh tabele
+						_table.invalidate();
+						_table.revalidate();
+						_table.repaint();
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali klijenta kojeg želite obrisati!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: d3l3t4 3rr0r");
+				}
+			}
+			
+		});
 		button_5.setBounds(292, 326, 89, 23);
 		panel_2.add(button_5);
 		
@@ -258,9 +403,9 @@ public class Klijenti extends JFrame {
 		JLabel label_7 = new JLabel("Unesi ime i prezime:");
 		panel_4.add(label_7);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		panel_4.add(textField_7);
+		tf_pretraga= new JTextField();
+		tf_pretraga.setColumns(10);
+		panel_4.add(tf_pretraga);
 		
 		JLabel label_8 = new JLabel("");
 		panel_4.add(label_8);
@@ -268,8 +413,38 @@ public class Klijenti extends JFrame {
 		JButton button_6 = new JButton("Pretraga");
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				try{
+				KlijentLogika _klijentLogika= new KlijentLogika();
+				List<KlijentSluzbenik> _klijenti=_klijentLogika.getByName(tf_pretraga.getText());
+				_sviKlijenti= new ArrayList<KlijentSluzbenik>();
+				for(KlijentSluzbenik k : _klijenti){
+					 _sviKlijenti.add(k);
+				}
+				
+				if(_klijenti.size()!=0){
+					
+					if(_table==null){ 
+						_table = new JTable();
+						_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					}
+					_table.setModel(new KlijentTableModel(_klijenti));
+			
+					if(_scrollPane==null){
+						_scrollPane = new JScrollPane(_table);
+						_scrollPane.setViewportView(_table);
+						panel_3.add(_scrollPane);
+					}
+					    
+		
+				panel_3.revalidate();
+				panel_3.repaint();
+				}
+				else JOptionPane.showMessageDialog(null, "Ne postoji klijent sa tim imenom.");
 			}
+			catch(HeadlessException e1)
+			{
+			 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
+			}}
 		});
 		button_6.setBounds(292, 20, 121, 23);
 		panel_2.add(button_6);

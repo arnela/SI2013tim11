@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
+import domainModels.Uposlenik;
+import aplikacija.MicroOrg.Spremnik;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
@@ -26,23 +28,24 @@ public class Izvjestaji extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-
+	private Uposlenik trenutni;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Izvjestaji frame = new Izvjestaji();
-					frame.setVisible(true);
-					frame.setResizable(false);
-				} catch (Exception e) {
-					e.printStackTrace();
+	//ovaj konstruktor je samo u slucaju da se aplikacija pokrece iz ove forme a nama to ne treba
+		public static void main(String[] args) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Izvjestaji frame = new Izvjestaji();
+						frame.setVisible(true);
+						frame.setResizable(false);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
-	}
+			});
+		}
 
 	/**
 	 * Create the frame.
@@ -51,12 +54,13 @@ public class Izvjestaji extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
+				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poï¿½etni gui za ï¿½efa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
 				n.setResizable(false);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Izvje\u0161taji");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 623, 389);

@@ -17,32 +17,38 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
+import domainModels.Uposlenik;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import aplikacija.MicroOrg.Spremnik;
+import logic.TransakcijaLogika;
+import logic.UposlenikLogika;
 
 public class Transakcije extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-
+	private JTextField tf_podaciPretrage;
+	private Uposlenik trenutni;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Transakcije frame = new Transakcije();
-					frame.setVisible(true);
-					frame.setResizable(false);
-				} catch (Exception e) {
-					e.printStackTrace();
+	//ovaj konstruktor je samo u slucaju da se aplikacija pokrece iz ove forme a nama to ne treba
+		public static void main(String[] args) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Transakcije frame = new Transakcije();
+						frame.setVisible(true);
+						frame.setResizable(false);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
-	}
+			});
+		}
 
 	/**
 	 * Create the frame.
@@ -51,12 +57,13 @@ public class Transakcije extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poèetni gui za šefa
+				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi poï¿½etni gui za ï¿½efa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
 				n.setResizable(false);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Transakcije");
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -102,40 +109,61 @@ public class Transakcije extends JFrame {
 		label.setBounds(6, 9, 119, 14);
 		panel_2.add(label);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(135, 6, 246, 20);
-		panel_2.add(textField);
+		tf_podaciPretrage = new JTextField();
+		tf_podaciPretrage.setColumns(10);
+		tf_podaciPretrage.setBounds(135, 6, 246, 20);
+		panel_2.add(tf_podaciPretrage);
 		
 		JLabel label_1 = new JLabel("");
 		label_1.setBounds(174, 16, 0, 0);
 		panel_2.add(label_1);
 		
-		JButton button_1 = new JButton("Pretra\u017Ei po:");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
-			}
-		});
-		button_1.setBounds(405, 11, 134, 32);
-		panel.add(button_1);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBounds(405, 54, 182, 88);
 		panel.add(panel_3);
 		
-		JRadioButton radioButton = new JRadioButton("Ime i Prezime uposlenika");
+		final JRadioButton radioButton = new JRadioButton("Ime i Prezime uposlenika");
 		radioButton.setBounds(6, 7, 170, 23);
 		panel_3.add(radioButton);
 		
-		JRadioButton radioButton_1 = new JRadioButton("Klijent - Ime&Prezime");
+		final JRadioButton radioButton_1 = new JRadioButton("Klijent - Ime&Prezime");
 		radioButton_1.setBounds(6, 33, 160, 23);
 		panel_3.add(radioButton_1);
 		
-		JRadioButton radioButton_2 = new JRadioButton("Naziv tipa kredita");
+		final JRadioButton radioButton_2 = new JRadioButton("Naziv tipa kredita");
 		radioButton_2.setBounds(6, 58, 160, 23);
 		panel_3.add(radioButton_2);
+		
+		JButton button_1 = new JButton("Pretra\u017Ei po:");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
+				
+				if(radioButton.isSelected()){
+					
+					
+				}
+				else if(radioButton_1.isSelected()){}
+				else if(radioButton_2.isSelected()){}
+				
+				
+			//	if(_transakcijaLogika.daLiPostoji(tf_podaciPretrage.getText())){	
+			//	}
+					
+				
+				
+				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+			}
+		});
+		button_1.setBounds(405, 11, 134, 32);
+		panel.add(button_1);
+		
+		
+		
+		
 		
 		JButton button_2 = new JButton("Nazad");
 		button_2.addActionListener(new ActionListener() {

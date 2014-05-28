@@ -94,3 +94,21 @@ java.lang.NullPointerException: null
 2014-05-20 16:36:18,004 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\Documents\GitHub\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\main\resources
 2014-05-20 16:36:18,036 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2014-05-20 16:36:18,036 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\Documents\GitHub\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\test\resources
+2014-05-28 22:54:03,258 [Worker-4] INFO  o.e.m.c.i.i.nexus.NexusIndexManager - Updating index for repository: central|http://repo.maven.apache.org/maven2
+2014-05-28 22:54:03,841 [Worker-4] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 8
+2014-05-28 22:54:26,707 [Worker-0] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: aplikacija:MicroOrg:0.0.1-SNAPSHOT @ C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\pom.xml.
+2014-05-28 22:54:39,084 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-05-28 22:54:39,084 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\main\resources
+2014-05-28 22:54:39,087 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-05-28 22:54:39,087 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\test\resources
+2014-05-28 22:54:41,767 [Worker-3] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: aplikacija:MicroOrg:0.0.1-SNAPSHOT @ C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\pom.xml.
+2014-05-28 22:54:42,506 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-05-28 22:54:42,507 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\main\resources
+2014-05-28 22:54:42,509 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-05-28 22:54:42,509 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\test\resources
+2014-05-28 22:54:58,723 [Worker-5] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: aplikacija:MicroOrg:0.0.1-SNAPSHOT @ C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\pom.xml.
+2014-05-28 22:54:59,184 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-05-28 22:54:59,184 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\main\resources
+2014-05-28 22:54:59,187 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2014-05-28 22:54:59,188 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Elvis\git\SI2013tim11\MikroOrg-radna verzija\MicroOrg\src\test\resources
+2014-05-28 22:55:03,421 [Worker-4] INFO  o.e.m.c.i.i.nexus.NexusIndexManager - Updated index for repository: central|http://repo.maven.apache.org/maven2 in 60174 ms

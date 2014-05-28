@@ -2,6 +2,7 @@ package SluzbenikGui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,8 +13,12 @@ import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.LineBorder;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
@@ -22,11 +27,26 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
+import javax.swing.ListSelectionModel;
+
+import viewModels.KlijentSluzbenik;
+import viewModels.KreditnaPonuda;
+import viewModels.TipKreditaSluzbenik;
+import viewModels.PonudaTableModel;
+import aplikacija.MicroOrg.Spremnik;
+import domainModels.Uposlenik;
+import logic.KlijentLogika;
+import logic.PonudeLogika;
+import logic.TipKreditaLogika;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import java.awt.FlowLayout;
 
 public class Ponude extends JFrame {
 
@@ -42,10 +62,15 @@ public class Ponude extends JFrame {
 	private JTextField textField_8;
 	private JTextField textField_9;
 	private JTextField textField_10;
-
+	private Uposlenik trenutni;
+	
+	private JTable _table = null;
+	private JScrollPane _scrollPane = null;
+	List<KlijentSluzbenik> klijenti = new ArrayList<KlijentSluzbenik>();
 	/**
 	 * Launch the application.
 	 */
+	//ovaj nam konstruktor ne treba jer se aplikacija ne pokrece iz ove forme
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -67,12 +92,13 @@ public class Ponude extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi po�etni gui za sluzbenika
+				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi po�etni gui za sluzbenika
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 				n.setVisible(true);  // upali vidljivost
 				n.setResizable(false);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Ponude");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 554, 441);
@@ -144,7 +170,17 @@ public class Ponude extends JFrame {
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		//dodavanje tipovaKredita iz baze u comboBox
+		final TipKreditaLogika a = new TipKreditaLogika();
+		List<TipKreditaSluzbenik> tipovi = a.getAll();
+		Vector comboBoxItems=new Vector();
+		for (int i=0;i<tipovi.size();i++)
+		{
+			comboBoxItems.add(tipovi.get(i).getNaziv());
+		}
+		final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems); 
+		final JComboBox comboBox = new JComboBox(model);
+		comboBox.setSelectedIndex(-1);
 		
 		textField_9 = new JTextField();
 		textField_9.setColumns(10);
@@ -255,7 +291,68 @@ public class Ponude extends JFrame {
 		JButton button_1 = new JButton("Kreiraj ponudu");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				PonudeLogika p = new PonudeLogika();
+				if(!p.postojiKlijent(textField_9.getText(), textField_2.getText())) {
+					JOptionPane.showMessageDialog(null, "Ne postoji uneseni klijent !");
+				}
+				else {
+					if(comboBox.getSelectedIndex() != -1) {
+						String nazivTipaKredita = comboBox.getSelectedItem().toString();
+						KreditnaPonuda kp = new KreditnaPonuda(Spremnik.getTrenutni(), p.dajKlijenta((String)(textField_9.getText()), (String)(textField_2.getText())) , p.dajTipKredita(nazivTipaKredita), "25.5.2014.");
+						p.dodajPonudu(kp);
+						JOptionPane.showMessageDialog(null, "Unos uspjesan !");
+						
+					}
+					else {
+						if(!(textField_3.getText().equals("") || textField_4.getText().equals("") || textField_5.getText().equals("") || textField_6.getText().equals("") || textField_7.getText().equals("") || textField_8.getText().equals("") || textField.getText().equals(""))){
+						String namjenaTipaKredita = textField_3.getText();
+						Double iznosTipaKredita = Double.parseDouble(textField_4.getText());
+						String rokTipaKredita = textField_5.getText();
+						String garancijaTipaKredita = textField_6.getText();
+						String graceTipaKredita = textField_7.getText();
+						Double troskoviTipaKredita = Double.parseDouble(textField_8.getText());
+						String instrumeniTipaKredita = textField.getText();
+						
+						
+						TipKreditaLogika _tk = new TipKreditaLogika();
+						
+						TipKreditaSluzbenik _tipKredita = new TipKreditaSluzbenik(
+								null,
+								namjenaTipaKredita,
+								iznosTipaKredita,
+								rokTipaKredita,
+								null,
+								garancijaTipaKredita,
+								graceTipaKredita,
+								troskoviTipaKredita
+								);
+
+						try {
+						 
+								Long idTipaKredita = _tk.dodajTipKredita(_tipKredita);
+								//ocisti formu
+								textField_3.setText("");
+								textField_4.setText("");
+								textField_5.setText("");
+								textField_6.setText("");
+								textField_7.setText("");
+								textField_8.setText("");
+								textField.setText("");
+								
+								KreditnaPonuda kp = new KreditnaPonuda(Spremnik.getTrenutni(), p.dajKlijenta((String)(textField_9.getText()), (String)(textField_2.getText())) , p.dajTipKredita(idTipaKredita), "");
+								p.dodajPonudu(kp);
+								JOptionPane.showMessageDialog(null, "Unos uspjesan !");
+								}
+						catch (Exception e1) {
+							JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
+						}
+						
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Sva polja moraju biti popunjena!");
+						}
+					}
+				}
 			}
 		});
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -311,31 +408,87 @@ public class Ponude extends JFrame {
 		label_12.setBounds(174, 16, 0, 0);
 		panel_3.add(label_12);
 		
-		JButton btnPretraiPo = new JButton("Pretra\u017Ei po:");
-		btnPretraiPo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
-			}
-		});
-		btnPretraiPo.setBounds(398, 11, 121, 23);
-		panel_2.add(btnPretraiPo);
-		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
 		panel_4.setBounds(398, 67, 121, 91);
 		panel_2.add(panel_4);
 		
-		JRadioButton radioButton = new JRadioButton("Ime i Prezime");
+		ButtonGroup grupa = new ButtonGroup();
+		
+		final JRadioButton radioButton = new JRadioButton("Ime i Prezime");
 		radioButton.setBounds(6, 7, 109, 23);
 		panel_4.add(radioButton);
 		
-		JRadioButton radioButton_1 = new JRadioButton("Kredit");
+		final JRadioButton radioButton_1 = new JRadioButton("Kredit");
 		radioButton_1.setBounds(6, 33, 109, 23);
 		panel_4.add(radioButton_1);
 		
-		JRadioButton radioButton_2 = new JRadioButton("Datum upisa");
+		final JRadioButton radioButton_2 = new JRadioButton("Datum upisa");
 		radioButton_2.setBounds(6, 59, 109, 23);
 		panel_4.add(radioButton_2);
+		
+		grupa.add(radioButton);
+		grupa.add(radioButton_1);
+		grupa.add(radioButton_2);
+		
+		final JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
+		panel_5.setBackground(Color.WHITE);
+		panel_5.setBounds(10, 54, 378, 283);
+		panel_2.add(panel_5);
+		
+		JButton btnPretraiPo = new JButton("Pretra\u017Ei po:");
+		btnPretraiPo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try{
+					PonudeLogika _pl = new PonudeLogika();
+					List<KreditnaPonuda> _ponude = new ArrayList<KreditnaPonuda>();
+					if(radioButton.isSelected()) {
+						_ponude = _pl.traziPoImenuKlijenta(textField_10.getText());
+					}
+					else if(radioButton_1.isSelected()) {
+						_ponude = _pl.traziPoTipuKredita(textField_10.getText());
+					}
+					else if(radioButton_2.isSelected()) {
+						_ponude = _pl.traziPoDatumu(textField_10.getText());
+					}
+					/*_svePonude = new ArrayList<KreditnaPonuda>();
+					for(KlijentSluzbenik k : _klijenti){
+						_svePonude.add(k);
+					}*/
+									
+					if(_ponude.size() != 0) {
+										
+					if(_table == null) { 
+						_table = new JTable();
+						_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					}
+					_table.setModel(new PonudaTableModel(_ponude));
+
+					if(_scrollPane == null){
+						_scrollPane = new JScrollPane(_table);
+											
+
+						//_table.setFillsViewportHeight(true);
+											
+
+						_scrollPane.setViewportView(_table);
+						panel_5.add(_scrollPane);
+					}
+										
+					panel_5.revalidate();
+					panel_5.repaint();
+					}
+					else JOptionPane.showMessageDialog(null, "Ne postoji ponuda izdata unesenom klijentu.");
+				}
+				catch(HeadlessException e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
+				} 
+			}
+			
+		});
+		btnPretraiPo.setBounds(398, 11, 121, 23);
+		panel_2.add(btnPretraiPo);
 		
 		JButton btnNazad_1 = new JButton("Nazad");
 		btnNazad_1.addActionListener(new ActionListener() {
@@ -363,16 +516,6 @@ public class Ponude extends JFrame {
 		});
 		button_5.setBounds(159, 340, 87, 23);
 		panel_2.add(button_5);
-		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
-		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(10, 54, 378, 283);
-		panel_2.add(panel_5);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		
-		JButton button_6 = new JButton("Pretrazi po:");
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setLayout(null);
@@ -405,8 +548,6 @@ public class Ponude extends JFrame {
 		radioButton_9.setBounds(6, 163, 109, 23);
 		panel_6.add(radioButton_9);
 		
-		JButton button_7 = new JButton("Pretrazi po:");
-		
 		JPanel panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		
@@ -437,43 +578,9 @@ public class Ponude extends JFrame {
 		JRadioButton radioButton_16 = new JRadioButton("Adresa");
 		radioButton_16.setBounds(6, 163, 109, 23);
 		panel_7.add(radioButton_16);
-		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
-		gl_panel_5.setHorizontalGroup(
-			gl_panel_5.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 404, Short.MAX_VALUE)
-				.addGroup(gl_panel_5.createSequentialGroup()
-					.addContainerGap(709, Short.MAX_VALUE)
-					.addComponent(scrollBar, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel_5.createSequentialGroup()
-					.addGap(472)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
-						.addComponent(button_6, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
-						.addComponent(button_7, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_panel_5.setVerticalGroup(
-			gl_panel_5.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 283, Short.MAX_VALUE)
-				.addGroup(gl_panel_5.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_5.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_5.createSequentialGroup()
-							.addComponent(button_7)
-							.addGap(20)
-							.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_5.createSequentialGroup()
-							.addComponent(button_6)
-							.addGap(20)
-							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollBar, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		panel_5.setLayout(gl_panel_5);
+		panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_5.add(panel_6);
+		panel_5.add(panel_7);
 		
 		JButton button_8 = new JButton("Po\u0161alji na E-mail");
 		button_8.addActionListener(new ActionListener() {
