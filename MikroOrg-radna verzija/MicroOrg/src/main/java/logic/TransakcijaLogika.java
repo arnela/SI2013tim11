@@ -26,6 +26,7 @@ public class TransakcijaLogika {
 	
 	public Long dodajTransakciju(Transakcija transakcija){
 		
+		
 		Session _session= HibernateUtil.getSessionFactory().openSession();
 		Transaction _t = _session.beginTransaction(); 
 		

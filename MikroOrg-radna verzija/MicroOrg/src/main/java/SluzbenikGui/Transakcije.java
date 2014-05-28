@@ -446,6 +446,7 @@ public class Transakcije extends JFrame {
 					panel_3.add(_scrollPane);
 					panel_3.revalidate();
 					panel_3.repaint();
+					
 					}
 					else JOptionPane.showMessageDialog(null, "Nema transakcija sa tim ID-om.");
 					}catch(HeadlessException e1)

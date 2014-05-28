@@ -42,6 +42,7 @@ public class Transakcije extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	//ovaj konstruktor je samo u slucaju da se aplikacija pokrece iz ove forme a nama to ne treba
 		public static void main(String[] args) {
 			EventQueue.invokeLater(new Runnable() {
