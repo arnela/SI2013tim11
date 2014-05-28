@@ -38,6 +38,7 @@ public class Transakcija {
 		return datumUplate;
 	}
 
+	
 	public void setDatumUplate(String datumUplate) {
 		this.datumUplate = datumUplate;
 	}

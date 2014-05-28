@@ -177,6 +177,7 @@ public class Transakcije extends JFrame {
 				else if(radioButton_2.isSelected()){
 					try{
 						List<Transakcija> _transakcije = _transakcijaLogika.getByTipKredita(tf_podaciPretrage.getText());
+						
 						if(_transakcije.size()!=0){
 						JTable _table = new JTable();
 						_table.setModel(new TransakcijaTableModel(_transakcije));

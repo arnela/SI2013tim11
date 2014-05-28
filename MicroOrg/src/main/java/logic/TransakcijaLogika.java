@@ -30,9 +30,11 @@ public class TransakcijaLogika {
 		Transaction _t = _session.beginTransaction(); 
 		
 		Transakcija _tr = new Transakcija(
+				
 				transakcija.getDatumUplate(),
 				transakcija.getIznosUplate(),
 				transakcija.getNacinUplate(),
+				
 				transakcija.getKlijent(),
 				transakcija.getKredit(),
 				

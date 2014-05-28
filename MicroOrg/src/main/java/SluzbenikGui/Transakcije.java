@@ -420,6 +420,7 @@ public class Transakcije extends JFrame {
 					List<Transakcija> _transakcije=_transakcijaLogika.getByKlijent(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
 					JTable _table = new JTable();
+					
 					_table.setModel(new TransakcijaTableModel(_transakcije));
 					JScrollPane _scrollPane = new JScrollPane(_table);
 				    _scrollPane.setViewportView(_table);
