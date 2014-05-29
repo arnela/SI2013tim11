@@ -239,7 +239,7 @@ public class SharedLogika {
 	public void generisiPDF(viewModels.Transakcija novi){
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		try {
-            PdfWriter.getInstance(document,new FileOutputStream("target/Transakcija"+novi.getKlijent().getKlijentId()+novi.getDatumUplate()+".pdf"));
+            PdfWriter.getInstance(document,new FileOutputStream("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+novi.getDatumUplate()+".pdf"));
             //SADRZAJ
             document.open();
             //zaglavlje dokumenta
@@ -260,15 +260,15 @@ public class SharedLogika {
             
             document.add(new Chunk("\n",pisanje));        
             
-            KlijentLogika logika=new KlijentLogika(); 
-            
-            document.add(new Chunk("\n Ime i Prezime: "+logika.getOsoba(novi.getKlijent().getOsobaId()).getImePrezime(),pisanje)); 
+            //KlijentLogika logika=new KlijentLogika(); 
+            UposlenikLogika ulogika=new UposlenikLogika();
+            document.add(new Chunk("\n Ime i Prezime: "+novi.getKlijentSluzbenik().getImePrezime(),pisanje)); 
             document.add(new Chunk("\n Datum uplate: "+novi.getDatumUplate(),pisanje)); 
             document.add(new Chunk("\n Vrsta uplate: "+novi.getNacinUplate(),pisanje));
             document.add(new Chunk("\n Iznos uplate: "+novi.getIznosUplate()+" KM",pisanje));
-            document.add(new Chunk("\n Iznos je uplaćen za: '"+novi.getKredit().getTipKredita().getNaziv()+"'",pisanje));
-            document.add(new Chunk(", odobrenog od strane kreditnog službenika:"+novi.getKredit().getKreditniSluzbenik().getUsername(),pisanje));
-            document.add(new Chunk(", datuma: "+novi.getKredit().getDatumUpisa(),pisanje));
+            document.add(new Chunk("\n Iznos je uplaćen za: '"+novi.getKreditnaPonuda().getTk().getNaziv()+"'",pisanje));
+            document.add(new Chunk(", odobrenog od strane kreditnog službenika:"+ulogika.getOsoba(Spremnik.getTrenutni().getOsobaId()).getImePrezime(),pisanje));
+            document.add(new Chunk(", datuma: "+novi.getKreditnaPonuda().getDatumUpisa(),pisanje));
             
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
             document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
@@ -285,7 +285,7 @@ public class SharedLogika {
             document.close();
             
             //kreiramo objekat myFile koji ćemo smjestit u trenutni objekat u spremniku
-            File myFile=new File( "target/Transakcija"+novi.getKlijent().getKlijentId()+novi.getDatumUplate()+".pdf");
+            File myFile=new File("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+novi.getDatumUplate()+".pdf");
             Spremnik.setObjekatPDF(myFile);
             
         } catch (DocumentException e) {
@@ -428,7 +428,7 @@ public class SharedLogika {
         if (o.getClass()==KreditnaPonuda.class) {KreditnaPonuda novi=(KreditnaPonuda) o; myFile = new File( "target/Kredit"+novi.getTk().getTipKreditaId()+".pdf");}
 		if (o.getClass()==IzvjestajSluzbenika.class) {IzvjestajSluzbenika novi=(IzvjestajSluzbenika) o; myFile = new File( "target/IzvjestajSluzbenika"+novi.getImePrezimeSluzbenika()+".pdf");}
 		if (o.getClass()==IzvjestajOrganizacije.class) {IzvjestajOrganizacije novi=(IzvjestajOrganizacije) o; myFile = new File( "target/IzvjestajOrganizacije"+novi.getDatumGenerisanja()+".pdf");}
-		if (o.getClass()==viewModels.Transakcija.class) {viewModels.Transakcija novi=(viewModels.Transakcija) o; myFile = new File( "target/Transakcija"+novi.getKlijent().getKlijentId()+novi.getDatumUplate()+".pdf");}
+		if (o.getClass()==viewModels.Transakcija.class) {viewModels.Transakcija novi=(viewModels.Transakcija) o; myFile = new File( "target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+novi.getDatumUplate()+".pdf");}
 		if (o.getClass()==KlijentSluzbenik.class) {KlijentSluzbenik novi=(KlijentSluzbenik) o; myFile = new File( "target/Klijent"+novi.getJmbg()+".pdf");}
 		if (o.getClass()==KreditniSluzbenik.class) {KreditniSluzbenik novi=(KreditniSluzbenik) o; myFile = new File("target/Sluzbenik"+novi.getJmbg()+".pdf");}
 		try {
