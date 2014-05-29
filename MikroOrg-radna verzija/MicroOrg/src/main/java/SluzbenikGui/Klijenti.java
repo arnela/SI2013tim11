@@ -63,12 +63,13 @@ public class Klijenti extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	//ovaj nam konstruktor ne treba jer se aplikacija ne pokrece iz ove forme
+ 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Klijenti frame = new Klijenti();
+					
+					 frame = new Klijenti();
 					frame.setVisible(true);
 					frame.setResizable(false);
 				} catch (Exception e) {
@@ -323,13 +324,11 @@ public class Klijenti extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				KlijentSluzbenik _toBeEdited=null;
+				KlijentSluzbenik _toBeEdited= null;
 				try {
 					int _foo= _table.getSelectedRow();
 					if(_foo==-1) throw new NullPointerException();
-						//JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika čije podatke želite promijeniti!");
-					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
-					
+
 					
 						for(KlijentSluzbenik k : _sviKlijenti){
 							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
@@ -337,19 +336,21 @@ public class Klijenti extends JFrame {
 							}
 
 						}
-						SluzbenikGui.EditKlijenti n =new SluzbenikGui.EditKlijenti(_toBeEdited);  //kreira Uposlenici gui za �efa
+						SluzbenikGui.EditKlijenti n =new SluzbenikGui.EditKlijenti(_toBeEdited); 
 						n.setLocationRelativeTo(null);   // postavlja ga na sredinu
 						n.setVisible(true);  // upali vidljivost
 						n.setResizable(false);
-						frame.setEnabled(false);
+						frame.setEnabled(false); 
 		
 				}
 				catch (NullPointerException e1) {
+				
 					JOptionPane.showMessageDialog(null, "Niste odabrali klijenta čije podatke želite promijeniti!");
 				} 
 				catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr0mjen4 3rr0r");
 				}
+				
 	
 			}
 		});
@@ -435,7 +436,7 @@ public class Klijenti extends JFrame {
 						panel_3.add(_scrollPane);
 					}
 					    
-		
+ 
 				panel_3.revalidate();
 				panel_3.repaint();
 				}

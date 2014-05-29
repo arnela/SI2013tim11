@@ -44,7 +44,6 @@ public class KlijentLogika {
 				 	klijentSluzbenik.getTelefon(),
 				 	klijentSluzbenik.getAdresa(),
 				 	klijentSluzbenik.getEmail(),
-					// tek kad sluzbenik napusti firmu onda je status aktivan = false
 					true,
 					new java.sql.Date(new java.util.Date().getTime())
 				 );
@@ -80,6 +79,7 @@ public class KlijentLogika {
 						osoba.getAdresa(),
 						osoba.getEmail()
 					 );
+			 _klijent.setDatumRodjenja(osoba.getDatumRodjenja());
 			 criteria = _session.createCriteria(Klijent.class);
 			 Klijent _k =(Klijent) criteria.add(Restrictions.eq("osobaId", osoba.getOsobaId())).uniqueResult();
 			 if(_k!=null&&osoba.getAktivan()!=false){

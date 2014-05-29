@@ -62,7 +62,7 @@ public class EditKlijenti extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	//ovaj nam konstruktor ne treba jer se aplikacija ne pokrece iz ove forme
+ 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -85,11 +85,12 @@ public class EditKlijenti extends JFrame {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SluzbenikGui.Klijenti n =new SluzbenikGui.Klijenti();  //kreira novi po�etni gui za sluzbenika
+				 SluzbenikGui.Klijenti.frame.setEnabled(true);
 				 
 			}
 		});
-		trenutni=Spremnik.getTrenutni();
+	
+		trenutni=Spremnik.getTrenutni(); 
 		setTitle("MikroOrg - Klijenti");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 460, 468);
@@ -112,8 +113,9 @@ public class EditKlijenti extends JFrame {
 		btnNazad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SluzbenikGui.EditKlijenti.this.dispose();
-			}
+			} 
 		});
+		
 		btnNazad.setBounds(294, 295, 95, 23);
 		final JLabel lbl_jmbg = new JLabel(_klijentSluzbenik.getJmbg());
 		JButton btnSpasiPromjene = new JButton("Spasi ");
@@ -197,7 +199,7 @@ public class EditKlijenti extends JFrame {
 		else
 			_help="";
 		tf_prezime.setText(_help);
-		tf_prezime.setText(split[1]);
+		
 		
 		tf_datum = new JTextField();
 		tf_datum.setColumns(10);
@@ -220,59 +222,115 @@ public class EditKlijenti extends JFrame {
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(10)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.TRAILING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+							.addGroup
+
+(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 								.addComponent(label)
 								.addComponent(label_1)
 								.addComponent(label_2)
 								.addComponent(label_3)
 								.addComponent(label_4))
-							.addPreferredGap(ComponentPlacement.UNRELATED))
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(label_5, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(label_6, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
-					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(tf_adresa, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-						.addComponent(tf_ime, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-						.addComponent(tf_prezime, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-						.addComponent(tf_datum, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-						.addComponent(tf_email, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-						.addComponent(tf_telefon, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-						.addComponent(lbl_jmbg, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addPreferredGap
+
+(ComponentPlacement.UNRELATED))
+						.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.LEADING, false)
+							.addComponent(label_5, 
+
+Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(label_6, 
+
+Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
+					.addPreferredGap(ComponentPlacement.RELATED, 61, 
+
+Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.LEADING, false)
+						.addComponent(tf_adresa, 
+
+GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_ime, GroupLayout.DEFAULT_SIZE, 
+
+155, Short.MAX_VALUE)
+						.addComponent(tf_prezime, 
+
+GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_datum, 
+
+GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_email, 
+
+GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_telefon, 
+
+GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(lbl_jmbg, 
+
+GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGap(41))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tf_ime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.BASELINE)
+						.addComponent(tf_ime, 
+
+GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_5))
 					.addGap(5)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tf_prezime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.BASELINE)
+						.addComponent(tf_prezime, 
+
+GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_6))
 					.addGap(6)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tf_datum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.BASELINE)
+						.addComponent(tf_datum, 
+
+GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_4))
 					.addGap(6)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.BASELINE)
 						.addComponent(label_3)
 						.addComponent(lbl_jmbg))
 					.addGap(6)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tf_email, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.BASELINE)
+						.addComponent(tf_email, 
+
+GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_2))
 					.addGap(6)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tf_telefon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.BASELINE)
+						.addComponent(tf_telefon, 
+
+GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label_1))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tf_adresa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_panel_1.createParallelGroup
+
+(Alignment.BASELINE)
+						.addComponent(tf_adresa, 
+
+GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label))
 					.addContainerGap(14, Short.MAX_VALUE))
 		);
