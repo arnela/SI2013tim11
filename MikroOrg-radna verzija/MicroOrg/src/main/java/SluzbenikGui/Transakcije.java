@@ -488,13 +488,13 @@ public class Transakcije extends JFrame {
 			}
 		});
 		
-		JButton button_8 = new JButton("Po\u0161alji na E-mail");
-		button_8.addActionListener(new ActionListener() {
+		JButton btnEmail = new JButton("E-mail");
+		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Nije implementirano !");
 			}
 		});
-		button_8.setBounds(132, 278, 135, 23);
-		panel_2.add(button_8);
+		btnEmail.setBounds(132, 278, 135, 23);
+		panel_2.add(btnEmail);
 	}
 }

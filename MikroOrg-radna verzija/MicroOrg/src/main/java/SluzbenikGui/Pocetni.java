@@ -161,8 +161,8 @@ public class Pocetni extends JFrame {
 		button_3.setBounds(10, 292, 153, 60);
 		contentPane.add(button_3);
 		
-		JButton button_4 = new JButton("Izvje\u0161taji");
-		button_4.addActionListener(new ActionListener() {
+		JButton btnIzvjetaj = new JButton("Izvještaj");
+		btnIzvjetaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SluzbenikGui.Izvjestaji n =new SluzbenikGui.Izvjestaji();  //kreira klijenti gui za �efa
 				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
@@ -172,11 +172,11 @@ public class Pocetni extends JFrame {
 				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
 			}
 		});
-		button_4.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/report.png")));
-		button_4.setHorizontalAlignment(SwingConstants.TRAILING);
-		button_4.setBackground(UIManager.getColor("Button.background"));
-		button_4.setBounds(10, 221, 153, 60);
-		contentPane.add(button_4);
+		btnIzvjetaj.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/report.png")));
+		btnIzvjetaj.setHorizontalAlignment(SwingConstants.TRAILING);
+		btnIzvjetaj.setBackground(UIManager.getColor("Button.background"));
+		btnIzvjetaj.setBounds(10, 221, 153, 60);
+		contentPane.add(btnIzvjetaj);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
