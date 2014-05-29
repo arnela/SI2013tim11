@@ -26,7 +26,6 @@ public class TransakcijaLogika {
 	
 	public Long dodajTransakciju(Transakcija transakcija){
 		
-		
 		Session _session= HibernateUtil.getSessionFactory().openSession();
 		Transaction _t = _session.beginTransaction(); 
 		
@@ -37,11 +36,11 @@ public class TransakcijaLogika {
 				transakcija.getKlijent(),
 				transakcija.getKredit(),
 				transakcija.getUposlenik()
-				
 				);
-	
+	  
+		Double iznos= _tr.getKredit().getTipKredita().getIznos();
+		_tr.getKredit().getTipKredita().setIznos(iznos-(_tr.getIznosUplate()));
 		Long _id = (Long) _session.save(_tr); 
-		//umanjiti iznos kredita za iznos uplate  
 		_t.commit(); 
 		_session.close();
 		return _id;	
@@ -75,6 +74,18 @@ public class TransakcijaLogika {
 		 _t.commit();
 		 _session.close();
 		 return _k;
+	} 
+	
+	public Osoba dajOsobu(String jmbg) {
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 Criteria criteria = _session.createCriteria(Osoba.class);
+		 Osoba _o =(Osoba) criteria.add(Restrictions.eq("jmbg", jmbg)).uniqueResult();
+		 
+		 _t.commit();
+		 _session.close();
+		 return _o;
 	} 
 	
 	
@@ -183,8 +194,11 @@ public class TransakcijaLogika {
 		 
 		 Criteria criteria = _session.createCriteria(Transakcija.class);
 		 Transakcija _tr = (Transakcija) criteria.add(Restrictions.and(Restrictions.eq("datumUplate", datum), Restrictions.eq("iznosUplate", iznos),Restrictions.eq("nacinUplate", nacin))); 
+		 
 		 //uvecati iznos kredita
-		
+		 Double _iznosKredita= _tr.getKredit().getTipKredita().getIznos();
+		 _tr.getKredit().getTipKredita().setIznos(_iznosKredita + (_tr.getIznosUplate()));
+			
 		 _session.update(_tr);
 		 _t.commit();
 		 _session.close();

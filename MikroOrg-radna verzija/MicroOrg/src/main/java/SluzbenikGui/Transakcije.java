@@ -27,6 +27,7 @@ import domainModels.Klijent;
 import domainModels.Kredit;
 import viewModels.KlijentSluzbenik;
 import viewModels.KlijentTableModel;
+import viewModels.KreditnaPonuda;
 import viewModels.Transakcija;
 import viewModels.TransakcijaTableModel;
 
@@ -41,6 +42,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import logic.KlijentLogika;
+import logic.PonudeLogika;
 import logic.TransakcijaLogika;
 
 import java.awt.event.MouseMotionAdapter;
@@ -125,6 +127,11 @@ public class Transakcije extends JFrame {
 		label_3.setBounds(-42, 41, 147, 14);
 		panel.add(label_3);
 		
+		final JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(108, 132, 164, 28);
+		panel.add(comboBox);
+		
+		
 		JLabel label_4 = new JLabel("ID Transakcije:");
 		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_4.setBounds(1, 65, 103, 14);
@@ -136,9 +143,20 @@ public class Transakcije extends JFrame {
 				
 				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
 				try{
-				if(!(_transakcijaLogika.daLiPostoji(tf_jmbg.getText()))) JOptionPane.showMessageDialog(null, "Klijent sa ovim maticnim brojem ne postoji!");
+				if(!(_transakcijaLogika.daLiPostoji(tf_jmbg.getText()))){
+					JOptionPane.showMessageDialog(null, "Klijent sa ovim maticnim brojem ne postoji!");
+				}else
+				{
+					PonudeLogika _ponudeLogika = new PonudeLogika();
+					List<KreditnaPonuda> _krediti = _ponudeLogika.traziPoImenuKlijenta(_transakcijaLogika.dajOsobu("").getImePrezime());
+					for (int i=0;i<_krediti.size();i++)
+					{
+						comboBox.addItem(_krediti.get(i));
+						//comboBox.addItem(_krediti.get(i).getTk().getNaziv());
+					}
 				
-			} catch (Exception e1) {
+				}
+				}catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
 			}
 			}
@@ -152,9 +170,6 @@ public class Transakcije extends JFrame {
 		label_5.setBounds(1, 139, 97, 14);
 		panel.add(label_5);
 		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(108, 132, 164, 28);
-		panel.add(comboBox);
 		
 		JLabel label_6 = new JLabel("Nov\u010Dani iznos:");
 		label_6.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -195,7 +210,7 @@ public class Transakcije extends JFrame {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
-                                                                                                                                         
+                PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
  				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 				Calendar cal = Calendar.getInstance();
 				String _datum = dateFormat.format(cal.getTime());
@@ -209,7 +224,8 @@ public class Transakcije extends JFrame {
 
 				Klijent _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
 				
-				Kredit _kredit = (Kredit) comboBox.getSelectedItem();
+				
+				Kredit _kredit =  (Kredit) comboBox.getSelectedItem();
 				
 				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
 				
@@ -376,15 +392,11 @@ public class Transakcije extends JFrame {
 			
 			@Override
 			public void windowActivated(WindowEvent arg0) {
-				//TODO: smjestiti kredite u combo, unijeti uposlenika i id
-				
 				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 				Calendar cal = Calendar.getInstance();
 				String _datum = dateFormat.format(cal.getTime());
 				lb_datum.setText(_datum);
-				
-				
-				
+				lb_uposlenik.setText(Spremnik.getTrenutni().getUsername());
 			}
 			
 			
