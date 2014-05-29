@@ -303,7 +303,7 @@ public class SharedLogika {
 		if (o.getClass()==IzvjestajOrganizacije.class) {IzvjestajOrganizacije novi=(IzvjestajOrganizacije) o; myFile = new File( "target/IzvjestajOrganizacije"+novi.getDatumGenerisanja()+".pdf");}
 		if (o.getClass()==viewModels.Transakcija.class) {viewModels.Transakcija novi=(viewModels.Transakcija) o; myFile = new File( "target/Transakcija"+novi.getKlijent().getKlijentId()+novi.getDatumUplate()+".pdf");}
 		if (o.getClass()==KlijentSluzbenik.class) {KlijentSluzbenik novi=(KlijentSluzbenik) o; myFile = new File( "target/Klijent"+novi.getJmbg()+".pdf");}
-		
+		if (o.getClass()==KreditniSluzbenik.class) {KreditniSluzbenik novi=(KreditniSluzbenik) o; myFile = new File( "target/Sluzbenik"+novi.getJmbg()+".pdf");}
 		try {
 		Desktop.getDesktop().open(myFile);
         //postavljanje opcije da se pdf obrise kad se zatvori aplikacija

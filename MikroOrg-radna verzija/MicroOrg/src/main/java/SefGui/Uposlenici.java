@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+
 import aplikacija.MicroOrg.Spremnik;
 import viewModels.KreditniSluzbenik;
 import viewModels.SluzbenikTableModel;
@@ -37,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.SharedLogika;
 import logic.UposlenikLogika;
 
 import javax.swing.JTable;
@@ -321,7 +323,34 @@ public class Uposlenici extends JFrame {
 		JButton button = new JButton("PDF prikaz");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				
+				KreditniSluzbenik _toBePDFGenerated=null;
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+						//JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika čije podatke želite promijeniti!");
+					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
+					
+					
+						for(KreditniSluzbenik k : _kreditniSluzbenici){
+							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
+								_toBePDFGenerated=k;
+							}
+
+						}
+						SharedLogika _sharedLogika= new SharedLogika();
+						_sharedLogika.generisiPDF(_toBePDFGenerated);
+						_sharedLogika.otvoriPDF(_toBePDFGenerated);
+							
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika čije podatke želite prikazati u pdf formatu!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				}
+				
+				//JOptionPane.showMessageDialog(null, "Nije implementirano !");
 			}
 		});
 		button.setBounds(10, 326, 101, 23);
