@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 
+import aplikacija.MicroOrg.Spremnik;
 import domainModels.Klijent;
 import domainModels.Kredit;
 import viewModels.KlijentSluzbenik;
@@ -204,13 +205,13 @@ public class Transakcije extends JFrame {
 				String _nacin;
 				if(radioButton_1.isSelected()) _nacin="gotovina";
 				else _nacin="uplatnica iz banke";
-				
+				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
+
 				Klijent _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
 				
 				Kredit _kredit = (Kredit) comboBox.getSelectedItem();
 				
-				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
-				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit);
+				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
 				
 				try {
 					_transakcijaLogika.dodajTransakciju(_transakcija);
@@ -312,7 +313,7 @@ public class Transakcije extends JFrame {
 		radioButton_3.setBounds(6, 59, 143, 23);
 		panel_5.add(radioButton_3);
 		
-		JRadioButton radioButton_4 = new JRadioButton("Naziv tipa kredita");
+		final JRadioButton radioButton_4 = new JRadioButton("Naziv tipa kredita");
 		radioButton_4.setBounds(6, 85, 177, 23);
 		panel_5.add(radioButton_4);
 		
@@ -391,6 +392,7 @@ public class Transakcije extends JFrame {
 		
 		
 		button_5.addActionListener(new ActionListener() {
+			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
 				
 				TransakcijaLogika _transakcijaLogika= new TransakcijaLogika();
@@ -444,15 +446,32 @@ public class Transakcije extends JFrame {
 					panel_3.add(_scrollPane);
 					panel_3.revalidate();
 					panel_3.repaint();
+					
 					}
-					else JOptionPane.showMessageDialog(null, "Ne transakcija sa tim ID-om.");
+					else JOptionPane.showMessageDialog(null, "Nema transakcija sa tim ID-om.");
+					}catch(HeadlessException e1)
+					{
+						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
+						}
+				}else if(radioButton_4.isSelected()){
+					try{
+					List<Transakcija> _transakcije = _transakcijaLogika.getByTipKredita(tf_pretraga.getText());
+					if(_transakcije.size()!=0){
+					JTable _table = new JTable();
+					_table.setModel(new TransakcijaTableModel(_transakcije));
+					JScrollPane _scrollPane = new JScrollPane(_table);
+				    _scrollPane.setViewportView(_table);
+				    
+					panel_3.add(_scrollPane);
+					panel_3.revalidate();
+					panel_3.repaint();
+					}
+					else JOptionPane.showMessageDialog(null, "Ne transakcija sa tim nazivom tipa kredita.");
 					}catch(HeadlessException e1)
 					{
 						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 						}
 				}
-				
-			
 			
 			}
 		});

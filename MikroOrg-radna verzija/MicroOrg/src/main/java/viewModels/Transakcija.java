@@ -2,6 +2,7 @@ package viewModels;
 
 import domainModels.Klijent;
 import domainModels.Kredit;
+import domainModels.Uposlenik;
 
 
 
@@ -12,6 +13,7 @@ public class Transakcija {
 	private String nacinUplate;
 	private Klijent klijent;
 	private Kredit kredit;
+	private Uposlenik u;
 	
 	public Transakcija(){
 		
@@ -22,18 +24,21 @@ public class Transakcija {
 			Double iznosUplate, 
 			String nacinUplate, 
 			Klijent klijent, 
-			Kredit kredit){
+			Kredit kredit,
+			Uposlenik u){
 		this.setDatumUplate(datumUplate);
 		this.setIznosUplate(iznosUplate);
 		this.setNacinUplate(nacinUplate);
 		this.setKlijent(klijent);
 		this.setKredit(kredit);
+		this.setUposlenik(u);
 	}
 
 	public String getDatumUplate() {
 		return datumUplate;
 	}
 
+	
 	public void setDatumUplate(String datumUplate) {
 		this.datumUplate = datumUplate;
 	}
@@ -68,6 +73,14 @@ public class Transakcija {
 
 	public void setKredit(Kredit kredit) {
 		this.kredit = kredit;
+	}
+
+	public Uposlenik getUposlenik() {
+		return u;
+	}
+
+	public void setUposlenik(Uposlenik u) {
+		this.u = u;
 	}
 
 	

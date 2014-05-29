@@ -2,6 +2,7 @@ package SefGui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,15 +15,21 @@ import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 
+import viewModels.Transakcija;
+import viewModels.TransakcijaTableModel;
 import domainModels.Uposlenik;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
+
 import aplikacija.MicroOrg.Spremnik;
 import logic.TransakcijaLogika;
 import logic.UposlenikLogika;
@@ -35,6 +42,7 @@ public class Transakcije extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	//ovaj konstruktor je samo u slucaju da se aplikacija pokrece iz ove forme a nama to ne treba
 		public static void main(String[] args) {
 			EventQueue.invokeLater(new Runnable() {
@@ -83,7 +91,7 @@ public class Transakcije extends JFrame {
 		panel.setBackground(Color.WHITE);
 		tabbedPane.addTab("Prikaz i pretraga", null, panel, null);
 		
-		JPanel panel_1 = new JPanel();
+		final JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(10, 54, 385, 311);
@@ -146,13 +154,48 @@ public class Transakcije extends JFrame {
 					
 					
 				}
-				else if(radioButton_1.isSelected()){}
-				else if(radioButton_2.isSelected()){}
-				
-				
-			//	if(_transakcijaLogika.daLiPostoji(tf_podaciPretrage.getText())){	
-			//	}
+				else if(radioButton_1.isSelected()){
+					try{
+						List<Transakcija> _transakcije=_transakcijaLogika.getByKlijent(tf_podaciPretrage.getText());
+						if(_transakcije.size()!=0){
+						JTable _table = new JTable();
+						_table.setModel(new TransakcijaTableModel(_transakcije));
+						JScrollPane _scrollPane = new JScrollPane(_table);
+					    _scrollPane.setViewportView(_table);
+					    
+						panel_1.add(_scrollPane);
+						panel_1.revalidate();
+						panel_1.repaint();
+						}
+						else JOptionPane.showMessageDialog(null, "Ne postoje transakcije sa tim klijentom.");
+						}catch(HeadlessException e1)
+						{
+							 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
+							}
 					
+					
+				}
+				else if(radioButton_2.isSelected()){
+					try{
+						List<Transakcija> _transakcije = _transakcijaLogika.getByTipKredita(tf_podaciPretrage.getText());
+						if(_transakcije.size()!=0){
+						JTable _table = new JTable();
+						_table.setModel(new TransakcijaTableModel(_transakcije));
+						JScrollPane _scrollPane = new JScrollPane(_table);
+					    _scrollPane.setViewportView(_table);
+					    
+						panel_1.add(_scrollPane);
+						panel_1.revalidate();
+						panel_1.repaint();
+						}
+						else JOptionPane.showMessageDialog(null, "Ne transakcija sa tim nazivom tipa kredita.");
+						}catch(HeadlessException e1)
+						{
+							 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
+							}
+					}
+				
+				
 				
 				
 				JOptionPane.showMessageDialog(null, "Nije implementirano !");
