@@ -185,6 +185,7 @@ public class UposlenikLogika {
 		 _t.commit();
 		 _session.close();
 	}
+<<<<<<< HEAD
 
 	public String validirajPodatke(String ime, String prezime, String jmbg,
 			String datum, String telefon, String adresa, String email,
@@ -241,5 +242,18 @@ public class UposlenikLogika {
 	  return true;  
 	}
 
+=======
+	public Osoba getOsoba(long id) {
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 Criteria criteria = _session.createCriteria(Osoba.class);
+		 Osoba _o =(Osoba) criteria.add(Restrictions.eq("id", id)).uniqueResult();
+		 
+		 _t.commit();
+		 _session.close();
+		 return _o;
+	}
+>>>>>>> b8e468777d64446b4e31f6c463a30e07fe3bc2a1
 
 }
