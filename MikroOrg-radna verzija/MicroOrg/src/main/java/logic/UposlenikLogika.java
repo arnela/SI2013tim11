@@ -182,6 +182,16 @@ public class UposlenikLogika {
 		 _t.commit();
 		 _session.close();
 	}
-
+	public Osoba getOsoba(long id) {
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 Criteria criteria = _session.createCriteria(Osoba.class);
+		 Osoba _o =(Osoba) criteria.add(Restrictions.eq("id", id)).uniqueResult();
+		 
+		 _t.commit();
+		 _session.close();
+		 return _o;
+	}
 
 }

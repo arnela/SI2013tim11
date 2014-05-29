@@ -195,7 +195,7 @@ public class Mail extends JFrame {
 
 			}
 			//ako ipak neće da pošalje privitak...
-			else{proba=nova.posaljiMail(posiljaoc,sifra,primalac,naslov,tekst,null,null);}
+			else{proba=nova.posaljiMail(posiljaoc,sifra,primalac,naslov,tekst,Spremnik.getTrenutni(),null);}
 
 			if (proba==true){JOptionPane.showMessageDialog(null, " Vaša poruka je uspješno poslana!","Izvještaj o poruci", JOptionPane.INFORMATION_MESSAGE);}
 		else {JOptionPane.showMessageDialog(null, " Unijeli ste pogrešne podatke, ili je internet konekcija onemogućena!","Greška...", JOptionPane.INFORMATION_MESSAGE);}		
