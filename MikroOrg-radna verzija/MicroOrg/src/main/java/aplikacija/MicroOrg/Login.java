@@ -109,7 +109,7 @@ public class Login extends JFrame {
 	}
 
 //Provjerava u bazi i postavlja varijable
-public Boolean Pronadji(String _username, String _jmbg) {
+public Boolean Pronadji(String _username, String pass) {
 		Session _session=null;
 		Transaction _t=null;
 		Criteria criteria=null;
@@ -121,7 +121,7 @@ public Boolean Pronadji(String _username, String _jmbg) {
 
 		try
 		{
-			_u =(Uposlenik) criteria.add(Restrictions.eq("password", _jmbg)).add(Restrictions.eq("username",_username)).uniqueResult();
+			_u =(Uposlenik) criteria.add(Restrictions.eq("password", pass)).add(Restrictions.eq("username",_username)).uniqueResult();
 			_userId=_u.getUposlenikId();
 			_userPosition=_u.getPrivilegije();
 			_t.commit();
@@ -139,7 +139,7 @@ public void Ispitaj(String username,String sifra){
 	{
 		Spremnik novi=new Spremnik();
 		novi.setTrenutni(_u);
-	if (_userPosition==false)
+	if (_userPosition==true)
 		{
 		SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi početni gui za šefa
 		n.setLocationRelativeTo(null);   // postavlja ga na sredinu
@@ -147,7 +147,7 @@ public void Ispitaj(String username,String sifra){
 		n.setResizable(false);
 		Login.this.dispose(); //zatvara ovu login formu
 		}
-	else if (_userPosition==true)
+	else if (_userPosition==false)
 		{
 		SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi početni gui za sluzbenika
 		n.setLocationRelativeTo(null);   // postavlja ga na sredinu
