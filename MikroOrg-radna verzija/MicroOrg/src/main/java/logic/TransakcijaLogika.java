@@ -33,13 +33,15 @@ public class TransakcijaLogika {
 				transakcija.getDatumUplate(),
 				transakcija.getIznosUplate(),
 				transakcija.getNacinUplate(),
-				transakcija.getKlijent(),
-				transakcija.getKredit(),
+				transakcija.getKlijentSluzbenik(),
+				transakcija.getKreditnaPonuda(),
 				transakcija.getUposlenik()
 				);
 	  
-		Double iznos= _tr.getKredit().getTipKredita().getIznos();
-		_tr.getKredit().getTipKredita().setIznos(iznos-(_tr.getIznosUplate()));
+		Double iznos= _tr.getKreditnaPonuda().getTk().getIznos();
+		_tr.getKreditnaPonuda().getTk().setIznos(iznos-(_tr.getIznosUplate()));
+		int brt = _tr.getUposlenik().getUkupanBrTransakcija();
+		_tr.getUposlenik().setUkupanBrTransakcija(brt+1);
 		Long _id = (Long) _session.save(_tr); 
 		_t.commit(); 
 		_session.close();
@@ -64,16 +66,38 @@ public class TransakcijaLogika {
 	
 	
 	
-	public Klijent dajKlijenta(String jmbg) {
-		Session _session= HibernateUtil.getSessionFactory().openSession();
+	public KlijentSluzbenik dajKlijenta(String jmbg) {
+		KlijentSluzbenik _kl= new KlijentSluzbenik();
+		
+		 Session _session= HibernateUtil.getSessionFactory().openSession();
 		 Transaction _t = _session.beginTransaction(); 
 		 
-		 Criteria criteria = _session.createCriteria(Klijent.class);
-		 Klijent _k =(Klijent) criteria.add(Restrictions.eq("jmbg", jmbg)).uniqueResult();
-		 
+		 Criteria criteria = _session.createCriteria(Osoba.class);
+		 @SuppressWarnings("unchecked")
+		 List<Osoba> _osobe =(List<Osoba>) criteria.add(Restrictions.eq("jmbg", jmbg)).list();
+		 for(Osoba osoba : _osobe){
+	
+			 KlijentSluzbenik _klijent= new KlijentSluzbenik(
+					    osoba.getImePrezime(),
+					 	osoba.getJmbg(),
+					 	null,
+						osoba.getTelefon(),
+						osoba.getAdresa(),
+						osoba.getEmail()
+					 );
+			 _klijent.setDatumRodjenja(osoba.getDatumRodjenja());
+			 criteria = _session.createCriteria(Klijent.class);
+			 Klijent _k =(Klijent) criteria.add(Restrictions.eq("osobaId", osoba.getOsobaId())).uniqueResult();
+			 if(_k!=null&&osoba.getAktivan()!=false){
+				 _klijent.setStatus(_k.getStatus());
+				 _kl=_klijent;
+			} 
+		 }
 		 _t.commit();
 		 _session.close();
-		 return _k;
+		 
+		 return _kl;
+
 	} 
 	
 	public Osoba dajOsobu(String jmbg) {
@@ -141,7 +165,7 @@ public class TransakcijaLogika {
 	
 	
 	
-	public Transakcija getByID(String id) {
+	/*public Transakcija getByID(String id) {
 		Session _session= HibernateUtil.getSessionFactory().openSession();
 		 Transaction _t = _session.beginTransaction(); 
 		 
@@ -154,7 +178,7 @@ public class TransakcijaLogika {
 						 	_tra.getDatumUplate(),
 							_tra.getIznosUplate(),
 							_tra.getNacinUplate(),
-							_tra.getKlijent(),
+							_tra.getKlijentSluzbenik(),
 							_tra.getKredit(),
 							_tra.getKreditniSluzbenik()
 						 );
@@ -163,7 +187,7 @@ public class TransakcijaLogika {
 		 _session.close();
 		 
 		 return _transakcija;
-	}
+	}*/
 	
 	
 	
@@ -196,8 +220,8 @@ public class TransakcijaLogika {
 		 Transakcija _tr = (Transakcija) criteria.add(Restrictions.and(Restrictions.eq("datumUplate", datum), Restrictions.eq("iznosUplate", iznos),Restrictions.eq("nacinUplate", nacin))); 
 		 
 		 //uvecati iznos kredita
-		 Double _iznosKredita= _tr.getKredit().getTipKredita().getIznos();
-		 _tr.getKredit().getTipKredita().setIznos(_iznosKredita + (_tr.getIznosUplate()));
+		 Double _iznosKredita= _tr.getKreditnaPonuda().getTk().getIznos();
+		 _tr.getKreditnaPonuda().getTk().setIznos(_iznosKredita + (_tr.getIznosUplate()));
 			
 		 _session.update(_tr);
 		 _t.commit();

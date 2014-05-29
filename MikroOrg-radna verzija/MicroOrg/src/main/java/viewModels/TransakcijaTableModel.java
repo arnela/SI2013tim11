@@ -37,9 +37,9 @@ public class TransakcijaTableModel extends AbstractTableModel {
 		 	Transakcija _transakcije = li.get(rowIndex);
 	        switch (columnIndex) {
 	            case 0: 
-	                return _transakcije.getKlijent();
+	                return _transakcije.getKlijentSluzbenik();
 	            case 1:
-	                return _transakcije.getKredit();
+	                return _transakcije.getKreditnaPonuda();
 	            case 2:
 	                return _transakcije.getIznosUplate();
 	            case 3:

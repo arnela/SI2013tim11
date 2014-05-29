@@ -12,6 +12,7 @@ import java.awt.Color;
 
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -43,6 +44,7 @@ import java.util.List;
 
 import logic.KlijentLogika;
 import logic.PonudeLogika;
+import logic.SharedLogika;
 import logic.TransakcijaLogika;
 
 import java.awt.event.MouseMotionAdapter;
@@ -188,6 +190,9 @@ public class Transakcije extends JFrame {
 		panel_1.setBounds(83, 214, 435, 48);
 		panel.add(panel_1);
 		
+		ButtonGroup grupa = new ButtonGroup();
+
+		
 		final JRadioButton radioButton = new JRadioButton("uplatnica iz banke");
 		radioButton.setBounds(260, 7, 153, 23);
 		panel_1.add(radioButton);
@@ -195,6 +200,9 @@ public class Transakcije extends JFrame {
 		final JRadioButton radioButton_1 = new JRadioButton("gotovina");
 		radioButton_1.setBounds(6, 7, 153, 23);
 		panel_1.add(radioButton_1);
+		
+		grupa.add(radioButton);
+		grupa.add(radioButton_1);
 		
 		JButton button_1 = new JButton("PDF prikaz");
 		button_1.addActionListener(new ActionListener() {
@@ -211,7 +219,7 @@ public class Transakcije extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
                 PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
- 				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+ 				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				Calendar cal = Calendar.getInstance();
 				String _datum = dateFormat.format(cal.getTime());
 				
@@ -222,10 +230,10 @@ public class Transakcije extends JFrame {
 				else _nacin="uplatnica iz banke";
 				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
 
-				Klijent _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
+				KlijentSluzbenik _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
 				
 				
-				Kredit _kredit =  (Kredit) comboBox.getSelectedItem();
+				KreditnaPonuda _kredit =  (KreditnaPonuda) comboBox.getSelectedItem();
 				
 				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
 				
@@ -241,7 +249,7 @@ public class Transakcije extends JFrame {
 				JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
 			}
 				
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				
 			}
 		});
 		button_2.setBounds(145, 280, 147, 23);
@@ -284,7 +292,30 @@ public class Transakcije extends JFrame {
 		JButton button_4 = new JButton("PDF prikaz");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				
+				Transakcija _toBePDFGenerated=null;
+				try{
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+					
+					
+					for(Transakcija t : _sveTransakcije){
+						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
+							_toBePDFGenerated=t;
+						}	
+					}
+					SharedLogika _sharedLogika= new SharedLogika();
+					_sharedLogika.generisiPDF(_toBePDFGenerated);
+					_sharedLogika.otvoriPDF(_toBePDFGenerated);
+					
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali transakciju čije podatke želite prikazati u pdf formatu!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				}
+				
 			}
 		});
 		button_4.setBounds(10, 278, 112, 23);
@@ -321,6 +352,9 @@ public class Transakcije extends JFrame {
 		panel_5.setBounds(405, 54, 189, 118);
 		panel_2.add(panel_5);
 		
+		ButtonGroup grupa2 = new ButtonGroup();
+
+		
 		final JRadioButton radioButton_2 = new JRadioButton("Datumu unosa");
 		radioButton_2.setBounds(6, 7, 177, 23);
 		panel_5.add(radioButton_2);
@@ -336,6 +370,11 @@ public class Transakcije extends JFrame {
 		final JRadioButton radioButton_5 = new JRadioButton("Klijent - Ime&Prezime");
 		radioButton_5.setBounds(6, 33, 177, 23);
 		panel_5.add(radioButton_5);
+		
+		grupa2.add(radioButton_2);
+		grupa2.add(radioButton_3);
+		grupa2.add(radioButton_4);
+		grupa2.add(radioButton_5);
 		
 		JButton button_6 = new JButton("Nazad");
 		button_6.addActionListener(new ActionListener() {
@@ -392,7 +431,7 @@ public class Transakcije extends JFrame {
 			
 			@Override
 			public void windowActivated(WindowEvent arg0) {
-				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 				Calendar cal = Calendar.getInstance();
 				String _datum = dateFormat.format(cal.getTime());
 				lb_datum.setText(_datum);
@@ -445,7 +484,7 @@ public class Transakcije extends JFrame {
 					{
 						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 						}
-				}else if(radioButton_3.isSelected()){
+				}/*else if(radioButton_3.isSelected()){
 					try{
 					List<Transakcija> _transakcije = null;
 					_transakcije.add(_transakcijaLogika.getByID(tf_pretraga.getText()));
@@ -465,7 +504,7 @@ public class Transakcije extends JFrame {
 					{
 						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 						}
-				}else if(radioButton_4.isSelected()){
+				}*/else if(radioButton_4.isSelected()){
 					try{
 					List<Transakcija> _transakcije = _transakcijaLogika.getByTipKredita(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
