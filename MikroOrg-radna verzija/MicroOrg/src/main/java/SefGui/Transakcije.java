@@ -216,6 +216,9 @@ public class Transakcije extends JFrame {
 		});
 		button_2.setBounds(479, 376, 103, 23);
 		panel.add(button_2);
+		
+		JButton btnNewButton = new JButton("E-mail");
+		btnNewButton.setBounds(132, 376, 134, 23);
+		panel.add(btnNewButton);
 	}
-
 }

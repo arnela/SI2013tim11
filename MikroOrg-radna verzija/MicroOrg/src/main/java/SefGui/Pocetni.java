@@ -66,7 +66,7 @@ public class Pocetni extends JFrame {
 		});
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("MicroOrg - \u0160ef");
-		setBounds(100, 100, 438, 480);
+		setBounds(100, 100, 436, 409);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -124,23 +124,6 @@ public class Pocetni extends JFrame {
 		button_2.setBounds(10, 133, 153, 50);
 		contentPane.add(button_2);
 		
-		JButton button_3 = new JButton("Izvje\u0161taji");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SefGui.Izvjestaji n =new SefGui.Izvjestaji();  //kreira Izvje�taji gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
-				//SefGui.Pocetni.this.dispose(); // zatvara ovu formu
-				SefGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
-			}
-		});
-		button_3.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/report.png")));
-		button_3.setHorizontalAlignment(SwingConstants.TRAILING);
-		button_3.setBackground(UIManager.getColor("Button.background"));
-		button_3.setBounds(10, 194, 153, 50);
-		contentPane.add(button_3);
-		
 		JButton button_4 = new JButton("Uposlenici");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -155,7 +138,7 @@ public class Pocetni extends JFrame {
 		button_4.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/Workers.png")));
 		button_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		button_4.setBackground(UIManager.getColor("Button.background"));
-		button_4.setBounds(10, 255, 153, 50);
+		button_4.setBounds(10, 194, 153, 50);
 		contentPane.add(button_4);
 		
 		JButton button_5 = new JButton("Transakcije");
@@ -172,7 +155,7 @@ public class Pocetni extends JFrame {
 		button_5.setBackground(UIManager.getColor("Button.background"));
 		button_5.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/kredit.jpg")));
 		button_5.setHorizontalAlignment(SwingConstants.RIGHT);
-		button_5.setBounds(10, 316, 153, 50);
+		button_5.setBounds(10, 255, 153, 50);
 		contentPane.add(button_5);
 		
 		JButton button_6 = new JButton("Poslovanje organizacije");
@@ -187,14 +170,14 @@ public class Pocetni extends JFrame {
 			}
 		});
 		button_6.setBackground(UIManager.getColor("Button.background"));
-		button_6.setBounds(10, 377, 190, 50);
+		button_6.setBounds(10, 316, 190, 50);
 		contentPane.add(button_6);
 		
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(128, 0, 0));
 		panel.setBorder(new LineBorder(new Color(128, 0, 0)));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(212, 216, 190, 114);
+		panel.setBounds(220, 159, 190, 114);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -238,26 +221,6 @@ public class Pocetni extends JFrame {
 		label_12.setBounds(99, 89, 79, 14);
 		panel.add(label_12);
 		
-		JLabel label = new JLabel("Ime:");
-		label.setHorizontalAlignment(SwingConstants.RIGHT);
-		label.setBounds(202, 228, 79, 14);
-		contentPane.add(label);
-		
-		JLabel label_1 = new JLabel("Prezime:");
-		label_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_1.setBounds(202, 253, 79, 14);
-		contentPane.add(label_1);
-		
-		JLabel label_2 = new JLabel("Pozicija:");
-		label_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_2.setBounds(202, 281, 79, 14);
-		contentPane.add(label_2);
-		
-		JLabel label_3 = new JLabel("Datum:");
-		label_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_3.setBounds(202, 306, 79, 14);
-		contentPane.add(label_3);
-		
 		JButton button_7 = new JButton("Odjavi se!");
 		button_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -266,12 +229,12 @@ public class Pocetni extends JFrame {
 		});
 		button_7.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/logout (1).png")));
 		button_7.setHorizontalAlignment(SwingConstants.TRAILING);
-		button_7.setBounds(257, 377, 153, 50);
+		button_7.setBounds(257, 316, 153, 50);
 		contentPane.add(button_7);
 		
 		JLabel label_4 = new JLabel("");
 		label_4.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/logo.jpg")));
-		label_4.setBounds(210, 47, 200, 114);
+		label_4.setBounds(212, 11, 200, 114);
 		contentPane.add(label_4);
 	}
 

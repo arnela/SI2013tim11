@@ -208,7 +208,7 @@ public class Mail extends JFrame {
 		btnNewButton.setBounds(142, 269, 115, 23);
 		contentPane.add(btnNewButton);
 		
-		lblPoiljaoc = new JLabel("Pošiljaoc:");
+		lblPoiljaoc = new JLabel("Pošiljalac:");
 		lblPoiljaoc.setBounds(20, 11, 145, 14);
 		contentPane.add(lblPoiljaoc);
 		
