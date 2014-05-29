@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -29,6 +31,7 @@ import domainModels.Uposlenik;
 import viewModels.*;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -366,7 +369,7 @@ public class SharedLogika {
 		
 	}
 	
-	public Boolean validirajJMB(String _jmbg, Date _datumRodjenja){
+	public boolean validirajJMB(String _jmbg, Date _datumRodjenja){
 			char[] cifre = _jmbg.toCharArray();
 			int dan = Character.getNumericValue(cifre[0])*10 + Character.getNumericValue(cifre[1]);
 			int mjesec = Character.getNumericValue(cifre[2])*10 + Character.getNumericValue(cifre[3]);
@@ -380,8 +383,68 @@ public class SharedLogika {
 			else return false;
 	}
 	
-	public void validirajDatum(Date _datum){}
+	public boolean validirajDatum(String datum){
+		 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		    dateFormat.setLenient(false);
+		    try {
+		      dateFormat.parse(datum.trim());
+		    } catch (java.text.ParseException pe) {
+		      return false;
+		    }
+		    return true;
+		  }
+	
 	public void ispitajSQL(String upad){}
+	
+	public boolean validirajEmail(String email){
+		boolean result = true;
+		   try {
+		      InternetAddress emailAddr = new InternetAddress(email);
+		      emailAddr.validate();
+		   } catch (AddressException ex) {
+		      result = false;
+		   }
+		   return result;
+		}
+	
+	public boolean validirajImePrezime(String imePrezime){
+		String[] par = imePrezime.split(" ");
+		String ime = par[0];
+		String prezime = par[1];		
+		return (ime.matches("[A-Z][a-zA-Z]*") && prezime.matches("[A-Z][a-zA-Z]*")); 
+	}
+	
+	public boolean validirajIznosKredita(String iznos){
+		
+		try {
+	        Double.parseDouble(iznos);
+	        return (Double.parseDouble(iznos)<50000);
+	    } catch (NumberFormatException e) {
+	        return false;
+	    }
+	}
+	
+	public boolean validirajKamatnuStopu(String kamata){
+		
+		try {
+	        Double.parseDouble(kamata);
+	        return (Double.parseDouble(kamata)<20);
+	    } catch (NumberFormatException e) {
+	        return false;
+	    }
+	}
+	
+	public boolean validirajIme(String ime){		
+		return ime.matches("[A-Z][a-zA-Z]*"); 
+	}
+	
+	public boolean validirajPrezime(String prezime){	
+		return prezime.matches("[A-Z][a-zA-Z]*"); 
+	}
+	
+	public boolean validirajTelefon(String telefon){
+		return telefon.matches("\\d{3}-\\d{3}-\\d{3}");
+	}
 	
 	
 	
