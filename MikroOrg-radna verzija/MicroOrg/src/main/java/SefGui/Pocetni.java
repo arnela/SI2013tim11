@@ -23,14 +23,21 @@ import javax.swing.UIManager;
 
 import domainModels.Uposlenik;
 import aplikacija.MicroOrg.Spremnik;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import logic.UposlenikLogika;
 
 public class Pocetni extends JFrame {
 
 	private JPanel contentPane;
+	private UposlenikLogika ulogika;
+	private Uposlenik trenutni;
 	/**
 	 * Launch the application.
 	 */
@@ -64,6 +71,8 @@ public class Pocetni extends JFrame {
 				l.setLocationRelativeTo(null);
 			}
 		});
+		trenutni=Spremnik.getTrenutni();
+		ulogika=new UposlenikLogika();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("MicroOrg - \u0160ef");
 		setBounds(100, 100, 436, 409);
@@ -177,7 +186,7 @@ public class Pocetni extends JFrame {
 		panel.setForeground(new Color(128, 0, 0));
 		panel.setBorder(new LineBorder(new Color(128, 0, 0)));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(220, 159, 190, 114);
+		panel.setBounds(192, 159, 218, 114);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -201,22 +210,27 @@ public class Pocetni extends JFrame {
 		label_8.setBounds(10, 89, 79, 14);
 		panel.add(label_8);
 		
-		JLabel label_9 = new JLabel("/");
+		String[] imena =ulogika.getOsoba(trenutni.getOsobaId()).getImePrezime().split(" ");
+		JLabel label_9 = new JLabel(imena[0]);
 		label_9.setHorizontalAlignment(SwingConstants.LEFT);
 		label_9.setBounds(99, 11, 79, 14);
 		panel.add(label_9);
 		
-		JLabel label_10 = new JLabel("/");
+		JLabel label_10 = new JLabel(imena[1]);
 		label_10.setHorizontalAlignment(SwingConstants.LEFT);
 		label_10.setBounds(99, 36, 79, 14);
 		panel.add(label_10);
 		
-		JLabel label_11 = new JLabel("/");
+		JLabel label_11 = new JLabel("Šef");
 		label_11.setHorizontalAlignment(SwingConstants.LEFT);
 		label_11.setBounds(99, 64, 79, 14);
 		panel.add(label_11);
 		
-		JLabel label_12 = new JLabel("/");
+		Calendar currentDate = Calendar.getInstance(); //Get the current date
+		SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //format it as per your requirement
+		String dateNow = formatter.format(currentDate.getTime());
+		
+		JLabel label_12 = new JLabel(dateNow);
 		label_12.setHorizontalAlignment(SwingConstants.LEFT);
 		label_12.setBounds(99, 89, 79, 14);
 		panel.add(label_12);
