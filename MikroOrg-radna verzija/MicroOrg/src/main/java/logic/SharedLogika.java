@@ -366,7 +366,23 @@ public class SharedLogika {
 		
 	}
 	
-	public void validirajJMB(String _jmbg, Date _datumRodjenja){}
+	public Boolean validirajJMB(String _jmbg, Date _datumRodjenja){
+			char[] cifre = _jmbg.toCharArray();
+			int dan = Character.getNumericValue(cifre[0])*10 + Character.getNumericValue(cifre[1]);
+			int mjesec = Character.getNumericValue(cifre[2])*10 + Character.getNumericValue(cifre[3]);
+			int godina = Character.getNumericValue(cifre[4])*100 + Character.getNumericValue(cifre[5])*10 + Character.getNumericValue(cifre[6])*1;
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(_datumRodjenja);
+			int d = cal.get(Calendar.DAY_OF_MONTH);
+			int m = cal.get(Calendar.MONTH);
+			int g = cal.get(Calendar.YEAR);
+			if(_jmbg.length()==13 || dan == d || mjesec == m || godina == g)return true;
+			else return false;
+	}
+	
 	public void validirajDatum(Date _datum){}
 	public void ispitajSQL(String upad){}
+	
+	
+	
 }
