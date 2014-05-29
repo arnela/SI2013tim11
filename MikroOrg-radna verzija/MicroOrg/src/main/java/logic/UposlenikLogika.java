@@ -1,6 +1,9 @@
 package logic;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -181,6 +184,61 @@ public class UposlenikLogika {
 		 
 		 _t.commit();
 		 _session.close();
+	}
+
+	public String validirajPodatke(String ime, String prezime, String jmbg,
+			String datum, String telefon, String adresa, String email,
+			String sifra, String mjestoRodjenja, String plata) {
+		
+		SharedLogika _sharedLogika= new SharedLogika();
+		
+		//provjera da li su popunjena sva polja
+		if(ime.equals("")||prezime.equals("")||jmbg.equals("")||
+			datum.equals("")||telefon.equals("")||adresa.equals("")||
+			email.equals("")||sifra.equals("")||mjestoRodjenja.equals("")||plata.equals("")
+				) 
+			return "Nisu popunjena sva polja";
+		
+		//provjera Sivrinim metodama iz shared logike
+		if(!_sharedLogika.validirajIme(ime))
+			return "Ime nije validno";
+		if(!_sharedLogika.validirajPrezime(prezime))
+			return "Prezime nije validno";
+		if(!_sharedLogika.validirajDatum(datum))
+			return "Datum nije validan";
+		if(!_sharedLogika.validirajEmail(email))
+			return "Email nije validan";
+		if(!isNumeric(plata))
+			return "Plata nije validna";
+		if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
+			return "JMBG nije validan";
+		if(!_sharedLogika.validirajTelefon(telefon))
+			return "Telefon nije validan";
+
+		return "OK";
+	}
+	private java.util.Date StringToDate(String datum) {
+		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date _datum=null;
+		try {
+			_datum=formatter.parse(datum);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return _datum;
+	}
+	private boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
 	}
 
 

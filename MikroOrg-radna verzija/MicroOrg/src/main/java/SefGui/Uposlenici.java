@@ -131,9 +131,28 @@ public class Uposlenici extends JFrame {
 			
 				//TODO: Uraditi validaciju jmbg-a, datuma , email-a
 				
-				
+				String _status="Nije ok";
 				UposlenikLogika _uposlenikLogika = new UposlenikLogika();
-
+				//VALIDACIJA
+				try {
+					 _status=_uposlenikLogika.validirajPodatke(
+							 	tf_ime.getText(),
+							 	tf_prezime.getText(),
+								tf_jmbg.getText(),
+								tf_datum.getText(),
+								tf_telefon.getText(),
+								tf_adresa.getText(),
+								tf_email.getText(),
+								tf_sifra.getText(),
+								tf_mjestoRodjenja.getText(),
+								tf_plata.getText()
+							 );
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "validacija error");
+				}
+				//END VALIDACIJA
+				if(_status=="OK"){
 				//formatiranje i parsiranje datuma
 				java.sql.Date _datum = null;
 				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -186,7 +205,10 @@ public class Uposlenici extends JFrame {
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
 				}
-
+				}
+				else{
+					JOptionPane.showMessageDialog(null, _status);
+				}
 			}
 		});
 		button_1.setBounds(10, 324, 142, 23);
