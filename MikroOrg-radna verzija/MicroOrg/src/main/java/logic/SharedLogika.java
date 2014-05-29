@@ -437,6 +437,7 @@ public class SharedLogika {
 			JOptionPane.showMessageDialog(null, "Nisi generisao/la PDF. Prvo je potrebno generisati PDF da bi se mogao otvoriti.","Greška...", JOptionPane.INFORMATION_MESSAGE);
         }	
 	}
+
 	//implementirano
 	public boolean posaljiMail(String posiljaoc,String sifra,String primalac, String naslov, String tekst, Uposlenik _uposlenik, Object privitak)
 	{
@@ -472,6 +473,7 @@ public class SharedLogika {
 	            //dodavanje attachmenta ako postoji
 	            if (privitak!=null){
 	            	File privitak1=(File) privitak;
+	            	privitak1.deleteOnExit();
 	            	Multipart multipart = new MimeMultipart();
 	            	MimeBodyPart messageBodyPart = new MimeBodyPart();
 
