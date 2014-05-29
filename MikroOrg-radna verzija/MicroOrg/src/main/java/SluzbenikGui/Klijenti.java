@@ -338,9 +338,11 @@ public class Klijenti extends JFrame {
 		panel_2.add(button_2);
 		
 		JButton button_3 = new JButton("Po\u0161alji na E-mail");
-		button_3.setEnabled(false);
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Mail m = new Mail();
+				m.setVisible(true);
+				
 			}
 		});
 		button_3.setBounds(10, 357, 150, 23);
