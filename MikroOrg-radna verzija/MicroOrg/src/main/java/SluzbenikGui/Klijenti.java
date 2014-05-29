@@ -30,6 +30,7 @@ import viewModels.KlijentTableModel;
 import viewModels.KreditniSluzbenik;
 import viewModels.SluzbenikTableModel;
 import logic.KlijentLogika;
+import logic.SharedLogika;
 import logic.UposlenikLogika;
 import domainModels.Klijent;
 import domainModels.Uposlenik;
@@ -296,15 +297,41 @@ public class Klijenti extends JFrame {
 		JButton button_2 = new JButton("PDF podataka");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				KlijentSluzbenik _toBePDFGenerated=null;
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+						 
+						for(KlijentSluzbenik k : _sviKlijenti){
+							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
+								_toBePDFGenerated=k;
+							}
+
+						}
+						SharedLogika _sharedLogika= new SharedLogika();
+						_sharedLogika.generisiPDF(_toBePDFGenerated);
+						_sharedLogika.otvoriPDF(_toBePDFGenerated);
+							
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika čije podatke želite prikazati u pdf formatu!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				}
+				
 			}
 		});
 		button_2.setBounds(10, 326, 112, 23);
 		panel_2.add(button_2);
 		
 		JButton button_3 = new JButton("Po\u0161alji na E-mail");
-		button_3.setBounds(10, 357, 150, 23);
 		button_3.setEnabled(false);
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button_3.setBounds(10, 357, 150, 23);
 		panel_2.add(button_3);
 		
 		JButton button_4 = new JButton("Promjeni podatke");
