@@ -140,14 +140,14 @@ public class Izvjestaji extends JFrame {
 		button.setBounds(10, 285, 110, 23);
 		panel.add(button);
 		
-		JButton button_1 = new JButton("Unesi izvje\u0161taj");
-		button_1.addActionListener(new ActionListener() {
+		JButton btnEmail = new JButton("E-mail");
+		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Nije implementirano !");
 			}
 		});
-		button_1.setBounds(142, 285, 163, 23);
-		panel.add(button_1);
+		btnEmail.setBounds(142, 285, 163, 23);
+		panel.add(btnEmail);
 		
 		JButton button_2 = new JButton("Nazad");
 		button_2.addActionListener(new ActionListener() {

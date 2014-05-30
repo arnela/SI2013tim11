@@ -508,14 +508,14 @@ public class Ponude extends JFrame {
 		button_4.setBounds(256, 340, 78, 23);
 		panel_2.add(button_4);
 		
-		JButton button_5 = new JButton("Print");
-		button_5.addActionListener(new ActionListener() {
+		JButton btnPdfPrikaz = new JButton("PDF prikaz");
+		btnPdfPrikaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Nije implementirano !");
 			}
 		});
-		button_5.setBounds(159, 340, 87, 23);
-		panel_2.add(button_5);
+		btnPdfPrikaz.setBounds(159, 340, 87, 23);
+		panel_2.add(btnPdfPrikaz);
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setLayout(null);
@@ -582,14 +582,14 @@ public class Ponude extends JFrame {
 		panel_5.add(panel_6);
 		panel_5.add(panel_7);
 		
-		JButton button_8 = new JButton("Po\u0161alji na E-mail");
-		button_8.addActionListener(new ActionListener() {
+		JButton btnEmail = new JButton("E-mail");
+		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Nije implementirano !");
 			}
 		});
-		button_8.setBounds(10, 340, 139, 23);
-		panel_2.add(button_8);
+		btnEmail.setBounds(10, 340, 139, 23);
+		panel_2.add(btnEmail);
 	}
 
 }

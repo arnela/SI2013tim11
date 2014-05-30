@@ -327,8 +327,8 @@ public class Klijenti extends JFrame {
 		panel_3.setBackground(Color.WHITE);
 		panel_2.add(panel_3);
 		
-		JButton button_2 = new JButton("PDF podataka");
-		button_2.addActionListener(new ActionListener() {
+		JButton btnPdfPrikaz = new JButton("PDF prikaz");
+		btnPdfPrikaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				KlijentSluzbenik _toBePDFGenerated=null;
 				try {
@@ -355,18 +355,18 @@ public class Klijenti extends JFrame {
 				
 			}
 		});
-		button_2.setBounds(10, 326, 129, 23);
-		panel_2.add(button_2);
+		btnPdfPrikaz.setBounds(10, 326, 129, 23);
+		panel_2.add(btnPdfPrikaz);
 		
-		JButton button_3 = new JButton("Po\u0161alji na E-mail");
-		button_3.addActionListener(new ActionListener() {
+		JButton btnEmail = new JButton("E-mail");
+		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Mail m = new Mail();
 				m.setVisible(true);
 			}
 		});
-		button_3.setBounds(10, 357, 129, 23);
-		panel_2.add(button_3);
+		btnEmail.setBounds(10, 357, 129, 23);
+		panel_2.add(btnEmail);
 		
 		JButton button_4 = new JButton("Promjeni podatke");
 		button_4.addActionListener(new ActionListener() {

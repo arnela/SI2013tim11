@@ -1,6 +1,7 @@
 package SluzbenikGui;
 import aplikacija.MicroOrg.Login;
 import aplikacija.MicroOrg.Spremnik;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -31,11 +32,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import logic.UposlenikLogika;
 
 public class Pocetni extends JFrame {
 
 	private JPanel contentPane;
 	private Uposlenik trenutni;
+	private UposlenikLogika ulogika;
 	/**
 	 * Launch the application.
 	 */
@@ -69,6 +75,7 @@ public class Pocetni extends JFrame {
 			}
 		});
 		trenutni=Spremnik.getTrenutni();
+		ulogika=new UposlenikLogika();
 		setTitle("MicroOrg - Kreditni slu\u017Ebenik ");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 472, 400);
@@ -183,7 +190,7 @@ public class Pocetni extends JFrame {
 		panel.setForeground(new Color(128, 0, 0));
 		panel.setBorder(new LineBorder(new Color(128, 0, 0)));
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(231, 178, 190, 114);
+		panel.setBounds(197, 177, 234, 114);
 		contentPane.add(panel);
 		
 		JLabel label_1 = new JLabel("Ime:");
@@ -206,22 +213,27 @@ public class Pocetni extends JFrame {
 		label_4.setBounds(10, 89, 79, 14);
 		panel.add(label_4);
 		
-		JLabel label_5 = new JLabel("/");
+		String[] imena =ulogika.getOsoba(trenutni.getOsobaId()).getImePrezime().split(" ");
+		JLabel label_5 = new JLabel(imena[0]);
 		label_5.setHorizontalAlignment(SwingConstants.LEFT);
 		label_5.setBounds(99, 11, 79, 14);
 		panel.add(label_5);
 		
-		JLabel label_6 = new JLabel("/");
+		JLabel label_6 = new JLabel(imena[1]);
 		label_6.setHorizontalAlignment(SwingConstants.LEFT);
 		label_6.setBounds(99, 36, 79, 14);
 		panel.add(label_6);
 		
-		JLabel label_7 = new JLabel("/");
+		
+		JLabel label_7 = new JLabel("Kreditni službenik");
 		label_7.setHorizontalAlignment(SwingConstants.LEFT);
-		label_7.setBounds(99, 64, 79, 14);
+		label_7.setBounds(99, 64, 125, 14);
 		panel.add(label_7);
 		
-		JLabel label_8 = new JLabel("/");
+		Calendar currentDate = Calendar.getInstance(); //Get the current date
+		SimpleDateFormat formatter= new SimpleDateFormat("dd/MM/yyyy"); //format it as per your requirement
+		String dateNow = formatter.format(currentDate.getTime());
+		JLabel label_8 = new JLabel(dateNow);
 		label_8.setHorizontalAlignment(SwingConstants.LEFT);
 		label_8.setBounds(99, 89, 79, 14);
 		panel.add(label_8);
