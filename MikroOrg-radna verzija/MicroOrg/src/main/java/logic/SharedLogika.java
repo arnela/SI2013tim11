@@ -510,7 +510,7 @@ public class SharedLogika {
 			int d = cal.get(Calendar.DAY_OF_MONTH);
 			int m = cal.get(Calendar.MONTH);
 			int g = cal.get(Calendar.YEAR);
-			if(_jmbg.length()==13 || dan == d || mjesec == m || godina == g)return true;
+			if(_jmbg.length()==13 || dan == d || mjesec == m || godina == g || _jmbg.matches("\\d{11}"))return true;
 			else return false;
 		} catch (Exception e) {
 			return false;
@@ -520,6 +520,12 @@ public class SharedLogika {
 	public boolean validirajDatum(String datum){
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		    dateFormat.setLenient(false);
+		    if(!datum.matches("[0-9]{2}-[0-9]{2}-[0-9]{4}")) return false;
+		    String[] s = datum.split("-");
+		    int dan = Integer.parseInt(s[0]);
+		    int mjesec = Integer.parseInt(s[1]);
+		    int godina = Integer.parseInt(s[2]);
+		    if (dan>31 || mjesec>12 || godina>2014) return false;
 		    try {
 		      dateFormat.parse(datum.trim());
 		    } catch (java.text.ParseException pe) {
@@ -534,10 +540,8 @@ public class SharedLogika {
 		}
 	//implementirano
 	public boolean validirajImePrezime(String imePrezime){
-		String[] par = imePrezime.split(" ");
-		String ime = par[0];
-		String prezime = par[1];		
-		return (ime.matches("[A-Z][a-zA-Z]*") && prezime.matches("[A-Z][a-zA-Z]*")); 
+			
+		return (imePrezime.matches("^[A-Za-z]*\\s{1}[A-Za-z]*$")); 
 	}
 	//implementirano
 	public boolean validirajIznosKredita(String iznos){
@@ -560,7 +564,7 @@ public class SharedLogika {
 	    }
 	}
 	//implementirano
-	public boolean validirajIme(String ime){		
+	public boolean validirajIme(String ime){
 		return ime.matches("[A-Z][a-zA-Z]*"); 
 	}
 	//implementirano
