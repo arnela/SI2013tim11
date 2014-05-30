@@ -141,15 +141,15 @@ public class Klijenti extends JFrame {
 		button.setBounds(10, 315, 112, 23);
 		panel.add(button);
 		
-		JButton button_1 = new JButton("Po\u0161alji na E-mail");
-		button_1.addActionListener(new ActionListener() {
+		JButton btnEmail = new JButton("E-mail");
+		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Mail m = new Mail();
 				m.setVisible(true);
 			}
 		});
-		button_1.setBounds(132, 315, 150, 23);
-		panel.add(button_1);
+		btnEmail.setBounds(132, 315, 150, 23);
+		panel.add(btnEmail);
 		
 		JButton button_2 = new JButton("Izbri\u0161i ");
 		button_2.addActionListener(new ActionListener() {
