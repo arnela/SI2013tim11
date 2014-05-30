@@ -5,11 +5,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JTextField;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
+
+
 
 
 
@@ -174,4 +179,37 @@ public List<TipKreditaSluzbenik> getAll()
 	 _t.commit();
 	 _session.close();
 }
+ public String validirajPodatke(String naziv, String namjena, String iznos,
+			String rok, String stopa, String garancija, String grace,
+			String troskovi) {
+		
+		SharedLogika _sharedLogika= new SharedLogika();
+		
+		//provjera da li su popunjena sva polja
+		if(naziv.equals("")||namjena.equals("")|| iznos.equals("")||
+			rok.equals("")|| stopa.equals("")|| garancija.equals("")||
+			grace.equals("")||troskovi.equals("")) 
+			return "Nisu popunjena sva polja";
+		
+		if(!isNumeric(iznos))
+			return "Iznos nije validan";
+		if(!isNumeric(stopa))
+			return "Kamatna stopa nije validna";
+		if(!isNumeric(troskovi))
+			return "Troskovi obrade nisu validni";
+
+		return "OK";
+	}
+ private boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
+	}
 }

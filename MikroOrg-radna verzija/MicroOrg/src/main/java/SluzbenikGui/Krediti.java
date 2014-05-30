@@ -119,7 +119,26 @@ public class Krediti extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TipKreditaLogika _tk = new TipKreditaLogika();
+				String _status="Nije ok";
 				
+				//VALIDACIJA
+				try {
+					 _status=_tk.validirajPodatke(
+							 	tf_naziv.getText(),
+							 	tf_namjena.getText(),
+								tf_iznos.getText(),
+								tf_rok.getText(),
+								tf_stopa.getText(),
+								tf_garancija.getText(),
+								tf_grace.getText(),
+								tf_troskovi.getText()
+							 );
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Validacija error !");
+				}
+				
+				if (_status == "OK"){
 				TipKreditaSluzbenik _tipKredita = new TipKreditaSluzbenik(
 						tf_naziv.getText(),
 						tf_namjena.getText(),
@@ -151,7 +170,8 @@ public class Krediti extends JFrame {
 						}
 				catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
-				}
+				}}
+				else JOptionPane.showMessageDialog(null, _status);
 			}
 			});
 		JPanel panel_1 = new JPanel();
