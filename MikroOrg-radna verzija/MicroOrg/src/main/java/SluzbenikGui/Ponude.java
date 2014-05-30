@@ -33,10 +33,12 @@ import viewModels.KlijentSluzbenik;
 import viewModels.KreditnaPonuda;
 import viewModels.TipKreditaSluzbenik;
 import viewModels.PonudaTableModel;
+import SefGui.Mail;
 import aplikacija.MicroOrg.Spremnik;
 import domainModels.Uposlenik;
 import logic.KlijentLogika;
 import logic.PonudeLogika;
+import logic.SharedLogika;
 import logic.TipKreditaLogika;
 
 import java.awt.event.WindowAdapter;
@@ -47,6 +49,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Ponude extends JFrame {
 
@@ -67,6 +73,8 @@ public class Ponude extends JFrame {
 	private JTable _table = null;
 	private JScrollPane _scrollPane = null;
 	List<KlijentSluzbenik> klijenti = new ArrayList<KlijentSluzbenik>();
+	private List<KreditnaPonuda> _svePonude = null;
+
 	/**
 	 * Launch the application.
 	 */
@@ -135,7 +143,7 @@ public class Ponude extends JFrame {
 		
 		JLabel label_3 = new JLabel("Iznos kredita:");
 		
-		JLabel label_4 = new JLabel("Rok vra\u0107anja kredita:");
+		final JLabel label_4 = new JLabel("Rok vra\u0107anja kredita:");
 		
 		JLabel label_5 = new JLabel("Namjena kredita:");
 		
@@ -180,6 +188,20 @@ public class Ponude extends JFrame {
 		}
 		final DefaultComboBoxModel model = new DefaultComboBoxModel(comboBoxItems); 
 		final JComboBox comboBox = new JComboBox(model);
+		comboBox.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				if (comboBox.getSelectedIndex() != -1)
+					textField_3.setEnabled(false);
+					textField_4.setEnabled(false);
+					textField_5.setEnabled(false);
+					textField_6.setEnabled(false);
+					textField_7.setEnabled(false);
+					textField_8.setEnabled(false);
+					textField.setEnabled(false);
+			}
+		});
+		
 		comboBox.setSelectedIndex(-1);
 		
 		textField_9 = new JTextField();
@@ -304,6 +326,25 @@ public class Ponude extends JFrame {
 						
 					}
 					else {
+						String _status="Nije ok";
+						
+						//VALIDACIJA
+						try {
+							 _status=p.validirajPodatke(
+									 	textField_3.getText(),
+										textField_4.getText(),
+										textField_5.getText(),
+										textField_6.getText(),
+										textField_7.getText(),
+										textField_8.getText(),
+										textField.getText()
+									 );
+						} catch (Exception e2) {
+							// TODO: handle exception
+							JOptionPane.showMessageDialog(null, "Validacija error !");
+						}
+						if (_status == "OK"){
+						
 						if(!(textField_3.getText().equals("") || textField_4.getText().equals("") || textField_5.getText().equals("") || textField_6.getText().equals("") || textField_7.getText().equals("") || textField_8.getText().equals("") || textField.getText().equals(""))){
 						String namjenaTipaKredita = textField_3.getText();
 						Double iznosTipaKredita = Double.parseDouble(textField_4.getText());
@@ -351,8 +392,11 @@ public class Ponude extends JFrame {
 						else {
 							JOptionPane.showMessageDialog(null, "Sva polja moraju biti popunjena!");
 						}
+						}
+						else JOptionPane.showMessageDialog(null, _status);
 					}
 				}
+				
 			}
 		});
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -445,12 +489,24 @@ public class Ponude extends JFrame {
 					List<KreditnaPonuda> _ponude = new ArrayList<KreditnaPonuda>();
 					if(radioButton.isSelected()) {
 						_ponude = _pl.traziPoImenuKlijenta(textField_10.getText());
+						_svePonude=new ArrayList<KreditnaPonuda>();
+						for(KreditnaPonuda kp : _ponude){
+							_svePonude.add(kp);
+						}
 					}
 					else if(radioButton_1.isSelected()) {
 						_ponude = _pl.traziPoTipuKredita(textField_10.getText());
+						_svePonude=new ArrayList<KreditnaPonuda>();
+						for(KreditnaPonuda kp : _ponude){
+							_svePonude.add(kp);
+						}
 					}
 					else if(radioButton_2.isSelected()) {
 						_ponude = _pl.traziPoDatumu(textField_10.getText());
+						_svePonude=new ArrayList<KreditnaPonuda>();
+						for(KreditnaPonuda kp : _ponude){
+							_svePonude.add(kp);
+						}
 					}
 					/*_svePonude = new ArrayList<KreditnaPonuda>();
 					for(KlijentSluzbenik k : _klijenti){
@@ -511,7 +567,26 @@ public class Ponude extends JFrame {
 		JButton btnPdfPrikaz = new JButton("PDF prikaz");
 		btnPdfPrikaz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				KreditnaPonuda _toBePDFGenerated=null;
+				try{
+					int _foo=_table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+					for(KreditnaPonuda kp : _svePonude){
+						if(kp.getDatumUpisa().equals((String)_table.getValueAt(_foo, 3))){
+							_toBePDFGenerated=kp;
+					}
+					}
+					SharedLogika _sharedLogika=new SharedLogika();
+					_sharedLogika.generisiPDF(_toBePDFGenerated);
+					_sharedLogika.otvoriPDF(_toBePDFGenerated);
+						
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali ponudu koju želite prikazati u pdf formatu!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				}
 			}
 		});
 		btnPdfPrikaz.setBounds(159, 340, 87, 23);
@@ -585,7 +660,29 @@ public class Ponude extends JFrame {
 		JButton btnEmail = new JButton("E-mail");
 		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				 					KreditnaPonuda _toBePDFGenerated=null;
+				 					try {
+				 						int _foo= _table.getSelectedRow();
+				 						if(_foo==-1) throw new NullPointerException();
+				 							
+				 							for(KreditnaPonuda kp : _svePonude){
+				 								if(kp.getDatumUpisa().equals((String)_table.getValueAt(_foo, 3))){
+				 									_toBePDFGenerated=kp;
+				 							}
+				 							}
+				 							SharedLogika _sharedLogika= new SharedLogika();
+				 							Spremnik.setObjekatPDF(_toBePDFGenerated);
+				 							Mail m = new Mail();
+				 							m.setVisible(true);
+				 								
+				 					}
+				 					catch (NullPointerException e1) {
+				 						JOptionPane.showMessageDialog(null, "Niste odabrali klijenta čije podatke želite prikazati u pdf formatu!");
+				 					} 
+				 					catch (Exception e1) {
+				 						JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				 					}
+				 					
 			}
 		});
 		btnEmail.setBounds(10, 340, 139, 23);
