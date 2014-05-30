@@ -67,7 +67,7 @@ public class KlijentTableModel extends AbstractTableModel {
 	             case 4:
 	               return String.class;
 	             case 5:
-	               return Integer.class;
+	               return String.class;
 	              
 	             }
 	             return null;

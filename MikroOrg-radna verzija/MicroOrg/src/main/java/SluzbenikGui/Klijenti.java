@@ -60,6 +60,7 @@ public class Klijenti extends JFrame {
 	private  List<KlijentSluzbenik> _sviKlijenti=null;
 	JTable _table = null;
 	static Klijenti frame;
+	private JTextField tf_status;
 	/**
 	 * Launch the application.
 	 */
@@ -94,7 +95,7 @@ public class Klijenti extends JFrame {
 			}
 		});
 		trenutni=Spremnik.getTrenutni();
-		setTitle("MikroOrg - Klijenti");
+		setTitle("MicroOrg - Klijenti");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 460, 468);
 		contentPane = new JPanel();
@@ -146,7 +147,7 @@ public class Klijenti extends JFrame {
 						tf_telefon.getText(),
 						tf_adresa.getText(),
 						tf_email.getText(),
-						"null"
+						tf_status.getText()
 						);
 
 				try {
@@ -160,9 +161,10 @@ public class Klijenti extends JFrame {
 						tf_telefon.setText("");
 						tf_adresa.setText("");
 						tf_email.setText("");
+						tf_status.setText("");
 						JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
 			//		}
-			//		else{
+			//		else
 			//			JOptionPane.showMessageDialog(null, "Klijent sa unesenim jmbg-om već postoji !");
 			//		}
 						}
@@ -175,7 +177,7 @@ public class Klijenti extends JFrame {
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(45, 55, 344, 202);
+		panel_1.setBounds(45, 55, 344, 229);
 		panel_1.setBorder(new LineBorder(new Color(165, 42, 42), 1, true));
 		panel_1.setBackground(Color.WHITE);
 		
@@ -214,10 +216,14 @@ public class Klijenti extends JFrame {
 		
 		tf_telefon = new JTextField();
 		tf_telefon.setColumns(10);
+		
+		JLabel lblStatus = new JLabel("Status:");
+		
+		tf_status = new JTextField();
+		tf_status.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 344, Short.MAX_VALUE)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(10)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
@@ -227,25 +233,26 @@ public class Klijenti extends JFrame {
 								.addComponent(label_1)
 								.addComponent(label_2)
 								.addComponent(label_3)
-								.addComponent(label_4))
+								.addComponent(label_4)
+								.addComponent(lblStatus))
 							.addPreferredGap(ComponentPlacement.UNRELATED))
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 							.addComponent(label_5, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(label_6, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(tf_adresa, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tf_ime, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tf_prezime, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tf_datum, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tf_jmbg, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tf_email, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-						.addComponent(tf_telefon, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(tf_adresa, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_ime, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_prezime, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_datum, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_jmbg, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_email, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_telefon, GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+						.addComponent(tf_status))
 					.addGap(41))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 202, Short.MAX_VALUE)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
@@ -275,7 +282,11 @@ public class Klijenti extends JFrame {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(tf_adresa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(label))
-					.addContainerGap(14, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblStatus)
+						.addComponent(tf_status, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		panel.add(panel_1);
