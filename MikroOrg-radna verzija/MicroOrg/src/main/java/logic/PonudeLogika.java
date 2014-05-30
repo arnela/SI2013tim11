@@ -198,6 +198,18 @@ public String validirajPodatke(String namjena,
 	return "OK";
 }
 
+public void hardDeletePoNecemu(KreditnaPonuda _kp){
+	Session _session= HibernateUtil.getSessionFactory().openSession();
+	 Transaction _t = _session.beginTransaction(); 
+	 
+	 Criteria criteria = _session.createCriteria(Kredit.class); 
+	Kredit _tk = (Kredit) criteria.add(Restrictions.eq("datumUpisa", _kp.getDatumUpisa())).
+			add(Restrictions.eq("klijent.klijentId", _kp.getK().getKlijentId())).
+			 add(Restrictions.eq("tipKredita.tipKreditaId", _kp.getTk().getTipKreditaId())).uniqueResult();
+	_session.delete(_tk);
+	 _t.commit();
+	 _session.close();
+}
 private boolean isNumeric(String str)  
 {  
   try  
