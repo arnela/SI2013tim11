@@ -183,7 +183,6 @@ public String validirajPodatke(String ime, String prezime,String namjena,
 		String iznos, String rok, String garancija, String grace, String troskovi, String instrumenti) {
 	
 	SharedLogika _sharedLogika= new SharedLogika();
-	
 	//provjera da li su popunjena sva polja
 	if(ime.equals("")||prezime.equals("")||
 		namjena.equals("")||iznos.equals("")||
