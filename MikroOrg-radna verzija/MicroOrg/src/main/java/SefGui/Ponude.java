@@ -26,6 +26,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollBar;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import viewModels.KlijentSluzbenik;
 import viewModels.KreditnaPonuda;
 import viewModels.PonudaTableModel;
 import aplikacija.MicroOrg.Spremnik;
@@ -39,6 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import logic.PonudeLogika;
+import logic.SharedLogika;
+
 import java.awt.FlowLayout;
 
 public class Ponude extends JFrame {
@@ -48,6 +51,7 @@ public class Ponude extends JFrame {
 	private Uposlenik trenutni;
 	private JTable _table = null;
 	private JScrollPane _scrollPane = null;
+	private List<KreditnaPonuda> _svePonude = null;
 	/**
 	 * Launch the application.
 	 */
@@ -152,9 +156,17 @@ public class Ponude extends JFrame {
 					List<KreditnaPonuda> _ponude = new ArrayList<KreditnaPonuda>();
 					if(radioButton.isSelected()) {
 						_ponude = _pl.traziPoImenuKlijenta(textField.getText());
+						_svePonude=new ArrayList<KreditnaPonuda>();
+						for(KreditnaPonuda kp : _ponude){
+							_svePonude.add(kp);
+						}
 					}
 					else if(radioButton_1.isSelected()) {
-						_ponude = _pl.traziPoTipuKredita(textField.getText());
+						_ponude = _pl.traziPoDatumu(textField.getText());
+						_svePonude=new ArrayList<KreditnaPonuda>();
+						for(KreditnaPonuda kp : _ponude){
+							_svePonude.add(kp);
+						}
 					}
 					if(_ponude.size() != 0) {
 						
@@ -202,8 +214,27 @@ public class Ponude extends JFrame {
 		JButton button_2 = new JButton("PDF prikaz");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
-			}
+				KreditnaPonuda _toBePDFGenerated=null;
+				try{
+					int _foo=_table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+					for(KreditnaPonuda kp : _svePonude){
+						if(kp.getDatumUpisa().equals((String)_table.getValueAt(_foo, 3))){
+							_toBePDFGenerated=kp;
+					}
+					}
+					SharedLogika _sharedLogika=new SharedLogika();
+					_sharedLogika.generisiPDF(_toBePDFGenerated);
+					_sharedLogika.otvoriPDF(_toBePDFGenerated);
+						
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali ponudu koju želite prikazati u pdf formatu!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				}
+				}
 		});
 		button_2.setBounds(23, 373, 171, 23);
 		panel.add(button_2);
