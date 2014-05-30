@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import domainModels.TipKredita;
 import viewModels.KlijentSluzbenik;
 import viewModels.KreditniSluzbenik;
 import viewModels.TipKreditaSluzbenik;
@@ -57,4 +58,64 @@ public void testDaLiPostoji() {
 	List<TipKreditaSluzbenik> _tipovi=_tipKreditaLogika.getAll();
 	assertEquals((int)(duzina+1),_tipovi.size());
 }
+	public void testGetByNameTest(){
+		TipKreditaLogika _tipKreditaLogika= new TipKreditaLogika();
+				//parsiranje datuma
+				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date _date = null;
+				try {
+					_date = _sdf1.parse("07-09-1992");
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				_tipKreditaLogika.dodajTipKredita(new TipKreditaSluzbenik(
+						"TipZ",
+						"namjena",
+						new Double(5000),
+						"neki rok",
+						new Double(20),
+						"nemagarancije",
+						"period",
+						new Double(1000)
+						));
+		List<TipKreditaSluzbenik> _tipovi=_tipKreditaLogika.getByName2("TipZ");
+		assertEquals(1,_tipovi.size());
+	}
+	public void testDeleteByNameTest(){
+		TipKreditaLogika _tipKreditaLogika =  new TipKreditaLogika();
+		_tipKreditaLogika.dodajTipKredita(new TipKreditaSluzbenik(
+				"AAAATip",
+				"namjena",
+				new Double(5000),
+				"neki rok",
+				new Double(20),
+				"nemagarancije",
+				"period",
+				new Double(1000)
+				));
+		_tipKreditaLogika.deleteByName("AAAATip");
+		assertEquals((Boolean)false,(Boolean) _tipKreditaLogika.daLiPostoji("AAAATip"));	
+	}
+	
+	public void testdajSveKredite() {
+		
+		TipKreditaLogika _tipKreditaLogika =  new TipKreditaLogika();
+		List<TipKredita> tipovi = _tipKreditaLogika.dajSveKredite();
+		int duzina=tipovi.size();
+		
+		_tipKreditaLogika.dodajTipKredita(new TipKreditaSluzbenik(
+				"Nekiiii",
+				"namjena",
+				new Double(5000),
+				"neki rok",
+				new Double(20),
+				"nemagarancije",
+				"period",
+				new Double(1000)
+				));
+		
+		List<TipKredita> _tipovi=_tipKreditaLogika.dajSveKredite();
+		assertEquals((int)(duzina+1),_tipovi.size());
+	}
 }
