@@ -1,6 +1,9 @@
 package logic;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -227,8 +230,54 @@ public class TransakcijaLogika {
 		 _t.commit();
 		 _session.close();
 	}
-
 	
+	public Boolean daLiPostojiT(String nazivTipa) {
+		
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		Transaction _t = _session.beginTransaction(); 
+		 
+		Criteria criteria = _session.createCriteria(TipKredita.class);
+		TipKredita _kredit = (TipKredita)criteria.add(Restrictions.eq("naziv", nazivTipa)).uniqueResult();
+		 criteria = _session.createCriteria(Transakcija.class);
+		 @SuppressWarnings("unchecked")
+		 List<Transakcija> _transakcije =(List<Transakcija>) criteria.add(Restrictions.eq("kredit", _kredit)).list();
+		 		 
+		_t.commit();
+		_session.close();
+		return _transakcije!=null;
+	}
+	
+	
+	public String validirajPodatke(String datum, String iznos, String nacin) {
+		
+		SharedLogika _sharedLogika= new SharedLogika();
+		
+		//provjera da li su popunjena sva polja
+		if(datum.equals("")||iznos.equals("")||nacin.equals("")) 
+			return "Nisu popunjena sva polja";
+		
+		if(!_sharedLogika.validirajDatum(datum))
+			return "Datum nije validno";
+		if(!isNumeric(iznos))
+			return "Iznos nije validno";
+		
+		return "OK";
+	}
+	
+	private boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
+	}
+
+
 	
 	
 	}

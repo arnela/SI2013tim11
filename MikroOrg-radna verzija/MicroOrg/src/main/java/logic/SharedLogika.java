@@ -529,14 +529,8 @@ public class SharedLogika {
 		  }
 	//implementirano
 	public boolean validirajEmail(String email){
-		boolean result = true;
-		   try {
-		      InternetAddress emailAddr = new InternetAddress(email);
-		      emailAddr.validate();
-		   } catch (AddressException ex) {
-		      result = false;
-		   }
-		   return result;
+		
+	       return email.matches(".+@.+\\.[a-z]+");
 		}
 	//implementirano
 	public boolean validirajImePrezime(String imePrezime){

@@ -31,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 import aplikacija.MicroOrg.Spremnik;
+import logic.SharedLogika;
 import logic.TransakcijaLogika;
 import logic.UposlenikLogika;
 
@@ -39,6 +40,9 @@ public class Transakcije extends JFrame {
 	private JPanel contentPane;
 	private JTextField tf_podaciPretrage;
 	private Uposlenik trenutni;
+	private  List<Transakcija> _sveTransakcije=null;
+	JTable _table = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -96,15 +100,6 @@ public class Transakcije extends JFrame {
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(10, 54, 385, 311);
 		panel.add(panel_1);
-		
-		JButton button = new JButton("PDF prikaz");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
-			}
-		});
-		button.setBounds(10, 376, 112, 23);
-		panel.add(button);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
@@ -204,6 +199,37 @@ public class Transakcije extends JFrame {
 		button_1.setBounds(405, 11, 134, 32);
 		panel.add(button_1);
 		
+
+		JButton button = new JButton("PDF prikaz");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Transakcija _toBePDFGenerated=null;
+				try{
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+					
+					
+					for(Transakcija t : _sveTransakcije){
+						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
+							_toBePDFGenerated=t;
+						}	
+					}
+					SharedLogika _sharedLogika= new SharedLogika();
+					_sharedLogika.generisiPDF(_toBePDFGenerated);
+					_sharedLogika.otvoriPDF(_toBePDFGenerated);
+					
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali transakciju čije podatke želite prikazati u pdf formatu!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				}
+				
+			}
+		});
+		button.setBounds(10, 376, 112, 23);
+		panel.add(button);
 		
 		
 		

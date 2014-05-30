@@ -26,6 +26,7 @@ import javax.swing.JRadioButton;
 import aplikacija.MicroOrg.Spremnik;
 import domainModels.Klijent;
 import domainModels.Kredit;
+import domainModels.Uposlenik;
 import viewModels.KlijentSluzbenik;
 import viewModels.KlijentTableModel;
 import viewModels.KreditnaPonuda;
@@ -46,6 +47,7 @@ import logic.KlijentLogika;
 import logic.PonudeLogika;
 import logic.SharedLogika;
 import logic.TransakcijaLogika;
+import logic.UposlenikLogika;
 
 import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
@@ -59,6 +61,7 @@ public class Transakcije extends JFrame {
 	private JLabel lb_datum;
 	private  List<Transakcija> _sveTransakcije=null;
 	JTable _table = null;
+	private Uposlenik trenutni;
 
 
 
@@ -208,7 +211,67 @@ public class Transakcije extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				Calendar cal = Calendar.getInstance();
+				String _datum = dateFormat.format(cal.getTime());
+				
+				String _nacin;
+				if(radioButton_1.isSelected()) _nacin="gotovina";
+				else _nacin="uplatnica iz banke";
+				
+				String _status="Nije ok";
+				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
+				//VALIDACIJA
+				try {
+					 _status=_transakcijaLogika.validirajPodatke(_datum, tf_iznos.getText(), _nacin);
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "validacija error");
+				}
+				//END VALIDACIJA
+				
+				
+				
+                PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
+ 				
+				double _iznos = Double.parseDouble(tf_iznos.getText());
+				
+				
+				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
+
+				KlijentSluzbenik _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
+				
+				
+				KreditnaPonuda _kredit =  (KreditnaPonuda) comboBox.getSelectedItem();
+				if(_status=="OK"){
+
+				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
+				
+				try {
+					
+					SharedLogika _sharedLogika= new SharedLogika();
+					_sharedLogika.generisiPDF(_transakcija);
+					_sharedLogika.otvoriPDF(_transakcija);
+					
+					//ocisti formu
+					tf_jmbg.setText("");
+					tf_iznos.setText("");
+					radioButton.setSelected(false);
+					radioButton_1.setSelected(false);
+					JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
+			}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, _status);
+				}	
+				
+				
+				
+				
+				
+				
 			}
 		});
 		button_1.setBounds(10, 280, 125, 23);
@@ -217,24 +280,40 @@ public class Transakcije extends JFrame {
 		JButton button_2 = new JButton("Unesi transakciju");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
-                PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
- 				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 				Calendar cal = Calendar.getInstance();
 				String _datum = dateFormat.format(cal.getTime());
-				
-				double _iznos = Double.parseDouble(tf_iznos.getText());
 				
 				String _nacin;
 				if(radioButton_1.isSelected()) _nacin="gotovina";
 				else _nacin="uplatnica iz banke";
+				
+				String _status="Nije ok";
+				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
+				//VALIDACIJA
+				try {
+					 _status=_transakcijaLogika.validirajPodatke(_datum, tf_iznos.getText(), _nacin);
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "validacija error");
+				}
+				//END VALIDACIJA
+				
+				
+				
+                PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
+ 				
+				double _iznos = Double.parseDouble(tf_iznos.getText());
+				
+				
 				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
 
 				KlijentSluzbenik _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
 				
 				
 				KreditnaPonuda _kredit =  (KreditnaPonuda) comboBox.getSelectedItem();
-				
+				if(_status=="OK"){
+
 				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
 				
 				try {
@@ -248,7 +327,10 @@ public class Transakcije extends JFrame {
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
 			}
-				
+				}
+				else{
+					JOptionPane.showMessageDialog(null, _status);
+				}	
 				
 			}
 		});
