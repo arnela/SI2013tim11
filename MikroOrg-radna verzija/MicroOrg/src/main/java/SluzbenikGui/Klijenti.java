@@ -361,8 +361,31 @@ public class Klijenti extends JFrame {
 		JButton btnEmail = new JButton("E-mail");
 		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Mail m = new Mail();
-				m.setVisible(true);
+				KlijentSluzbenik _toBePDFGenerated=null;
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1) throw new NullPointerException();
+						
+						for(KlijentSluzbenik k : _sviKlijenti){
+							if(k.getJmbg().equals((String)_table.getValueAt(_foo, 1))){
+								_toBePDFGenerated=k;
+							}
+
+						}
+						SharedLogika _sharedLogika= new SharedLogika();
+						Spremnik.setObjekatPDF(_toBePDFGenerated);
+						Mail m = new Mail();
+						m.setVisible(true);
+							
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali klijenta čije podatke želite prikazati u pdf formatu!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+				}
+				
+				 
 			}
 		});
 		btnEmail.setBounds(10, 357, 129, 23);

@@ -261,8 +261,8 @@ public class KlijentLogika {
 			return "Datum nije validan";*/
 		if(!_sharedLogika.validirajEmail(email))
 			return "Email nije validan";
-	/*	if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
-			return "JMBG nije validan";*/
+		if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
+			return "JMBG nije validan";
 		if(!_sharedLogika.validirajTelefon(telefon))
 			return "Telefon nije validan";
 
