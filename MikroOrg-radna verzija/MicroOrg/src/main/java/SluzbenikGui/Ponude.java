@@ -29,12 +29,19 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.ListSelectionModel;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
 import viewModels.KlijentSluzbenik;
 import viewModels.KreditnaPonuda;
 import viewModels.TipKreditaSluzbenik;
 import viewModels.PonudaTableModel;
 import SefGui.Mail;
 import aplikacija.MicroOrg.Spremnik;
+import domainModels.HibernateUtil;
+import domainModels.Osoba;
 import domainModels.Uposlenik;
 import logic.KlijentLogika;
 import logic.PonudeLogika;
@@ -558,7 +565,41 @@ public class Ponude extends JFrame {
 		JButton button_4 = new JButton("Izbri\u0161i");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				//try{
+				int _temp = _table.getSelectedRow();
+				if(_temp == -1) JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4"); 
+				KreditnaPonuda _zaBrisanje = null;
+				for(KreditnaPonuda kp : _svePonude) {
+					
+					
+					
+					
+                    Session _session = HibernateUtil.getSessionFactory().openSession();
+                    Transaction _t = _session.beginTransaction();
+
+                    Criteria _criteria = _session.createCriteria(Osoba.class);
+                    Osoba _o = (Osoba) _criteria.add(Restrictions.eq("osobaId", kp.getU().getOsobaId())).uniqueResult();
+
+                    Criteria criteria = _session.createCriteria(Osoba.class);
+                    Osoba o = (Osoba) criteria.add(Restrictions.eq("osobaId", kp.getK().getOsobaId())).uniqueResult();
+                    
+                    _t.commit();
+                    _session.close();
+           
+                    String s = kp.getTk().getNaziv() + " " + kp.getTk().getNamjena() + " " + Double.toString(kp.getTk().getIznos());
+					
+					if(_o.getImePrezime().equals(_table.getValueAt(_temp, 0)) && o.getImePrezime().equals(_table.getValueAt(_temp, 1)) && s.equals(_table.getValueAt(_temp, 2)) && kp.getDatumUpisa().equals((String)_table.getValueAt(_temp, 3))){
+						_zaBrisanje = kp;
+						new PonudeLogika().hardDeletePoNecemu(kp);
+					}
+				}
+				_svePonude.remove(_zaBrisanje);
+				_table.setModel(new PonudaTableModel(_svePonude));
+				JOptionPane.showMessageDialog(null, "Obrisano!");
+				
+				_table.invalidate();
+				_table.revalidate();
+				_table.repaint();			
 			}
 		});
 		button_4.setBounds(256, 340, 78, 23);
