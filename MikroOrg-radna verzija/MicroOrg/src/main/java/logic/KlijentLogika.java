@@ -256,16 +256,16 @@ public class KlijentLogika {
 	/*	if(!_sharedLogika.validirajIme(ime))
 			return "Ime nije validno";
 		if(!_sharedLogika.validirajPrezime(prezime))
-			return "Prezime nije validno";
-		if(!_sharedLogika.validirajDatum(datum))
-			return "Datum nije validan";
+			return "Prezime nije validno";*/
+	/*	if(!_sharedLogika.validirajDatum(datum))
+			return "Datum nije validan";*/
 		if(!_sharedLogika.validirajEmail(email))
 			return "Email nije validan";
-		if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
-			return "JMBG nije validan";
+	/*	if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
+			return "JMBG nije validan";*/
 		if(!_sharedLogika.validirajTelefon(telefon))
 			return "Telefon nije validan";
-*/
+
 		return "OK";
 	}
 	private java.util.Date StringToDate(String datum) {

@@ -191,9 +191,10 @@ public List<TipKreditaSluzbenik> getAll()
 			grace.equals("")||troskovi.equals("")) 
 			return "Nisu popunjena sva polja";
 		
-		if(!isNumeric(iznos))
+		//sivrina metode za validaciju
+		if(!_sharedLogika.validirajIznosKredita(iznos))
 			return "Iznos nije validan";
-		if(!isNumeric(stopa))
+		if(!_sharedLogika.validirajKamatnuStopu(stopa))
 			return "Kamatna stopa nije validna";
 		if(!isNumeric(troskovi))
 			return "Troskovi obrade nisu validni";
