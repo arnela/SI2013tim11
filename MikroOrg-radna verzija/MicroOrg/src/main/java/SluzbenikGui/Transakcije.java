@@ -612,7 +612,33 @@ public class Transakcije extends JFrame {
 		JButton btnEmail = new JButton("E-mail");
 		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+				try {
+					int _foo= _table.getSelectedRow();
+					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali transakciju koju želite poslati!");
+					Transakcija _privitak=null;
+					
+						for(Transakcija t : _sveTransakcije){
+							if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
+								_privitak=t;
+							
+							}
+
+						}
+						Spremnik.setObjekatPDF(_privitak);
+					
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali transakciju koju želite poslati!");
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: d3l3t4 3rr0r");
+				}
+				
+				
+				
+				Mail m = new Mail();
+				m.setVisible(true);
+				
 			}
 		});
 		btnEmail.setBounds(132, 278, 135, 23);
