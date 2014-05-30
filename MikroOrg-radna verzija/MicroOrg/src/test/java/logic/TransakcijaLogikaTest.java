@@ -16,8 +16,7 @@ import junit.framework.TestCase;
 
 public class TransakcijaLogikaTest extends TestCase{
 
-	/*public void testDodajTransakciju(){
-		
+	public void testDodajTransakciju(){
 		TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
 		SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date _date = null;
@@ -54,9 +53,9 @@ public class TransakcijaLogikaTest extends TestCase{
 				 "dsadasd",
 				 0,
 				 0,
-				 _osobaId,
+				 Long.parseLong("0", 10),
 				 "Sarajevo",
-				 10000
+				 10000.00
 				 );
 		
 		KreditnaPonuda _kredit = new KreditnaPonuda();
@@ -64,21 +63,47 @@ public class TransakcijaLogikaTest extends TestCase{
 		
 		_transakcijaLogika.dodajTransakciju(new Transakcija(
 				"22-11-2013",
-				111,
+				111.00,
 				"gotovina",
 				_klijent,
 				_kredit,
 				_u
 				));
 		
-		
-	}*/
+		assertEquals((Boolean)true,(Boolean) _transakcijaLogika.daLiPostoji("PrviTip"));
+	}
 	
 	public void testDaLiPostojiKlijent(){
 		TransakcijaLogika _transakcijaLogika =  new TransakcijaLogika();
 		assertEquals((Boolean)false,(Boolean) _transakcijaLogika.daLiPostoji("42342345364564767767888990"));		
 	}
-	public void testDajOsobu(){}
+	public void testDajOsobu(){
+		TransakcijaLogika _transakcijaLogika= new TransakcijaLogika();
+		UposlenikLogika _uposlenikLogika= new UposlenikLogika();
+		//parsiranje datuma
+			SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+			java.util.Date _date = null;
+			try {
+				_date = _sdf1.parse("07-09-1992");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   _uposlenikLogika.dodajUposlenika(new KreditniSluzbenik(
+			"Mustafa",
+			"88946546814",
+			new java.sql.Date(_date.getTime()),
+			"null",
+			"061-113-322",
+			"Neka Adresa 1337",
+			"mail@mail.mail",
+			"magicniPassword",
+			"Sarajevo",
+			new Double(1337)
+			));
+	   assertEquals("Mustafa",_transakcijaLogika.dajOsobu("88946546814").getImePrezime());
+	}
+	
 	public void testGetByDate(){}
 	public void testGetByKlijent(){}
 	public void testGetByID(){}
