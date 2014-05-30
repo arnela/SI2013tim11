@@ -139,7 +139,7 @@ public void Ispitaj(String username,String sifra){
 	{
 		Spremnik novi=new Spremnik();
 		novi.setTrenutni(_u);
-	if (_userPosition==false)
+	if (_userPosition==true)
 		{
 		SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi početni gui za šefa
 		n.setLocationRelativeTo(null);   // postavlja ga na sredinu
@@ -147,7 +147,7 @@ public void Ispitaj(String username,String sifra){
 		n.setResizable(false);
 		Login.this.dispose(); //zatvara ovu login formu
 		}
-	else if (_userPosition==true)
+	else if (_userPosition==false)
 		{
 		SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi početni gui za sluzbenika
 		n.setLocationRelativeTo(null);   // postavlja ga na sredinu
