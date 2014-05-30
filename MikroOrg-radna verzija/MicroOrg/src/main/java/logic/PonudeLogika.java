@@ -11,6 +11,8 @@ import java.util.List;
 
 
 
+
+
 import javax.swing.JOptionPane;
 
 import org.hibernate.Criteria;
@@ -177,5 +179,38 @@ public Boolean postojiKlijent (String ime, String prezime){
 	return !(_klijenti.isEmpty());
 }
 
+public String validirajPodatke(String ime, String prezime,String namjena,
+		String iznos, String rok, String garancija, String grace, String troskovi, String instrumenti) {
+	
+	SharedLogika _sharedLogika= new SharedLogika();
+	
+	//provjera da li su popunjena sva polja
+	if(ime.equals("")||prezime.equals("")||
+		namjena.equals("")||iznos.equals("")||
+		rok.equals("")||garancija.equals("")||grace.equals("")||troskovi.equals("") || instrumenti.equals("")
+			) 
+		return "Nisu popunjena sva polja";
+	if(!_sharedLogika.validirajIme(ime))
+		return "Ime nije validno";
+	if(!_sharedLogika.validirajPrezime(prezime))
+		return "Prezime nije validno";
+	if(!_sharedLogika.validirajIznosKredita(iznos))
+		return "Iznos nije validan";
+	if(!isNumeric(troskovi))
+		return "Troskovi obrade nisu validni";
 
+	return "OK";
+}
+private boolean isNumeric(String str)  
+{  
+  try  
+  {  
+    double d = Double.parseDouble(str);  
+  }  
+  catch(NumberFormatException nfe)  
+  {  
+    return false;  
+  }  
+  return true;  
+}
 }
