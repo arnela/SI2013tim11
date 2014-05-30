@@ -510,7 +510,7 @@ public class SharedLogika {
 			int d = cal.get(Calendar.DAY_OF_MONTH);
 			int m = cal.get(Calendar.MONTH);
 			int g = cal.get(Calendar.YEAR);
-			if(_jmbg.length()==13 || dan == d || mjesec == m || godina == g || _jmbg.matches("\\d{11}"))return true;
+			if(_jmbg.length()==13 && dan == d && mjesec == m && godina == g && _jmbg.matches("\\d{13}"))return true;
 			else return false;
 		} catch (Exception e) {
 			return false;
@@ -575,7 +575,11 @@ public class SharedLogika {
 	public boolean validirajTelefon(String telefon){
 		return telefon.matches("\\d{3}-\\d{3}-\\d{3}");
 	}
-	
+	//implementirano
+	public boolean validirajJMB(String jmbg){
+		if(jmbg.length()==13 && jmbg.matches("\\d{13}"))return true;
+		else return false;
+	}
 	public void ispitajSQL(String upad){}
 	
 }
