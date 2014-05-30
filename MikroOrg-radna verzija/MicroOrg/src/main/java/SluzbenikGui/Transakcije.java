@@ -156,7 +156,7 @@ public class Transakcije extends JFrame {
 					List<KreditnaPonuda> _krediti = _ponudeLogika.traziPoImenuKlijenta(_transakcijaLogika.dajOsobu("").getImePrezime());
 					for (int i=0;i<_krediti.size();i++)
 					{
-						comboBox.addItem(_krediti.get(i));
+						comboBox.addItem(_krediti.get(i).getTk().getNaziv());
 						//comboBox.addItem(_krediti.get(i).getTk().getNaziv());
 					}
 				
@@ -290,6 +290,10 @@ public class Transakcije extends JFrame {
 				
 				String _status="Nije ok";
 				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
+			
+				String nazivTipaKredita = comboBox.getSelectedItem().toString();	
+				
+				
 				//VALIDACIJA
 				try {
 					 _status=_transakcijaLogika.validirajPodatke(_datum, tf_iznos.getText(), _nacin);
@@ -299,19 +303,13 @@ public class Transakcije extends JFrame {
 				}
 				//END VALIDACIJA
 				
-				
-				
                 PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
  				
 				double _iznos = Double.parseDouble(tf_iznos.getText());
 				
-				
-				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
-
 				KlijentSluzbenik _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
 				
-				
-				KreditnaPonuda _kredit =  (KreditnaPonuda) comboBox.getSelectedItem();
+				KreditnaPonuda _kredit = _transakcijaLogika.traziPoTipuKreditaIKlijenta(nazivTipaKredita, _k.getImePrezime());
 				if(_status=="OK"){
 
 				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 

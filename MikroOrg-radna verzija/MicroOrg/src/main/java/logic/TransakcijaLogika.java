@@ -247,6 +247,31 @@ public class TransakcijaLogika {
 		return _transakcije!=null;
 	}
 	
+	public KreditnaPonuda traziPoTipuKreditaIKlijenta(String nazivTipa, String kl){
+		Session _session = HibernateUtil.getSessionFactory().openSession();
+		Transaction _t = _session.beginTransaction();
+		
+		Criteria _criteria = _session.createCriteria(TipKredita.class);
+		List<TipKredita> _tipovi = (List<TipKredita>)_criteria.add(Restrictions.eq("naziv", nazivTipa)).list();
+		
+		List<Kredit> _krediti = new ArrayList<Kredit>();
+		Kredit _kredit_ = new Kredit();
+		for(TipKredita tk : _tipovi) {
+			Criteria criteria = _session.createCriteria(Kredit.class);
+			_kredit_ = (Kredit)criteria.add(Restrictions.and(Restrictions.eq("tipKredita",tk), Restrictions.eq("klijent", kl))).list();
+			_krediti.add(_kredit_);
+		}
+		List<KreditnaPonuda> _kp = new ArrayList<KreditnaPonuda>();
+		for(Kredit kredit : _krediti) {
+			_kp.add(new KreditnaPonuda(kredit.getKreditniSluzbenik(), kredit.getKlijent(), kredit.getTipKredita(), kredit.getDatumUpisa()));
+		}
+		KreditnaPonuda _kredit1 = _kp.get(0);
+		_t.commit();
+		_session.close();
+		return _kredit1;
+	}
+	
+	
 	
 	public String validirajPodatke(String datum, String iznos, String nacin) {
 		
