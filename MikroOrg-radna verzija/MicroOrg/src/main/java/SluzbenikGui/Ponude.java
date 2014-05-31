@@ -333,7 +333,16 @@ public class Ponude extends JFrame {
 						p.dodajPonudu(kp);
 						JOptionPane.showMessageDialog(null, "Unos uspjesan !");
 						_ul.dodajKredit(Spremnik.getTrenutni());
-						
+						textField_9.setText("");
+						textField_2.setText("");
+						comboBox.setSelectedIndex(-1);
+						textField_3.setEnabled(true);
+						textField_4.setEnabled(true);
+						textField_5.setEnabled(true);
+						textField_6.setEnabled(true);
+						textField_7.setEnabled(true);
+						textField_8.setEnabled(true);
+						textField.setEnabled(true);
 					}
 					else {
 						String _status="Nije ok";
@@ -485,6 +494,7 @@ public class Ponude extends JFrame {
 		grupa.add(radioButton);
 		grupa.add(radioButton_1);
 		grupa.add(radioButton_2);
+		radioButton.setSelected(true);
 		
 		final JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
