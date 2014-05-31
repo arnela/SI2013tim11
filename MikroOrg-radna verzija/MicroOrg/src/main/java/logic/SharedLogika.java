@@ -239,7 +239,7 @@ public class SharedLogika {
 	public void generisiPDF(viewModels.Transakcija novi){
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		try {
-            PdfWriter.getInstance(document,new FileOutputStream("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+".pdf"));
+            PdfWriter.getInstance(document,new FileOutputStream("target/Transakcija"+novi.getKlijent().getOsobaId()+".pdf"));
             //SADRZAJ
             document.open();
             //zaglavlje dokumenta
@@ -260,15 +260,17 @@ public class SharedLogika {
             
             document.add(new Chunk("\n",pisanje));        
             
+            KlijentLogika logika=new KlijentLogika();
+            PonudeLogika plogika=new PonudeLogika();
             //KlijentLogika logika=new KlijentLogika(); 
             UposlenikLogika ulogika=new UposlenikLogika();
-            document.add(new Chunk("\n Ime i Prezime: "+novi.getKlijentSluzbenik().getImePrezime(),pisanje)); 
+            document.add(new Chunk("\n Ime i Prezime: "+logika.getOsoba(novi.getKlijent().getOsobaId()).getImePrezime(),pisanje)); 
             document.add(new Chunk("\n Datum uplate: "+novi.getDatumUplate(),pisanje)); 
             document.add(new Chunk("\n Vrsta uplate: "+novi.getNacinUplate(),pisanje));
             document.add(new Chunk("\n Iznos uplate: "+novi.getIznosUplate()+" KM",pisanje));
-            document.add(new Chunk("\n Iznos je uplaćen za: '"+novi.getKreditnaPonuda().getTk().getNaziv()+"'",pisanje));
+            document.add(new Chunk("\n Iznos je uplaćen za: '"+plogika.dajTipKredita(novi.getKredit().getKreditId()).getNaziv()+"'",pisanje));
             document.add(new Chunk(", odobrenog od strane kreditnog službenika:"+ulogika.getOsoba(Spremnik.getTrenutni().getOsobaId()).getImePrezime(),pisanje));
-            document.add(new Chunk(", datuma: "+novi.getKreditnaPonuda().getDatumUpisa(),pisanje));
+            document.add(new Chunk(", datuma: "+novi.getKredit().getDatumUpisa(),pisanje));
             
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
             document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
@@ -285,7 +287,7 @@ public class SharedLogika {
             document.close();
             
             //kreiramo objekat myFile koji ćemo smjestit u trenutni objekat u spremniku
-            File myFile=new File("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+".pdf");
+            File myFile=new File("target/Transakcija"+novi.getKlijent().getOsobaId()+".pdf");
             Spremnik.setObjekatPDF(myFile);
             
         } catch (DocumentException e) {
@@ -428,7 +430,7 @@ public class SharedLogika {
         if (o.getClass()==KreditnaPonuda.class) {KreditnaPonuda novi=(KreditnaPonuda) o; myFile = new File( "target/Kredit"+novi.getTk().getTipKreditaId()+".pdf");}
 		if (o.getClass()==IzvjestajSluzbenika.class) {IzvjestajSluzbenika novi=(IzvjestajSluzbenika) o; myFile = new File("target/IzvjestajSluzbenika"+novi.getBrEvidentiranihTransakcija()+novi.getBrIzdatihKredita()+".pdf");}
 		if (o.getClass()==IzvjestajOrganizacije.class) {IzvjestajOrganizacije novi=(IzvjestajOrganizacije) o; myFile = new File("target/IzvjestajOrganizacije"+novi.getBrojTransakcija()+novi.getBrojKredita()+".pdf");}
-		if (o.getClass()==viewModels.Transakcija.class) {viewModels.Transakcija novi=(viewModels.Transakcija) o; myFile = new File( "target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+".pdf");}
+		if (o.getClass()==viewModels.Transakcija.class) {viewModels.Transakcija novi=(viewModels.Transakcija) o; myFile = new File( "target/Transakcija"+novi.getKlijent().getOsobaId()+".pdf");}
 		if (o.getClass()==KlijentSluzbenik.class) {KlijentSluzbenik novi=(KlijentSluzbenik) o; myFile = new File( "target/Klijent"+novi.getJmbg()+".pdf");}
 		if (o.getClass()==KreditniSluzbenik.class) {KreditniSluzbenik novi=(KreditniSluzbenik) o; myFile = new File("target/Sluzbenik"+novi.getJmbg()+".pdf");}
 		try {
@@ -466,23 +468,25 @@ public class SharedLogika {
 	            message.setFrom(new InternetAddress(username));
 	            message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(sendTo));
 	            
-	            //sadržaj poruke
-	            message.setSubject("Naslov");
-	            message.setText("Poštovani,"+ "\n\n U privitku ove poruke vam šaljemo dokument(u PDF formatu) koji ste zahtjevali.");
-	            if (tekst!="") {message.setText("\n \n"+tekst);}
-	            message.setText("\n \n \n \n Lijepi pozdravi, \n"+_uposlenik.getUsername());
+	        
+	          //sadržaj poruke
+	            if (naslov!="") {message.setSubject(naslov);} else {message.setSubject("Obavještenje");}
 	            
+	            message.setText("Poštovani, \n"+tekst+"\n \n \n \n Lijepi pozdravi, \n");
 	            //dodavanje attachmenta ako postoji
 	            if (privitak!=null){
 	            	File privitak1=(File) privitak;
 	            	privitak1.deleteOnExit();
 	            	Multipart multipart = new MimeMultipart();
 	            	MimeBodyPart messageBodyPart = new MimeBodyPart();
-
+	            	MimeBodyPart messageText = new MimeBodyPart();
 	            	DataSource source = new FileDataSource(privitak1.getPath());
 	            	messageBodyPart.setDataHandler(new DataHandler(source));
 	            	messageBodyPart.setFileName(privitak1.getName());
 	            	multipart.addBodyPart(messageBodyPart);
+	            	if (tekst!="") {messageText.setText("Poštovani, \n u privitku ove poruke vam šaljemo dokument(u PDF formatu) koji ste zahtjevali.\n \n"+tekst+"\n \n \n \n Lijepi pozdravi, \n");}
+		            else {messageText.setText("Poštovani, u privitku ove poruke vam šaljemo dokument(u PDF formatu) koji ste zahtjevali. \n \n \n \n \n Lijepi pozdravi, \n");}
+	            	multipart.addBodyPart(messageText);
 	            	message.setContent(multipart);
 	            }
 
