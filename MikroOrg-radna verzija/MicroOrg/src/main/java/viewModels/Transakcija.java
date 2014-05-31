@@ -11,26 +11,24 @@ public class Transakcija {
 	private String datumUplate;
 	private Double iznosUplate;
 	private String nacinUplate;
-	private KlijentSluzbenik klijent;
-	private KreditnaPonuda kredit;
+	private Klijent klijent;
+	private Kredit kredit;
 	private Uposlenik u;
 	
-	public Transakcija(){
-		
-	}
+	public Transakcija(){}
 	
 	public Transakcija(
 			String datumUplate, 
 			Double iznosUplate, 
 			String nacinUplate, 
-			KlijentSluzbenik klijent, 
-			KreditnaPonuda kredit,
+			Klijent klijent, 
+			Kredit kredit,
 			Uposlenik u){
 		this.setDatumUplate(datumUplate);
 		this.setIznosUplate(iznosUplate);
 		this.setNacinUplate(nacinUplate);
-		this.setKlijentSluzbenik(klijent);
-		this.setKreditnaPonuda(kredit);
+		this.setKlijent(klijent);
+		this.setKredit(kredit);
 		this.setUposlenik(u);
 	}
 
@@ -59,19 +57,19 @@ public class Transakcija {
 		this.nacinUplate = nacinUplate;
 	}
 
-	public KlijentSluzbenik getKlijentSluzbenik() {
+	public Klijent getKlijent() {
 		return klijent;
 	}
 
-	public void setKlijentSluzbenik(KlijentSluzbenik klijent) {
+	public void setKlijent(Klijent klijent) {
 		this.klijent = klijent;
 	}
 
-	public KreditnaPonuda getKreditnaPonuda() {
+	public Kredit getKredit() {
 		return kredit;
 	}
 
-	public void setKreditnaPonuda(KreditnaPonuda kredit) {
+	public void setKredit(Kredit kredit) {
 		this.kredit = kredit;
 	}
 

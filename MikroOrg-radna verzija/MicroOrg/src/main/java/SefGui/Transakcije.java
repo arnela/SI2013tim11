@@ -40,7 +40,7 @@ public class Transakcije extends JFrame {
 	private JPanel contentPane;
 	private JTextField tf_podaciPretrage;
 	private Uposlenik trenutni;
-	private  List<Transakcija> _sveTransakcije=null;
+	private  List<Transakcija> _transakcije=null;
 	JTable _table = null;
 	
 	/**
@@ -208,7 +208,7 @@ public class Transakcije extends JFrame {
 					if(_foo==-1) throw new NullPointerException();
 					
 					
-					for(Transakcija t : _sveTransakcije){
+					for(Transakcija t : _transakcije){
 						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
 							_toBePDFGenerated=t;
 						}	

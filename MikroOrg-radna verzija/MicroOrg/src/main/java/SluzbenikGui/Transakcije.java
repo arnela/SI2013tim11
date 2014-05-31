@@ -59,8 +59,8 @@ public class Transakcije extends JFrame {
 	private JTextField tf_iznos;
 	private JTextField tf_pretraga;
 	private JLabel lb_datum;
-	private  List<Transakcija> _sveTransakcije=null;
-	JTable _table = null;
+	private  List<Transakcija> _transakcije=null;
+	private JTable _table = null;
 	private Uposlenik trenutni;
 
 
@@ -147,22 +147,25 @@ public class Transakcije extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
+				PonudeLogika _ponudeLogika = new PonudeLogika();
+
 				try{
 				if(!(_transakcijaLogika.daLiPostoji(tf_jmbg.getText()))){
 					JOptionPane.showMessageDialog(null, "Klijent sa ovim maticnim brojem ne postoji!");
 				}else
 				{
-					PonudeLogika _ponudeLogika = new PonudeLogika();
-					List<KreditnaPonuda> _krediti = _ponudeLogika.traziPoImenuKlijenta(_transakcijaLogika.dajOsobu("").getImePrezime());
+					
+					List<KreditnaPonuda> _krediti = _ponudeLogika.traziPoImenuKlijenta(_transakcijaLogika.dajOsobu(tf_jmbg.getText()).getImePrezime());
+					
 					for (int i=0;i<_krediti.size();i++)
 					{
 						comboBox.addItem(_krediti.get(i).getTk().getNaziv());
-						//comboBox.addItem(_krediti.get(i).getTk().getNaziv());
 					}
 				
 				}
 				}catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
+				JOptionPane.showMessageDialog(null, "Provjerite bazu podataka, vjerovatno imate dva ili više ista unosa...");
+
 			}
 			}
 		});
@@ -239,10 +242,10 @@ public class Transakcije extends JFrame {
 				
 				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
 
-				KlijentSluzbenik _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
+				Klijent _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
 				
 				
-				KreditnaPonuda _kredit =  (KreditnaPonuda) comboBox.getSelectedItem();
+				Kredit _kredit =  (Kredit) comboBox.getSelectedItem();
 				if(_status=="OK"){
 
 				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
@@ -306,16 +309,14 @@ public class Transakcije extends JFrame {
                 PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
  				
 				double _iznos = Double.parseDouble(tf_iznos.getText());
+				Klijent _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
+				Kredit _kredit = _transakcijaLogika.traziPoTipuKreditaIKlijenta(tf_jmbg.getText());
 				
-				KlijentSluzbenik _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
-				
-				KreditnaPonuda _kredit = _transakcijaLogika.traziPoTipuKreditaIKlijenta(nazivTipaKredita, _k.getImePrezime());
 				if(_status=="OK"){
 
-				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
-				
+					Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
 				try {
-					_transakcijaLogika.dodajTransakciju(_transakcija);
+					_transakcijaLogika.dodajTransakciju(_transakcija); 
 					//ocisti formu
 					tf_jmbg.setText("");
 					tf_iznos.setText("");
@@ -323,7 +324,7 @@ public class Transakcije extends JFrame {
 					radioButton_1.setSelected(false);
 					JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
 			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
+				JOptionPane.showMessageDialog(null, "Nesto je poslo naopako !");
 			}
 				}
 				else{
@@ -379,7 +380,7 @@ public class Transakcije extends JFrame {
 					if(_foo==-1) throw new NullPointerException();
 					
 					
-					for(Transakcija t : _sveTransakcije){
+					for(Transakcija t : _transakcije){
 						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
 							_toBePDFGenerated=t;
 						}	
@@ -460,52 +461,15 @@ public class Transakcije extends JFrame {
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SluzbenikGui.Transakcije.this.dispose();
-			}
+						}
 		});
 		button_6.setBounds(505, 278, 89, 23);
 		panel_2.add(button_6);
-		
-		JButton button_7 = new JButton("Obri\u0161i");
-		button_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				 try {
-					int _foo= _table.getSelectedRow();
-					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali transakciju koju želite obrisati!");
-					Transakcija _toBeDeleted=null;
-					
-						for(Transakcija t : _sveTransakcije){
-							if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
-								_toBeDeleted=t;
-							new TransakcijaLogika().softDeleteByMorePar(t.getDatumUplate(), t.getIznosUplate(), t.getNacinUplate());
-							}
 
-						}
-						_sveTransakcije.remove(_toBeDeleted);
-						_table.setModel(new TransakcijaTableModel(_sveTransakcije));
-						JOptionPane.showMessageDialog(null, "Uspješno obrisano!");
-						
-						_table.invalidate();
-						_table.revalidate();
-						_table.repaint();
-				}
-				catch (NullPointerException e1) {
-					JOptionPane.showMessageDialog(null, "Niste odabrali transakciju kojeg želite obrisati!");
-				} 
-				catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: d3l3t4 3rr0r");
-				}
-			}
-		});
-		button_7.setBounds(283, 278, 112, 23);
-		panel_2.add(button_7);
-		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				Spremnik.setTransakcije(SluzbenikGui.Transakcije.this);
-				Spremnik.getTransakcije().hide();
-				Spremnik.getPocetni().show();
+				
 			}
 			
 			@Override
@@ -520,16 +484,15 @@ public class Transakcije extends JFrame {
 			
 		});
 		
-		
 		button_5.addActionListener(new ActionListener() {
 			@SuppressWarnings("null")
 			public void actionPerformed(ActionEvent e) {
 				
 				TransakcijaLogika _transakcijaLogika= new TransakcijaLogika();
-				
+				//neka stoji ovo
 				if(radioButton_2.isSelected()){
 				try{
-				List<Transakcija> _transakcije=_transakcijaLogika.getByDate(tf_pretraga.getText());
+				_transakcije=_transakcijaLogika.getByDate(tf_pretraga.getText());
 				if(_transakcije.size()!=0){
 				JTable _table = new JTable();
 				_table.setModel(new TransakcijaTableModel(_transakcije));
@@ -547,7 +510,7 @@ public class Transakcije extends JFrame {
 					}
 				}else if(radioButton_5.isSelected()){
 					try{
-					List<Transakcija> _transakcije=_transakcijaLogika.getByKlijent(tf_pretraga.getText());
+					_transakcije=_transakcijaLogika.getByKlijent(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
 					JTable _table = new JTable();
 					_table.setModel(new TransakcijaTableModel(_transakcije));
@@ -563,9 +526,9 @@ public class Transakcije extends JFrame {
 					{
 						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 						}
-				}/*else if(radioButton_3.isSelected()){
+				}else if(radioButton_3.isSelected()){
 					try{
-					List<Transakcija> _transakcije = null;
+					
 					_transakcije.add(_transakcijaLogika.getByID(tf_pretraga.getText()));
 					if(_transakcije.size()!=0){
 					JTable _table = new JTable();
@@ -583,9 +546,9 @@ public class Transakcije extends JFrame {
 					{
 						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 						}
-				}*/else if(radioButton_4.isSelected()){
+				}else if(radioButton_4.isSelected()){
 					try{
-					List<Transakcija> _transakcije = _transakcijaLogika.getByTipKredita(tf_pretraga.getText());
+					_transakcije = _transakcijaLogika.getByTipKredita(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
 					JTable _table = new JTable();
 					_table.setModel(new TransakcijaTableModel(_transakcije));
@@ -604,7 +567,57 @@ public class Transakcije extends JFrame {
 				}
 			
 			}
+		
 		});
+		
+		
+		
+		JButton button_7 = new JButton("Obri\u0161i");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	
+					try {
+					//int _foo= _table.getSelectedRow();
+					int _foo = 0;
+
+					if(_foo==-1) JOptionPane.showMessageDialog(null, "Niste odabrali transakciju koji želite obrisati!");
+
+					Transakcija _toBeDeleted=null;
+
+						for(Transakcija t : _transakcije){
+							if( (t.getDatumUplate().equals((String) _table.getValueAt(_foo,  3)))){
+								_toBeDeleted=t;		
+							new TransakcijaLogika().softDeleteByDatum(t.getDatumUplate());		}
+							
+						}
+						
+
+						_transakcije.remove(_toBeDeleted);
+						_table.setModel(new TransakcijaTableModel(_transakcije));
+						JOptionPane.showMessageDialog(null, "Uspješno obrisano!");
+						
+						_table.invalidate();
+						_table.revalidate();
+						_table.repaint();
+				}
+				catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(null, "Niste odabrali tip kredita koji želite obrisati!");
+
+				} 
+				catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: d3l3t4 3rr0r");
+				}
+			}
+		});
+		
+		
+		
+		
+		button_7.setBounds(283, 278, 112, 23);
+		panel_2.add(button_7);
+		
+		
+		
 		
 		JButton btnEmail = new JButton("E-mail");
 		btnEmail.addActionListener(new ActionListener() {
@@ -613,8 +626,8 @@ public class Transakcije extends JFrame {
 					int _foo= _table.getSelectedRow();
 					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali transakciju koju želite poslati!");
 					Transakcija _privitak=null;
-					
-						for(Transakcija t : _sveTransakcije){
+				
+						for(Transakcija t : _transakcije){
 							if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
 								_privitak=t;
 							
