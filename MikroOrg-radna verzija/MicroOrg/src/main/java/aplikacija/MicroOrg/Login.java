@@ -2,37 +2,52 @@ package aplikacija.MicroOrg;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Color;
+
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+
 import SefGui.Pocetni;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import logic.SharedLogika;
 import logic.UposlenikLogika;
+
 import javax.swing.JPasswordField;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
 import domainModels.HibernateUtil;
 import domainModels.Uposlenik;
+
 import java.sql.Date;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
 import viewModels.KreditniSluzbenik;
 import domainModels.HibernateUtil;
 import domainModels.Osoba;
 import domainModels.Uposlenik;
+
 import java.io.Serializable;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -75,16 +90,16 @@ public class Login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		setResizable(false);
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(204, 186, 86, 20);
 		contentPane.add(textField);
 		
-		JLabel label = new JLabel("Korisni\u010Dko ime:");
-		label.setHorizontalAlignment(SwingConstants.RIGHT);
-		label.setBounds(29, 189, 158, 14);
-		contentPane.add(label);
+		JLabel lblKorisnikoImejmbg = new JLabel("Korisničko ime(JMBG):");
+		lblKorisnikoImejmbg.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblKorisnikoImejmbg.setBounds(29, 189, 158, 14);
+		contentPane.add(lblKorisnikoImejmbg);
 		
 		JLabel label_1 = new JLabel("\u0160ifra:");
 		label_1.setBounds(161, 220, 33, 14);
@@ -93,7 +108,11 @@ public class Login extends JFrame {
 		JButton button = new JButton("Prijavi se!");
 		button.addActionListener(new ActionListener() {
 			
-			public void actionPerformed(ActionEvent e) {Ispitaj(textField.getText(),passwordField.getText());} //klik na dugme login
+			public void actionPerformed(ActionEvent e) {
+				SharedLogika validacija=new SharedLogika();
+				if (validacija.validirajJMB(textField.getText())) Ispitaj(textField.getText(),passwordField.getText());
+				else {JOptionPane.showMessageDialog(null, "Nepravilan jmbg...","Pogrešan format", JOptionPane.INFORMATION_MESSAGE);}
+			} //klik na dugme login
 			
 		});
 		
@@ -156,7 +175,8 @@ public void Ispitaj(String username,String sifra){
 		Login.this.dispose(); //zatvara ovu login formu
 		}
 	}
-	else {JOptionPane.showMessageDialog(null, "Žao nam je, pogrešan unos!","Greška", JOptionPane.INFORMATION_MESSAGE);}
+	else {JOptionPane.showMessageDialog(null, "Žao nam je, pogrešan unos!","Greška", JOptionPane.INFORMATION_MESSAGE);
+	textField.setText(""); passwordField.setText("");}
 }
 
 }
