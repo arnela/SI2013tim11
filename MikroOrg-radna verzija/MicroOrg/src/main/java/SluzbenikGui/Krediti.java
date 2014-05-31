@@ -180,7 +180,7 @@ public class Krediti extends JFrame {
 		
 		JLabel label = new JLabel("Naziv tipa kredita:");
 		
-		JLabel label_1 = new JLabel("Kamatna stopa:");
+		JLabel lblKamatnaStopa = new JLabel("Kamatna stopa(%):");
 		
 		JLabel label_2 = new JLabel("Rok vra\u0107anja kredita:");
 		
@@ -188,9 +188,9 @@ public class Krediti extends JFrame {
 		
 		JLabel label_4 = new JLabel("Grace period:");
 		
-		JLabel label_5 = new JLabel("Tro\u0161kovi obrade:");
+		JLabel lblTrokoviObradekm = new JLabel("Troškovi obrade(KM):");
 		
-		JLabel label_6 = new JLabel("Iznos kredita:");
+		JLabel lblIznosKreditakm = new JLabel("Iznos kredita(KM):");
 		
 		JLabel label_7 = new JLabel("Namjena kredita:");
 		
@@ -224,12 +224,12 @@ public class Krediti extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 						.addComponent(label)
-						.addComponent(label_1)
+						.addComponent(lblKamatnaStopa)
 						.addComponent(label_2)
 						.addComponent(label_3)
 						.addComponent(label_4)
-						.addComponent(label_5)
-						.addComponent(label_6)
+						.addComponent(lblTrokoviObradekm)
+						.addComponent(lblIznosKreditakm)
 						.addComponent(label_7))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
@@ -256,7 +256,7 @@ public class Krediti extends JFrame {
 						.addComponent(tf_namjena, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_6)
+						.addComponent(lblIznosKreditakm)
 						.addComponent(tf_iznos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
@@ -264,7 +264,7 @@ public class Krediti extends JFrame {
 						.addComponent(tf_rok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_1)
+						.addComponent(lblKamatnaStopa)
 						.addComponent(tf_stopa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
@@ -276,7 +276,7 @@ public class Krediti extends JFrame {
 						.addComponent(tf_grace, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_5)
+						.addComponent(lblTrokoviObradekm)
 						.addComponent(tf_troskovi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(105, Short.MAX_VALUE))
 		);
@@ -398,7 +398,7 @@ public class Krediti extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int _foo= _table.getSelectedRow();
-					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali tip kredita koji želite obrisati!");
+					if(_foo==-1) throw new NullPointerException();
 					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
 					TipKreditaSluzbenik _toBeDeleted=null;
 					
