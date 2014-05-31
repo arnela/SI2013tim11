@@ -510,7 +510,8 @@ public class SharedLogika {
 			int d = cal.get(Calendar.DAY_OF_MONTH);
 			int m = cal.get(Calendar.MONTH);
 			int g = cal.get(Calendar.YEAR);
-			if(_jmbg.length()==13 && dan == d && mjesec == m && godina == g && _jmbg.matches("\\d{13}"))return true;
+			if(/*_jmbg.length()==13 && */dan == d && mjesec == m && godina == g || _jmbg.matches("\\d{13}")) return true;
+			
 			else return false;
 		} catch (Exception e) {
 			return false;
