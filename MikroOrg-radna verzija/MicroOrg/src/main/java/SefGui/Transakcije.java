@@ -12,6 +12,7 @@ import java.awt.Color;
 
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -126,6 +127,9 @@ public class Transakcije extends JFrame {
 		panel_3.setBounds(405, 54, 182, 88);
 		panel.add(panel_3);
 		
+		ButtonGroup grupa = new ButtonGroup();
+
+		
 		final JRadioButton radioButton = new JRadioButton("Ime i Prezime uposlenika");
 		radioButton.setBounds(6, 7, 170, 23);
 		panel_3.add(radioButton);
@@ -137,6 +141,10 @@ public class Transakcije extends JFrame {
 		final JRadioButton radioButton_2 = new JRadioButton("Naziv tipa kredita");
 		radioButton_2.setBounds(6, 58, 160, 23);
 		panel_3.add(radioButton_2);
+		
+		grupa.add(radioButton);
+		grupa.add(radioButton_1);
+		grupa.add(radioButton_2);
 		
 		JButton button_1 = new JButton("Pretra\u017Ei po:");
 		button_1.addActionListener(new ActionListener() {
@@ -152,7 +160,7 @@ public class Transakcije extends JFrame {
 					try{
 						List<Transakcija> _transakcije=_transakcijaLogika.getByKlijent(tf_podaciPretrage.getText());
 						if(_transakcije.size()!=0){
-						_table = new JTable();
+						 _table = new JTable();
 						_table.setModel(new TransakcijaTableModel(_transakcije));
 						JScrollPane _scrollPane = new JScrollPane(_table);
 					    _scrollPane.setViewportView(_table);
@@ -173,7 +181,7 @@ public class Transakcije extends JFrame {
 					try{
 						List<Transakcija> _transakcije = _transakcijaLogika.getByTipKredita(tf_podaciPretrage.getText());
 						if(_transakcije.size()!=0){
-						JTable _table = new JTable();
+						_table = new JTable();
 						_table.setModel(new TransakcijaTableModel(_transakcije));
 						JScrollPane _scrollPane = new JScrollPane(_table);
 					    _scrollPane.setViewportView(_table);
@@ -189,7 +197,7 @@ public class Transakcije extends JFrame {
 							}
 					}
 				
-		
+				
 			}
 		});
 		button_1.setBounds(405, 11, 134, 32);
@@ -206,7 +214,7 @@ public class Transakcije extends JFrame {
 					
 					
 					for(Transakcija t : _transakcije){
-						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
+						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4)))){
 							_toBePDFGenerated=t;
 						}	
 					}
