@@ -555,6 +555,7 @@ public class Ponude extends JFrame {
 										
 					panel_5.revalidate();
 					panel_5.repaint();
+					textField_10.setText("");
 					}
 					else JOptionPane.showMessageDialog(null, "Ne postoji ponuda izdata unesenom klijentu.");
 				}
