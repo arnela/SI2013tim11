@@ -28,6 +28,7 @@ import org.hibernate.criterion.Restrictions;
 
 import viewModels.IzvjestajOrganizacije;
 import domainModels.HibernateUtil;
+import domainModels.Klijent;
 import domainModels.Kredit;
 import domainModels.Osoba;
 import domainModels.Transakcija;
@@ -96,6 +97,9 @@ public class Poslovanje extends JFrame {
 	    _c = session.createCriteria(Uposlenik.class);
 	    List<Uposlenik> _uposlenici = (List<Uposlenik>)_c.list();
 	    
+	    _c = session.createCriteria(Klijent.class);
+	    List<Klijent> _klijenti = (List<Klijent>)_c.list();
+	    
 	    List<String> imena = new ArrayList<String>();
 	    for(Uposlenik _u : _uposlenici) {
 	    	_c = session.createCriteria(Osoba.class);
@@ -124,6 +128,7 @@ public class Poslovanje extends JFrame {
 	    int _brKredita = _krediti.size();
 	    int _brTransakcija = _transakcije.size();
 	    int _brUposlenih = _uposlenici.size();
+	    int _brKlijenata = _klijenti.size();
 	    
 	    double _rashodi = 0;
 	    double _prihodi = 0;
@@ -226,7 +231,7 @@ public class Poslovanje extends JFrame {
 		label_9.setBounds(10, 225, 141, 14);
 		panel.add(label_9);
 		
-		JLabel label_10 = new JLabel("Broj novih klijenata:");
+		JLabel label_10 = new JLabel("Broj klijenata:" + Integer.toString(_brKlijenata));
 		label_10.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_10.setBounds(10, 250, 141, 14);
 		panel.add(label_10);
