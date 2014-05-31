@@ -180,6 +180,7 @@ public class Krediti extends JFrame {
 		JLabel label = new JLabel("Naziv tipa kredita:");
 		
 		JLabel lblKamatnaStopa = new JLabel("Kamatna stopa(%):");
+		lblKamatnaStopa.setToolTipText("Mora biti manja od 20%");
 		
 		JLabel label_2 = new JLabel("Rok vra\u0107anja kredita:");
 		

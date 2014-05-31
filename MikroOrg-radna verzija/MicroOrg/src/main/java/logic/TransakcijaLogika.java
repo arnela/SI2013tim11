@@ -240,7 +240,7 @@ public class TransakcijaLogika {
 		 Transaction _t = _session.beginTransaction(); 
 		 
 		 Criteria criteria = _session.createCriteria(Transakcija.class);
-		 domainModels.Transakcija _tr = (domainModels.Transakcija) criteria.add(Restrictions.and(Restrictions.eq("datumUplate", datum), Restrictions.eq("iznosUplate", iznos),Restrictions.eq("nacinUplate", nacin))); 
+		 domainModels.Transakcija _tr = (domainModels.Transakcija) criteria.add(Restrictions.and(Restrictions.eq("datumUplate", datum), Restrictions.eq("iznosUplate", iznos),Restrictions.eq("nacinUplate", nacin))).uniqueResult(); 
 		 
 		 //uvecati iznos kredita
 		 Double _iznosKredita= _tr.getKredit().getTipKredita().getIznos();
@@ -257,7 +257,7 @@ public class TransakcijaLogika {
 		 Transaction _t = _session.beginTransaction(); 
 		 
 		 Criteria criteria = _session.createCriteria(domainModels.Transakcija.class);
-		 domainModels.Transakcija _tr = (domainModels.Transakcija) criteria.add(Restrictions.eq("datumUplate", datum)); 
+		 domainModels.Transakcija _tr = (domainModels.Transakcija) criteria.add(Restrictions.eq("datumUplate", datum)).uniqueResult(); 
 		 
 		 //uvecati iznos kredita
 		 Double _iznosKredita= _tr.getKredit().getTipKredita().getIznos();
@@ -274,7 +274,7 @@ public class TransakcijaLogika {
 		 Transaction _t = _session.beginTransaction(); 
 		 
 		 Criteria criteria = _session.createCriteria(domainModels.Transakcija.class);
-		 domainModels.Transakcija _tr = (domainModels.Transakcija) criteria.add(Restrictions.eq("nacinUplate", nacin)); 
+		 domainModels.Transakcija _tr = (domainModels.Transakcija) criteria.add(Restrictions.eq("nacinUplate", nacin)).uniqueResult(); 
 		 
 		 //uvecati iznos kredita
 		 Double _iznosKredita= _tr.getKredit().getTipKredita().getIznos();

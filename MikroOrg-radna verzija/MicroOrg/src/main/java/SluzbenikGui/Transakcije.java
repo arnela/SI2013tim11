@@ -381,7 +381,7 @@ public class Transakcije extends JFrame {
 					
 					
 					for(Transakcija t : _transakcije){
-						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
+						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4)))){
 							_toBePDFGenerated=t;
 						}	
 					}
@@ -478,7 +478,7 @@ public class Transakcije extends JFrame {
 				Calendar cal = Calendar.getInstance();
 				String _datum = dateFormat.format(cal.getTime());
 				lb_datum.setText(_datum);
-				lb_uposlenik.setText(Spremnik.getTrenutni().getUsername());
+				//lb_uposlenik.setText(Spremnik.getTrenutni().getUsername());
 			}
 			
 			
@@ -494,7 +494,7 @@ public class Transakcije extends JFrame {
 				try{
 				_transakcije=_transakcijaLogika.getByDate(tf_pretraga.getText());
 				if(_transakcije.size()!=0){
-				JTable _table = new JTable();
+				_table = new JTable();
 				_table.setModel(new TransakcijaTableModel(_transakcije));
 				JScrollPane _scrollPane = new JScrollPane(_table);
 			    _scrollPane.setViewportView(_table);
@@ -512,7 +512,7 @@ public class Transakcije extends JFrame {
 					try{
 					_transakcije=_transakcijaLogika.getByKlijent(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
-					JTable _table = new JTable();
+					_table = new JTable();
 					_table.setModel(new TransakcijaTableModel(_transakcije));
 					JScrollPane _scrollPane = new JScrollPane(_table);
 				    _scrollPane.setViewportView(_table);
@@ -531,7 +531,7 @@ public class Transakcije extends JFrame {
 					
 					_transakcije.add(_transakcijaLogika.getByID(tf_pretraga.getText()));
 					if(_transakcije.size()!=0){
-					JTable _table = new JTable();
+					 _table = new JTable();
 					_table.setModel(new TransakcijaTableModel(_transakcije));
 					JScrollPane _scrollPane = new JScrollPane(_table);
 				    _scrollPane.setViewportView(_table);
@@ -550,7 +550,7 @@ public class Transakcije extends JFrame {
 					try{
 					_transakcije = _transakcijaLogika.getByTipKredita(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
-					JTable _table = new JTable();
+					 _table = new JTable();
 					_table.setModel(new TransakcijaTableModel(_transakcije));
 					JScrollPane _scrollPane = new JScrollPane(_table);
 				    _scrollPane.setViewportView(_table);
@@ -574,20 +574,20 @@ public class Transakcije extends JFrame {
 		
 		JButton button_7 = new JButton("Obri\u0161i");
 		button_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-	
-					try {
-					//int _foo= _table.getSelectedRow();
-					int _foo = 0;
-
+			public void actionPerformed(ActionEvent e) {		
+				
+				try {
+					int	_foo= _table.getSelectedRow();
 					if(_foo==-1) JOptionPane.showMessageDialog(null, "Niste odabrali transakciju koji želite obrisati!");
-
 					Transakcija _toBeDeleted=null;
-
+					TransakcijaLogika _tl = new TransakcijaLogika();
+					
 						for(Transakcija t : _transakcije){
-							if( (t.getDatumUplate().equals((String) _table.getValueAt(_foo,  3)))){
+							String s = _table.getValueAt(_foo, 3).toString();
+							
+							if( (t.getNacinUplate().equals(s))){
 								_toBeDeleted=t;		
-							new TransakcijaLogika().softDeleteByDatum(t.getDatumUplate());		}
+							_tl.softDeleteByNacin(t.getNacinUplate());;		}
 							
 						}
 						
@@ -601,7 +601,7 @@ public class Transakcije extends JFrame {
 						_table.repaint();
 				}
 				catch (NullPointerException e1) {
-					JOptionPane.showMessageDialog(null, "Niste odabrali tip kredita koji želite obrisati!");
+					JOptionPane.showMessageDialog(null, "Niste odabrali tip kredita koji želite obrisati!!!!");
 
 				} 
 				catch (Exception e1) {
@@ -622,15 +622,13 @@ public class Transakcije extends JFrame {
 		JButton btnEmail = new JButton("E-mail");
 		btnEmail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Transakcija _privitak=null;
 				try {
 					int _foo= _table.getSelectedRow();
-					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali transakciju koju želite poslati!");
-					Transakcija _privitak=null;
-				
+					if(_foo==-1) throw new NullPointerException();
 						for(Transakcija t : _transakcije){
-							if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4))) && (t.getIznosUplate().equals((Double)_table.getValueAt(_foo, 2))) && (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
+							if( (t.getNacinUplate().equals((String)_table.getValueAt(_foo, 3)))){
 								_privitak=t;
-							
 							}
 
 						}

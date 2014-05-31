@@ -152,7 +152,7 @@ public class Transakcije extends JFrame {
 					try{
 						List<Transakcija> _transakcije=_transakcijaLogika.getByKlijent(tf_podaciPretrage.getText());
 						if(_transakcije.size()!=0){
-						JTable _table = new JTable();
+						_table = new JTable();
 						_table.setModel(new TransakcijaTableModel(_transakcije));
 						JScrollPane _scrollPane = new JScrollPane(_table);
 					    _scrollPane.setViewportView(_table);
@@ -189,10 +189,7 @@ public class Transakcije extends JFrame {
 							}
 					}
 				
-				
-				
-				
-				JOptionPane.showMessageDialog(null, "Nije implementirano !");
+		
 			}
 		});
 		button_1.setBounds(405, 11, 134, 32);
