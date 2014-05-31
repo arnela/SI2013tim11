@@ -44,7 +44,7 @@ public class SharedLogika {
 	public void generisiPDF(IzvjestajSluzbenika novi){
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		try {
-            PdfWriter.getInstance(document,new FileOutputStream("target/IzvjestajSluzbenika"+novi.getDatumGenerisanja()+".pdf"));
+            PdfWriter.getInstance(document,new FileOutputStream("target/IzvjestajSluzbenika"+novi.getBrEvidentiranihTransakcija()+novi.getBrIzdatihKredita()+".pdf"));
           //SADRZAJ
             document.open();
             //zaglavlje dokumenta
@@ -88,7 +88,7 @@ public class SharedLogika {
             document.close();
 
             //kreiramo objekat myFile koji ćemo smjestit u trenutni objekat u spremniku
-            File myFile=new File( "target/IzvjestajSluzbenika"+novi.getDatumGenerisanja()+".pdf");
+            File myFile=new File("target/IzvjestajSluzbenika"+novi.getBrEvidentiranihTransakcija()+novi.getBrIzdatihKredita()+".pdf");
             Spremnik.setObjekatPDF(myFile);
             
         } catch (DocumentException e) {
@@ -102,7 +102,7 @@ public class SharedLogika {
 	public void generisiPDF(IzvjestajOrganizacije novi){
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		try {
-            PdfWriter.getInstance(document,new FileOutputStream("target/IzvjestajOrganizacije"+novi.getDatumGenerisanja()+".pdf"));
+            PdfWriter.getInstance(document,new FileOutputStream("target/IzvjestajOrganizacije"+novi.getBrojTransakcija()+novi.getBrojKredita()+".pdf"));
             //SADRZAJ
             document.open();
             //zaglavlje dokumenta
@@ -149,7 +149,7 @@ public class SharedLogika {
             document.close();
             
             //kreiramo objekat myFile koji ćemo smjestit u trenutni objekat u spremniku
-            File myFile=new File( "target/IzvjestajOrganizacije"+novi.getDatumGenerisanja()+".pdf");
+            File myFile=new File("target/IzvjestajOrganizacije"+novi.getBrojTransakcija()+novi.getBrojKredita()+".pdf");
             Spremnik.setObjekatPDF(myFile);
             
         } catch (DocumentException e) {
@@ -239,7 +239,7 @@ public class SharedLogika {
 	public void generisiPDF(viewModels.Transakcija novi){
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
 		try {
-            PdfWriter.getInstance(document,new FileOutputStream("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+novi.getDatumUplate()+".pdf"));
+            PdfWriter.getInstance(document,new FileOutputStream("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+".pdf"));
             //SADRZAJ
             document.open();
             //zaglavlje dokumenta
@@ -285,7 +285,7 @@ public class SharedLogika {
             document.close();
             
             //kreiramo objekat myFile koji ćemo smjestit u trenutni objekat u spremniku
-            File myFile=new File("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+novi.getDatumUplate()+".pdf");
+            File myFile=new File("target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+".pdf");
             Spremnik.setObjekatPDF(myFile);
             
         } catch (DocumentException e) {
@@ -426,9 +426,9 @@ public class SharedLogika {
         File myFile=null;
 		//podesavanje adrese koju će otvoriti
         if (o.getClass()==KreditnaPonuda.class) {KreditnaPonuda novi=(KreditnaPonuda) o; myFile = new File( "target/Kredit"+novi.getTk().getTipKreditaId()+".pdf");}
-		if (o.getClass()==IzvjestajSluzbenika.class) {IzvjestajSluzbenika novi=(IzvjestajSluzbenika) o; myFile = new File( "target/IzvjestajSluzbenika"+novi.getImePrezimeSluzbenika()+".pdf");}
-		if (o.getClass()==IzvjestajOrganizacije.class) {IzvjestajOrganizacije novi=(IzvjestajOrganizacije) o; myFile = new File( "target/IzvjestajOrganizacije"+novi.getDatumGenerisanja()+".pdf");}
-		if (o.getClass()==viewModels.Transakcija.class) {viewModels.Transakcija novi=(viewModels.Transakcija) o; myFile = new File( "target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+novi.getDatumUplate()+".pdf");}
+		if (o.getClass()==IzvjestajSluzbenika.class) {IzvjestajSluzbenika novi=(IzvjestajSluzbenika) o; myFile = new File("target/IzvjestajSluzbenika"+novi.getBrEvidentiranihTransakcija()+novi.getBrIzdatihKredita()+".pdf");}
+		if (o.getClass()==IzvjestajOrganizacije.class) {IzvjestajOrganizacije novi=(IzvjestajOrganizacije) o; myFile = new File("target/IzvjestajOrganizacije"+novi.getBrojTransakcija()+novi.getBrojKredita()+".pdf");}
+		if (o.getClass()==viewModels.Transakcija.class) {viewModels.Transakcija novi=(viewModels.Transakcija) o; myFile = new File( "target/Transakcija"+novi.getKlijentSluzbenik().getJmbg()+".pdf");}
 		if (o.getClass()==KlijentSluzbenik.class) {KlijentSluzbenik novi=(KlijentSluzbenik) o; myFile = new File( "target/Klijent"+novi.getJmbg()+".pdf");}
 		if (o.getClass()==KreditniSluzbenik.class) {KreditniSluzbenik novi=(KreditniSluzbenik) o; myFile = new File("target/Sluzbenik"+novi.getJmbg()+".pdf");}
 		try {
