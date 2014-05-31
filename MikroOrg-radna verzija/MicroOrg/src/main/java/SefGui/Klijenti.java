@@ -179,7 +179,7 @@ public class Klijenti extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					int _foo= _table.getSelectedRow();
-					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika kojeg želite obrisati!");
+					if(_foo==-1)JOptionPane.showMessageDialog(null, "Niste odabrali klijenta kojeg želite obrisati!");
 					//pomocna varijabla jer se remove ne moze uraditi kako treba unutar foreach petlje !
 					KlijentSluzbenik _toBeDeleted=null;
 					
@@ -200,7 +200,7 @@ public class Klijenti extends JFrame {
 						_table.repaint();
 				}
 				catch (NullPointerException e1) {
-					JOptionPane.showMessageDialog(null, "Niste odabrali uposlenika kojeg želite obrisati!");
+					JOptionPane.showMessageDialog(null, "Niste odabrali klijenta kojeg želite obrisati!");
 				} 
 				catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: d3l3t4 3rr0r");
@@ -311,7 +311,7 @@ public class Klijenti extends JFrame {
 							panel_1.revalidate();
 							panel_1.repaint();
 					   }
-							else JOptionPane.showMessageDialog(null, "Ne postoji klijent sa tim imenom.");
+							else JOptionPane.showMessageDialog(null, "Ne postoji klijent sa tom e-mail adresom.");
 						 
 					 }
 					 
@@ -338,8 +338,10 @@ public class Klijenti extends JFrame {
 							panel_1.revalidate();
 							panel_1.repaint();
 					   }
-							else JOptionPane.showMessageDialog(null, "Ne postoji klijent sa tim imenom.");
-							}}
+							else JOptionPane.showMessageDialog(null, "Ne postoji klijent sa tom adresom.");
+							} 
+					 else JOptionPane.showMessageDialog(null, "Odaberite parametar po kojem želite vršiti pretragu");
+					 }
 					 catch(HeadlessException e1)
 						{
 						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");

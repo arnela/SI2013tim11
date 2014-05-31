@@ -98,7 +98,7 @@ public class Klijenti extends JFrame {
 		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Klijenti");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 493, 468);
+		setBounds(100, 100, 516, 468);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -106,7 +106,7 @@ public class Klijenti extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 477, 419);
+		tabbedPane.setBounds(0, 0, 500, 419);
 		tabbedPane.setBackground(Color.WHITE);
 		contentPane.add(tabbedPane);
 		
@@ -120,7 +120,7 @@ public class Klijenti extends JFrame {
 				SluzbenikGui.Klijenti.this.dispose();
 			}
 		});
-		btnNazad.setBounds(294, 295, 95, 23);
+		btnNazad.setBounds(333, 312, 95, 23);
 		
 		JButton button_1 = new JButton("Unesi klijenta");
 		button_1.addActionListener(new ActionListener() {
@@ -196,23 +196,25 @@ public class Klijenti extends JFrame {
 				else JOptionPane.showMessageDialog(null, _status);
 			}
 			});
-		button_1.setBounds(152, 295, 124, 23);
+		button_1.setBounds(205, 312, 124, 23);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(45, 55, 344, 229);
+		panel_1.setBounds(84, 54, 344, 229);
 		panel_1.setBorder(new LineBorder(new Color(165, 42, 42), 1, true));
 		panel_1.setBackground(Color.WHITE);
 		
 		JLabel label = new JLabel("Adresa:");
 		
 		JLabel label_1 = new JLabel("Telefon:");
+		label_1.setToolTipText("111-111-111");
 		
 		JLabel label_2 = new JLabel("Email:");
 		
 		JLabel label_3 = new JLabel("JMBG:");
 		
 		JLabel label_4 = new JLabel("Datum ro\u0111enja:");
+		label_4.setToolTipText("dd-MM-yyyy");
 		
 		JLabel label_5 = new JLabel("Ime:");
 		label_5.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -322,7 +324,7 @@ public class Klijenti extends JFrame {
 		panel_2.setLayout(null);
 		
 		final JPanel panel_3 = new JPanel();
-		panel_3.setBounds(10, 54, 452, 261);
+		panel_3.setBounds(10, 54, 475, 261);
 		panel_3.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_3.setBackground(Color.WHITE);
 		panel_2.add(panel_3);
@@ -476,11 +478,11 @@ public class Klijenti extends JFrame {
 			}
 			
 		});
-		button_5.setBounds(373, 326, 89, 23);
+		button_5.setBounds(396, 326, 89, 23);
 		panel_2.add(button_5);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(10, 11, 311, 32);
+		panel_4.setBounds(10, 11, 344, 32);
 		panel_4.setBorder(new LineBorder(new Color(165, 42, 42), 1, true));
 		panel_4.setBackground(Color.WHITE);
 		panel_2.add(panel_4);
@@ -532,7 +534,7 @@ public class Klijenti extends JFrame {
 			 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 			}}
 		});
-		button_6.setBounds(331, 20, 121, 23);
+		button_6.setBounds(364, 20, 121, 23);
 		panel_2.add(button_6);
 		
 		JButton button_7 = new JButton("Nazad");
@@ -541,7 +543,7 @@ public class Klijenti extends JFrame {
 				SluzbenikGui.Klijenti.this.dispose();
 			}
 		});
-		button_7.setBounds(373, 357, 89, 23);
+		button_7.setBounds(396, 357, 89, 23);
 		panel_2.add(button_7);
 	}
 }
