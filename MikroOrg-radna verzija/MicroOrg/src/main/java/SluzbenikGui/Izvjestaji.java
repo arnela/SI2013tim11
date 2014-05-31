@@ -144,11 +144,6 @@ public class Izvjestaji extends JFrame {
 		panel.setBackground(Color.WHITE);
 		tabbedPane.addTab("Novi izvje\u0161taj", null, panel, null);
 		
-		JLabel label = new JLabel("Radni sati:");
-		label.setHorizontalAlignment(SwingConstants.TRAILING);
-		label.setBounds(10, 75, 141, 14);
-		panel.add(label);
-		
 		JLabel label_1 = new JLabel("Lista transakcija:");
 		label_1.setBounds(307, 39, 231, 14);
 		panel.add(label_1);
@@ -174,22 +169,22 @@ public class Izvjestaji extends JFrame {
 		
 		JLabel label_2 = new JLabel("Prihodi: " + String.valueOf(_prihodi));
 		label_2.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_2.setBounds(10, 100, 141, 14);
+		label_2.setBounds(10, 75, 141, 14);
 		panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("Rashodi: " + String.valueOf(_rashodi));
 		label_3.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_3.setBounds(10, 125, 141, 14);
+		label_3.setBounds(10, 100, 141, 14);
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("Izvr\u0161ene transakcije: " + String.valueOf(Spremnik.getTrenutni().getUkupanBrTransakcija()));
 		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_4.setBounds(10, 150, 141, 14);
+		label_4.setBounds(10, 125, 141, 14);
 		panel.add(label_4);
 		
 		JLabel label_5 = new JLabel("Dodijeljeni krediti: " + String.valueOf(Spremnik.getTrenutni().getUkupanBrKredita()));
 		label_5.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_5.setBounds(10, 175, 141, 14);
+		label_5.setBounds(10, 150, 141, 14);
 		panel.add(label_5);
 		
 		final JComboBox comboBox = new JComboBox();
@@ -203,11 +198,6 @@ public class Izvjestaji extends JFrame {
 		label_6.setHorizontalAlignment(SwingConstants.TRAILING);
 		label_6.setBounds(10, 11, 176, 14);
 		panel.add(label_6);
-		
-		JLabel label_7 = new JLabel("Kreirano tipova kredita:");
-		label_7.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_7.setBounds(10, 200, 141, 14);
-		panel.add(label_7);
 		
 		JButton button = new JButton("PDF prikaz");
 		button.addActionListener(new ActionListener() {
@@ -273,7 +263,7 @@ public class Izvjestaji extends JFrame {
 		
 		JLabel label_8 = new JLabel("Datum i vrijeme: " + datum);
 		label_8.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_8.setBounds(10, 225, 204, 14);
+		label_8.setBounds(10, 175, 204, 14);
 		panel.add(label_8);
 	}
 
