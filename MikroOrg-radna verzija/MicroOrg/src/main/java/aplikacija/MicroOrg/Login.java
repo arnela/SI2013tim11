@@ -161,17 +161,21 @@ public void Ispitaj(String username,String sifra){
 	if (_userPosition==true)
 		{
 		SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi početni gui za šefa
-		n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-		n.setVisible(true);  // upali vidljivost
-		n.setResizable(false);
+		Spremnik.setPocetni(n);
+		Spremnik.getPocetni().show();
+		Spremnik.getPocetni().setLocationRelativeTo(null);   // postavlja ga na sredinu
+		Spremnik.getPocetni().setVisible(true);  // upali vidljivost
+		Spremnik.getPocetni().setResizable(false);
 		Login.this.dispose(); //zatvara ovu login formu
 		}
 	else if (_userPosition==false)
 		{
 		SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi početni gui za sluzbenika
-		n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-		n.setVisible(true);  // upali vidljivost
-		n.setResizable(false);
+		Spremnik.setPocetni(n);
+		Spremnik.getPocetni().show();
+		Spremnik.getPocetni().setLocationRelativeTo(null);   // postavlja ga na sredinu
+		Spremnik.getPocetni().setVisible(true);  // upali vidljivost
+		Spremnik.getPocetni().setResizable(false);
 		Login.this.dispose(); //zatvara ovu login formu
 		}
 	}
