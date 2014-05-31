@@ -76,7 +76,7 @@ public class Mail extends JFrame {
 	public Mail() {
 		objekat=Spremnik.getObjekatPDF();
 		setTitle("Unesite podatke za slanje E-mail poštom:");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 397, 331);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
