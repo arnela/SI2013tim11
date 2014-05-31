@@ -169,7 +169,7 @@ public class Poslovanje extends JFrame {
 		Calendar cal = Calendar.getInstance();
 		String datum = _f.format(cal.getTime());
 				
-		JLabel label = new JLabel("Datum i vrijeme:" + datum);
+		JLabel label = new JLabel("Datum i vrijeme: " + datum);
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
 		label.setBounds(10, 50, 206, 14);
 		panel.add(label);
@@ -216,24 +216,14 @@ public class Poslovanje extends JFrame {
 		label_6.setBounds(10, 11, 176, 14);
 		panel.add(label_6);
 		
-		JLabel label_7 = new JLabel("Kreirano izvje\u0161taja:");
-		label_7.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_7.setBounds(10, 175, 141, 14);
-		panel.add(label_7);
-		
-		JLabel label_8 = new JLabel("Kreirano tipova kredita:");
-		label_8.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_8.setBounds(10, 200, 141, 14);
-		panel.add(label_8);
-		
 		JLabel label_9 = new JLabel("Broj uposlenih: " + Integer.toString(_brUposlenih));
 		label_9.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_9.setBounds(10, 225, 141, 14);
+		label_9.setBounds(10, 175, 141, 14);
 		panel.add(label_9);
 		
-		JLabel label_10 = new JLabel("Broj klijenata:" + Integer.toString(_brKlijenata));
+		JLabel label_10 = new JLabel("Broj klijenata: " + Integer.toString(_brKlijenata));
 		label_10.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_10.setBounds(10, 250, 141, 14);
+		label_10.setBounds(10, 200, 141, 14);
 		panel.add(label_10);
 		
 		JButton button = new JButton("PDF prikaz");
