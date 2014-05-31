@@ -123,7 +123,25 @@ public class EditKlijenti extends JFrame {
 		btnSpasiPromjene.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				KlijentLogika _klijentLogika = new KlijentLogika();
-
+String _status="Nije ok";
+				
+				//VALIDACIJA
+				try {
+					 _status=_klijentLogika.validirajPodatke2(
+							 	tf_ime.getText(),
+							 	tf_prezime.getText(),
+								tf_datum.getText(),
+								tf_telefon.getText(),
+								tf_adresa.getText(),
+								tf_email.getText(),
+								tf_status.getText()
+							 );
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Validacija error !");
+				}
+				
+				if (_status == "OK"){
 				//formatiranje i parsiranje datuma
 				java.sql.Date _datum = null;
 				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -155,8 +173,9 @@ public class EditKlijenti extends JFrame {
 						JOptionPane.showMessageDialog(null, "Promjene uspješno spašene !");
 						SluzbenikGui.EditKlijenti.this.dispose();
 				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: pr0mij3n1 Up0sl3n1k4");
-				}	
+					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
+				}	}
+				else JOptionPane.showMessageDialog(null, _status);
 			}
 			});
 		btnSpasiPromjene.setBounds(189, 295, 95, 23);

@@ -268,6 +268,35 @@ public class KlijentLogika {
 
 		return "OK";
 	}
+	
+	//validacija forme EditKlijenti sa parametrom manje nego u formi Klijenti
+	public String validirajPodatke2(String ime, String prezime,
+			String datum, String telefon, String adresa, String email,
+			String status) {
+		
+		SharedLogika _sharedLogika= new SharedLogika();
+		
+		//provjera da li su popunjena sva polja
+		if(ime.equals("")||prezime.equals("")||
+			datum.equals("")||telefon.equals("")||adresa.equals("")||
+			email.equals("")||status.equals("")) 
+			return "Nisu popunjena sva polja";
+		
+		//provjera Sivrinim metodama iz shared logike
+		if(!_sharedLogika.validirajIme(ime))
+			return "Ime nije validno";
+		if(!_sharedLogika.validirajPrezime(prezime))
+			return "Prezime nije validno";
+		if(!_sharedLogika.validirajDatum(datum))
+			return "Datum nije validan";
+		if(!_sharedLogika.validirajEmail(email))
+			return "Email nije validan";
+		
+		if(!_sharedLogika.validirajTelefon(telefon))
+			return "Telefon nije validan";
+
+		return "OK";
+	}
 	private java.util.Date StringToDate(String datum) {
 		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date _datum=null;

@@ -190,7 +190,7 @@ public class Klijenti extends JFrame {
 			//		}
 						}
 				catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
+					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako !");
 				}
 				}
 				else JOptionPane.showMessageDialog(null, _status);
