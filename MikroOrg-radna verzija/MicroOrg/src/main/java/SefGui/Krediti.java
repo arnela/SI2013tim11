@@ -98,10 +98,9 @@ public class Krediti extends JFrame {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi po�etni gui za sluzbenika
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
+				Spremnik.setKrediti(SefGui.Krediti.this);
+				Spremnik.getPocetni().show();
+				Spremnik.getKrediti().hide();
 			}
 		});
 	//	trenutni=Spremnik.getTrenutni();

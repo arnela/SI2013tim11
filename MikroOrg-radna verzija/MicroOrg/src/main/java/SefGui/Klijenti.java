@@ -80,10 +80,10 @@ public class Klijenti extends JFrame {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi po�etni gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
+				Spremnik.setKlijenti(SefGui.Klijenti.this);
+				Spremnik.getPocetni().show();
+				Spremnik.getKlijenti().hide();
+				
 			}
 		});
 		trenutni=Spremnik.getTrenutni(); //postavlja uposlenika forme na trenutnog koji je logovan

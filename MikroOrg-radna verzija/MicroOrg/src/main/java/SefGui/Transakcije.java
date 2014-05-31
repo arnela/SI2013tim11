@@ -69,10 +69,9 @@ public class Transakcije extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SefGui.Pocetni n =new SefGui.Pocetni();  //kreira novi po�etni gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
+				Spremnik.setTransakcije(SefGui.Transakcije.this);
+				Spremnik.getPocetni().show();
+				Spremnik.getTransakcije().hide();
 			}
 		});
 		trenutni=Spremnik.getTrenutni();
