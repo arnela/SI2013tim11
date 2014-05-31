@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import domainModels.Klijent;
+import domainModels.Kredit;
 import domainModels.TipKredita;
 import domainModels.Uposlenik;
 import viewModels.KlijentSluzbenik;
@@ -35,14 +36,19 @@ public class TransakcijaLogikaTest extends TestCase{
 				"mail@mail.mail",
 				null
 				);
+		Klijent _kl = new Klijent(
+				"aktivan",
+				Long.parseLong("0", 10)
+				);
 		
-		TipKreditaSluzbenik _tipkredita = new TipKreditaSluzbenik(
+		TipKredita _tipkredita = new TipKredita(
 				"PrviTip",
 				"namjena",
 				new Double(5000),
 				"neki rok",
 				new Double(20),
 				"nemagarancije",
+				"obezbjedjenje",
 				"period",
 				new Double(1000)
 				);
@@ -58,15 +64,20 @@ public class TransakcijaLogikaTest extends TestCase{
 				 10000.00
 				 );
 		
-		KreditnaPonuda _kredit = new KreditnaPonuda();
+		Kredit _kredit1 = new Kredit(
+				_u,
+				_kl,
+				_tipkredita,
+				"datum"
+				);
 		
 		
 		_transakcijaLogika.dodajTransakciju(new Transakcija(
 				"22-11-2013",
 				111.00,
 				"gotovina",
-				_klijent,
-				_kredit,
+				_kl,
+				_kredit1,
 				_u
 				));
 		
@@ -105,7 +116,6 @@ public class TransakcijaLogikaTest extends TestCase{
 	}
 	
 	public void testGetByDate(){
-		
 		TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
 		SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date _date = null;
@@ -124,14 +134,19 @@ public class TransakcijaLogikaTest extends TestCase{
 				"mail@mail.mail",
 				null
 				);
+		Klijent _kl = new Klijent(
+				"aktivan",
+				Long.parseLong("0", 10)
+				);
 		
-		TipKreditaSluzbenik _tipkredita = new TipKreditaSluzbenik(
+		TipKredita _tipkredita = new TipKredita(
 				"PrviTip",
 				"namjena",
 				new Double(5000),
 				"neki rok",
 				new Double(20),
 				"nemagarancije",
+				"obezbjedjenje",
 				"period",
 				new Double(1000)
 				);
@@ -147,24 +162,29 @@ public class TransakcijaLogikaTest extends TestCase{
 				 10000.00
 				 );
 		
-		KreditnaPonuda _kredit = new KreditnaPonuda();
+		Kredit _kredit1 = new Kredit(
+				_u,
+				_kl,
+				_tipkredita,
+				"datum"
+				);
 		
 		
 		_transakcijaLogika.dodajTransakciju(new Transakcija(
 				"22-11-2013",
 				111.00,
 				"gotovina",
-				_klijent,
-				_kredit,
+				_kl,
+				_kredit1,
 				_u
 				));
+		
 		List<Transakcija> _transakcije=_transakcijaLogika.getByDate("22-11-2013");
 		assertEquals(1,_transakcije.size());
 		
 	}
 	
 	public void testGetByKlijent(){
-		
 		TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
 		SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date _date = null;
@@ -183,14 +203,19 @@ public class TransakcijaLogikaTest extends TestCase{
 				"mail@mail.mail",
 				null
 				);
+		Klijent _kl = new Klijent(
+				"aktivan",
+				Long.parseLong("0", 10)
+				);
 		
-		TipKreditaSluzbenik _tipkredita = new TipKreditaSluzbenik(
+		TipKredita _tipkredita = new TipKredita(
 				"PrviTip",
 				"namjena",
 				new Double(5000),
 				"neki rok",
 				new Double(20),
 				"nemagarancije",
+				"obezbjedjenje",
 				"period",
 				new Double(1000)
 				);
@@ -206,24 +231,28 @@ public class TransakcijaLogikaTest extends TestCase{
 				 10000.00
 				 );
 		
-		KreditnaPonuda _kredit = new KreditnaPonuda();
+		Kredit _kredit1 = new Kredit(
+				_u,
+				_kl,
+				_tipkredita,
+				"datum"
+				);
 		
 		
 		_transakcijaLogika.dodajTransakciju(new Transakcija(
 				"22-11-2013",
 				111.00,
 				"gotovina",
-				_klijent,
-				_kredit,
+				_kl,
+				_kredit1,
 				_u
 				));
+		
 		List<Transakcija> _transakcije=_transakcijaLogika.getByKlijent("Adnan Sivro");
 		assertEquals(1,_transakcije.size());
 		
 	}
-	public void testGetByID(){}
 	public void testGetByTipKredita(){
-		
 		TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
 		SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date _date = null;
@@ -242,14 +271,19 @@ public class TransakcijaLogikaTest extends TestCase{
 				"mail@mail.mail",
 				null
 				);
+		Klijent _kl = new Klijent(
+				"aktivan",
+				Long.parseLong("0", 10)
+				);
 		
-		TipKreditaSluzbenik _tipkredita = new TipKreditaSluzbenik(
+		TipKredita _tipkredita = new TipKredita(
 				"PrviTip",
 				"namjena",
 				new Double(5000),
 				"neki rok",
 				new Double(20),
 				"nemagarancije",
+				"obezbjedjenje",
 				"period",
 				new Double(1000)
 				);
@@ -265,17 +299,23 @@ public class TransakcijaLogikaTest extends TestCase{
 				 10000.00
 				 );
 		
-		KreditnaPonuda _kredit = new KreditnaPonuda();
+		Kredit _kredit1 = new Kredit(
+				_u,
+				_kl,
+				_tipkredita,
+				"datum"
+				);
 		
 		
 		_transakcijaLogika.dodajTransakciju(new Transakcija(
 				"22-11-2013",
 				111.00,
 				"gotovina",
-				_klijent,
-				_kredit,
+				_kl,
+				_kredit1,
 				_u
 				));
+		
 		List<Transakcija> _transakcije=_transakcijaLogika.getByTipKredita("PrviTip");
 		assertEquals(1,_transakcije.size());
 		
