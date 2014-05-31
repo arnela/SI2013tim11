@@ -141,6 +141,8 @@ public class Ponude extends JFrame {
 		
 		grupa.add(radioButton);
 		grupa.add(radioButton_1);
+		radioButton.setSelected(true);
+		
 		
 		final JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
@@ -189,6 +191,7 @@ public class Ponude extends JFrame {
 											
 						panel_3.revalidate();
 						panel_3.repaint();
+						textField.setText("");
 						}
 						else JOptionPane.showMessageDialog(null, "Ne postoji ponuda izdata unesenom klijentu.");
 				}
