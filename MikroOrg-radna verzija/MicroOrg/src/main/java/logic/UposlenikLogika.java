@@ -184,9 +184,7 @@ public class UposlenikLogika {
 		 
 		 _t.commit();
 		 _session.close();
-	}
-
-
+	}	
 	public String validirajPodatke(String ime, String prezime, String jmbg,
 			String datum, String telefon, String adresa, String email,
 			String sifra, String mjestoRodjenja, String plata) {
@@ -241,8 +239,6 @@ public class UposlenikLogika {
 	  }  
 	  return true;  
 	}
-
-
 	public Osoba getOsoba(long id) {
 		Session _session= HibernateUtil.getSessionFactory().openSession();
 		 Transaction _t = _session.beginTransaction(); 
@@ -254,6 +250,51 @@ public class UposlenikLogika {
 		 _session.close();
 		 return _o;
 	}
+	public void dodajKredit(Uposlenik u){
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 Criteria criteria = _session.createCriteria(Uposlenik.class);
+		 Uposlenik _o =(Uposlenik) criteria.add(Restrictions.eq("osobaId", u.getOsobaId())).uniqueResult();
+		 _o.setMjestoRodjenja(u.getMjestoRodjenja());
+		 _o.setKrediti(u.getKrediti());
+		 _o.setOsobaId(u.getOsobaId());
+		 _o.setPassword(u.getPassword());
+		 _o.setPlata(u.getPlata());
+		 _o.setPrivilegije(u.getPrivilegije());
+		 _o.setUkupanBrKredita(u.getUkupanBrKredita()+1);
+		 _o.setUkupanBrTransakcija(u.getUkupanBrTransakcija());
+		 _o.setUposlenikId(u.getUposlenikId());
+		 _o.setUsername(u.getUsername());
 
+		 _session.update(_o);
+ 
+		 _t.commit();
+		 _session.close();
+
+	}
+	public void dodajTransakciju(Uposlenik u){
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 Criteria criteria = _session.createCriteria(Uposlenik.class);
+		 Uposlenik _o =(Uposlenik) criteria.add(Restrictions.eq("osobaId", u.getOsobaId())).uniqueResult();
+		 _o.setMjestoRodjenja(u.getMjestoRodjenja());
+		 _o.setKrediti(u.getKrediti());
+		 _o.setOsobaId(u.getOsobaId());
+		 _o.setPassword(u.getPassword());
+		 _o.setPlata(u.getPlata());
+		 _o.setPrivilegije(u.getPrivilegije());
+		 _o.setUkupanBrKredita(u.getUkupanBrKredita());
+		 _o.setUkupanBrTransakcija(u.getUkupanBrTransakcija()+1);
+		 _o.setUposlenikId(u.getUposlenikId());
+		 _o.setUsername(u.getUsername());
+
+		 _session.update(_o);
+
+		 _t.commit();
+		 _session.close();
+
+	}
 
 }
