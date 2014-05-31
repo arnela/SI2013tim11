@@ -72,6 +72,19 @@ public class Pocetni extends JFrame {
 				l.setVisible(true);
 				l.setResizable(false);
 				l.setLocationRelativeTo(null);
+				l.show();
+				Spremnik.getPocetni().hide();
+				//brisanje sadržaja iz Spremnika
+				Spremnik.setIzvjestaji(null);
+				Spremnik.setKlijenti(null);
+				Spremnik.setKrediti(null);
+				Spremnik.setObjekatPDF(null);
+				Spremnik.setPocetni(null);
+				Spremnik.setPonude(null);
+				Spremnik.setPoslovanje(null);
+				Spremnik.setTransakcije(null);
+				Spremnik.setTrenutni(null);
+				Spremnik.setUposlenici(null);
 			}
 		});
 		trenutni=Spremnik.getTrenutni();
@@ -104,12 +117,16 @@ public class Pocetni extends JFrame {
 		JButton button = new JButton("Klijenti");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SluzbenikGui.Klijenti n =new SluzbenikGui.Klijenti();  //kreira klijenti gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
-				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
-				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
+				if (Spremnik.getKlijenti()==null){
+					SluzbenikGui.Klijenti n =new SluzbenikGui.Klijenti();  //kreira klijenti gui za �efa
+					n.setLocationRelativeTo(null);   // postavlja ga na sredinu
+					n.setVisible(true);  // upali vidljivost
+					n.setResizable(false);
+					Spremnik.setKlijenti(n);
+					}
+					else {Spremnik.getKlijenti().show();} // ako ipak postoji samo je otvori}
+					Spremnik.setPocetni(SluzbenikGui.Pocetni.this); //postavlja formu u spremnik ...
+					Spremnik.getPocetni().hide(); //sakriva pocetnu formu koja se nalazi u spremniku
 			}
 		});
 		button.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/users (1).png")));
@@ -120,12 +137,16 @@ public class Pocetni extends JFrame {
 		JButton button_1 = new JButton("Krediti");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SluzbenikGui.Krediti n =new SluzbenikGui.Krediti();  //kreira klijenti gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
-				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
-				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
+				if (Spremnik.getKrediti()==null){
+					SluzbenikGui.Krediti n =new SluzbenikGui.Krediti();  //kreira klijenti gui za �efa
+					n.setLocationRelativeTo(null);   // postavlja ga na sredinu
+					n.setVisible(true);  // upali vidljivost
+					n.setResizable(false);
+					Spremnik.setKrediti(n);
+					}
+					else {Spremnik.getKrediti().show();} // ako ipak postoji samo je otvori
+					Spremnik.setPocetni(SluzbenikGui.Pocetni.this); //postavlja formu u spremnik ...
+					Spremnik.getPocetni().hide(); //sakriva pocetnu formu koja se nalazi u spremniku
 			}
 		});
 		button_1.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/kredit.png")));
@@ -137,12 +158,16 @@ public class Pocetni extends JFrame {
 		JButton button_2 = new JButton("Ponude");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SluzbenikGui.Ponude n =new SluzbenikGui.Ponude();  //kreira klijenti gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
-				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
-				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
+				if (Spremnik.getPonude()==null){
+					SluzbenikGui.Ponude n =new SluzbenikGui.Ponude();  //kreira klijenti gui za �efa
+					n.setLocationRelativeTo(null);   // postavlja ga na sredinu
+					n.setVisible(true);  // upali vidljivost
+					n.setResizable(false);
+					Spremnik.setPonude(n);
+					}
+					else {Spremnik.getPonude().show();} // ako ipak postoji samo je otvori
+					Spremnik.setPocetni(SluzbenikGui.Pocetni.this); //postavlja formu u spremnik ...
+					Spremnik.getPocetni().hide(); //sakriva pocetnu formu koja se nalazi u spremniku
 			}
 		});
 		button_2.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/poooonuda.png")));
@@ -154,12 +179,16 @@ public class Pocetni extends JFrame {
 		JButton button_3 = new JButton("Transakcije");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SluzbenikGui.Transakcije n =new SluzbenikGui.Transakcije();  //kreira klijenti gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
-				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
-				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
+				if (Spremnik.getTransakcije()==null){
+					SluzbenikGui.Transakcije n =new SluzbenikGui.Transakcije();  //kreira klijenti gui za �efa
+					n.setLocationRelativeTo(null);   // postavlja ga na sredinu
+					n.setVisible(true);  // upali vidljivost
+					n.setResizable(false);
+					Spremnik.setTransakcije(n);
+					}
+					else {Spremnik.getTransakcije().show();} // ako ipak postoji samo je otvori
+					Spremnik.setPocetni(SluzbenikGui.Pocetni.this); //postavlja formu u spremnik ...
+					Spremnik.getPocetni().hide(); //sakriva pocetnu formu koja se nalazi u spremniku
 			}
 		});
 		button_3.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/kredit.jpg")));
@@ -171,12 +200,16 @@ public class Pocetni extends JFrame {
 		JButton button_4 = new JButton("Izvje\u0161taji");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SluzbenikGui.Izvjestaji n =new SluzbenikGui.Izvjestaji();  //kreira klijenti gui za �efa
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
-				//SluzbenikGui.Pocetni.this.dispose(); // zatvara ovu formu
-				SluzbenikGui.Pocetni.this.hide(); // nije dobro rje�enje jer ga skriva negdje...
+				if (Spremnik.getIzvjestaji()==null){
+					SluzbenikGui.Izvjestaji n =new SluzbenikGui.Izvjestaji();  //kreira klijenti gui za �efa
+					n.setLocationRelativeTo(null);   // postavlja ga na sredinu
+					n.setVisible(true);  // upali vidljivost
+					n.setResizable(false);
+					Spremnik.setIzvjestaji(n);
+					}
+					else {Spremnik.getIzvjestaji().show();} // ako ipak postoji samo je otvori
+					Spremnik.setPocetni(SluzbenikGui.Pocetni.this); //postavlja formu u spremnik ...
+					Spremnik.getPocetni().hide(); //sakriva pocetnu formu koja se nalazi u spremniku
 			}
 		});
 		button_4.setIcon(new ImageIcon(Pocetni.class.getResource("/slike/report.png")));

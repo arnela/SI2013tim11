@@ -68,6 +68,8 @@ public class Pocetni extends JFrame {
 				l.setVisible(true);
 				l.setResizable(false);
 				l.setLocationRelativeTo(null);
+				l.show();
+				Spremnik.getPocetni().hide();
 				//brisanje sadržaja iz Spremnika
 				Spremnik.setIzvjestaji(null);
 				Spremnik.setKlijenti(null);

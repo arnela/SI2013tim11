@@ -89,10 +89,9 @@ public class Klijenti extends JFrame {
 			
 			@Override
 			public void windowClosed(WindowEvent e) {
-				SluzbenikGui.Pocetni n =new SluzbenikGui.Pocetni();  //kreira novi po�etni gui za sluzbenika
-				n.setLocationRelativeTo(null);   // postavlja ga na sredinu
-				n.setVisible(true);  // upali vidljivost
-				n.setResizable(false);
+				Spremnik.setKlijenti(SluzbenikGui.Klijenti.this);
+				Spremnik.getKlijenti().hide();
+				Spremnik.getPocetni().show();
 			}
 		});
 		trenutni=Spremnik.getTrenutni();
