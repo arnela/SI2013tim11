@@ -47,6 +47,7 @@ import logic.KlijentLogika;
 import logic.PonudeLogika;
 import logic.SharedLogika;
 import logic.TipKreditaLogika;
+import logic.UposlenikLogika;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -320,6 +321,7 @@ public class Ponude extends JFrame {
 		JButton button_1 = new JButton("Kreiraj ponudu");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				UposlenikLogika _ul = new UposlenikLogika();
 				PonudeLogika p = new PonudeLogika();
 				if(!p.postojiKlijent(textField_9.getText(), textField_2.getText())) {
 					JOptionPane.showMessageDialog(null, "Ne postoji uneseni klijent !");
@@ -330,6 +332,7 @@ public class Ponude extends JFrame {
 						KreditnaPonuda kp = new KreditnaPonuda(Spremnik.getTrenutni(), p.dajKlijenta((String)(textField_9.getText()), (String)(textField_2.getText())) , p.dajTipKredita(nazivTipaKredita), "25.5.2014.");
 						p.dodajPonudu(kp);
 						JOptionPane.showMessageDialog(null, "Unos uspjesan !");
+						_ul.dodajKredit(Spremnik.getTrenutni());
 						
 					}
 					else {
@@ -390,6 +393,7 @@ public class Ponude extends JFrame {
 								KreditnaPonuda kp = new KreditnaPonuda(Spremnik.getTrenutni(), p.dajKlijenta((String)(textField_9.getText()), (String)(textField_2.getText())) , p.dajTipKredita(idTipaKredita), "");
 								p.dodajPonudu(kp);
 								JOptionPane.showMessageDialog(null, "Unos uspjesan !");
+								_ul.dodajKredit(Spremnik.getTrenutni());
 								}
 						catch (Exception e1) {
 							JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
@@ -630,7 +634,7 @@ public class Ponude extends JFrame {
 				}
 			}
 		});
-		btnPdfPrikaz.setBounds(159, 340, 87, 23);
+		btnPdfPrikaz.setBounds(135, 340, 111, 23);
 		panel_2.add(btnPdfPrikaz);
 		
 		JPanel panel_6 = new JPanel();
@@ -726,7 +730,7 @@ public class Ponude extends JFrame {
 				 					
 			}
 		});
-		btnEmail.setBounds(10, 340, 139, 23);
+		btnEmail.setBounds(10, 340, 115, 23);
 		panel_2.add(btnEmail);
 	}
 
