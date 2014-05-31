@@ -1,7 +1,9 @@
 package domainModels;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner; 
-
+import java.sql.Date;
 import org.hibernate.Criteria;
 import org.hibernate.Transaction; 
 import org.hibernate.Session; 
@@ -20,18 +22,45 @@ public class Main {
  session.close(); 
  } 
  
+ 
  private static void dodajOsobu(Session session) { 
  Transaction t = session.beginTransaction(); 
- 
+ java.sql.Date _datum = null;
+	SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+	java.util.Date _date;
+	try 
+	{
+		_date = _sdf1.parse("31-03-1992");
+		_datum=new java.sql.Date(_date.getTime());  
+	}
+	
+	catch (ParseException e1) 
+	{
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 Osoba o= new Osoba();
-o.setImePrezime("Enver");
-o.setEmail("2msehovic92@gmail.com");
+o.setImePrezime("Arnela Tumbul");
+o.setEmail("artmob49@gmail.com");
+o.setJmbg("3103992175103");
+o.setAdresa("Vrbovska 178");
+o.setObrazovanje("BoEE");
+o.setTelefon("061-916-987");
+o.setDatumRodjenja(_datum); 
+o.setAktivan(true);
+o.setDatumUnosa(new java.sql.Date(new java.util.Date().getTime()));
 Long osobaId= (Long) session.save(o);
 
 Uposlenik u= new Uposlenik();
  u.setOsobaId(osobaId);
  u.setUkupanBrKredita(200);
-
+ u.setPrivilegije(true);
+ u.setUsername(o.getJmbg());
+ u.setPassword("pass"); 
+ u.setMjestoRodjenja("Sarajevo");
+ u.setPlata(2200.50);
+ u.setUkupanBrTransakcija(350);
+ 
  
  Long id = (Long) session.save(u); 
  System.out.println("Dodana osoba sa IDom "+osobaId); 
