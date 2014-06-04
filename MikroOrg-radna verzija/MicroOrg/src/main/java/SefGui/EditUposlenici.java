@@ -127,10 +127,28 @@ public class EditUposlenici extends JFrame {
 				
 			
 			
-				//TODO: Uraditi validaciju jmbg-a, datuma , email-a
-				
-				
+				String _status="Nije ok";
 				UposlenikLogika _uposlenikLogika = new UposlenikLogika();
+				//VALIDACIJA
+				try {
+					 _status=_uposlenikLogika.validirajPodatke(
+							 	tf_ime.getText(),
+							 	tf_prezime.getText(),
+							 	lbl_jmbg.getText(),
+								tf_datum.getText(),
+								tf_telefon.getText(),
+								tf_adresa.getText(),
+								tf_email.getText(),
+								tf_sifra.getText(),
+								tf_mjestoRodjenja.getText(),
+								tf_plata.getText()
+							 );
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "validacija error");
+				}
+				//END VALIDACIJA
+				if(_status=="OK"){
 
 				//formatiranje i parsiranje datuma
 				java.sql.Date _datum = null;
@@ -168,8 +186,89 @@ public class EditUposlenici extends JFrame {
 						SefGui.EditUposlenici.this.dispose();
 				} catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: pr0mij3n1 Up0sl3n1k4");
-				}	
+				}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, _status);
+				}
+				/*			String _status="Nije ok";
+				UposlenikLogika _uposlenikLogika = new UposlenikLogika();
+				//VALIDACIJA
+				try {
+					 _status=_uposlenikLogika.validirajPodatke(
+							 	tf_ime.getText(),
+							 	tf_prezime.getText(),
+								tf_jmbg.getText(),
+								tf_datum.getText(),
+								tf_telefon.getText(),
+								tf_adresa.getText(),
+								tf_email.getText(),
+								tf_sifra.getText(),
+								tf_mjestoRodjenja.getText(),
+								tf_plata.getText()
+							 );
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "validacija error");
+				}
+				//END VALIDACIJA
+				if(_status=="OK"){
+				//formatiranje i parsiranje datuma
+				java.sql.Date _datum = null;
+				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+				java.util.Date _date;
+				try 
+				{
+					_date = _sdf1.parse(tf_datum.getText());
+					_datum=new java.sql.Date(_date.getTime());  
+				}
+				
+				catch (ParseException e1) 
+				{
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
+				KreditniSluzbenik _kreditniSluzbenik= new KreditniSluzbenik
+						(
+							tf_ime.getText()+" "+tf_prezime.getText(),
+							tf_jmbg.getText(),
+							_datum,
+							"null",
+							tf_telefon.getText(),
+							tf_adresa.getText(),
+							tf_email.getText(),
+							tf_sifra.getText(),
+							tf_mjestoRodjenja.getText(),
+							Double.parseDouble(tf_plata.getText())
+						);
+				
+				try {
+						if(!_uposlenikLogika.daLiPostoji(tf_jmbg.getText())){
+							_uposlenikLogika.dodajUposlenika(_kreditniSluzbenik);
+						//ocisti formu
+						tf_ime.setText("");
+						tf_prezime.setText("");
+						tf_jmbg.setText("");
+						tf_datum.setText("");
+						tf_telefon.setText("");
+						tf_adresa.setText("");
+						tf_email.setText("");
+						tf_sifra.setText("");
+						tf_mjestoRodjenja.setText("");
+						tf_plata.setText("");
+						JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
+					}
+					else{
+						JOptionPane.showMessageDialog(null, "Uposlenik sa unesenim jmbg-om već postoji !");
+					}
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Nešto je pošlo naopako ! ERROR: d0d4jUp0sl3n1k4");
+				}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, _status);
+				}*/
 			}
 		});
 		btnSpasiPromjene.setBounds(10, 324, 142, 23);
