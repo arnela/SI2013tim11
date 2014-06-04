@@ -92,7 +92,7 @@ public class Krediti extends JFrame {
 		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Krediti");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 439, 414);
+		setBounds(100, 100, 607, 466);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -100,7 +100,7 @@ public class Krediti extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 417, 365);
+		tabbedPane.setBounds(0, 0, 581, 417);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -233,15 +233,15 @@ public class Krediti extends JFrame {
 						.addComponent(label_7))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(tf_naziv, GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
 						.addComponent(tf_namjena)
 						.addComponent(tf_iznos)
 						.addComponent(tf_rok)
 						.addComponent(tf_stopa)
 						.addComponent(tf_garancija)
 						.addComponent(tf_grace)
-						.addComponent(tf_troskovi))
-					.addContainerGap(43, Short.MAX_VALUE))
+						.addComponent(tf_troskovi)
+						.addComponent(tf_naziv, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -278,28 +278,30 @@ public class Krediti extends JFrame {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTrokoviObradekm)
 						.addComponent(tf_troskovi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(105, Short.MAX_VALUE))
+					.addContainerGap(19, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(38)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(73, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
 							.addComponent(button_1)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNazad))
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 347, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(67, Short.MAX_VALUE))
+							.addComponent(btnNazad)
+							.addGap(23))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 452, GroupLayout.PREFERRED_SIZE)
+							.addGap(51))))
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addContainerGap(41, Short.MAX_VALUE)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap(61, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(60)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNazad)
 						.addComponent(button_1))
@@ -315,13 +317,13 @@ public class Krediti extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(10, 11, 392, 315);
+		panel_3.setBounds(10, 11, 556, 378);
 		panel_2.add(panel_3);
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_4.setBackground(Color.WHITE);
-		panel_4.setBounds(10, 11, 269, 32);
+		panel_4.setBounds(10, 11, 408, 32);
 		panel_3.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -331,13 +333,13 @@ public class Krediti extends JFrame {
 		panel_4.add(label_8);
 		
 		tf_pretraga = new JTextField();
-		tf_pretraga.setBounds(120, 6, 139, 20);
+		tf_pretraga.setBounds(120, 6, 278, 20);
 		tf_pretraga.setColumns(10);
 		panel_4.add(tf_pretraga);
 		final JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(10, 54, 372, 224);
+		panel_5.setBounds(10, 54, 536, 279);
 		panel_3.add(panel_5);
 		GroupLayout gl_panel_5 = new GroupLayout(panel_5);
 		gl_panel_5.setHorizontalGroup(
@@ -381,7 +383,7 @@ public class Krediti extends JFrame {
 				}
 			}
 		});
-		button_2.setBounds(289, 20, 93, 23);
+		button_2.setBounds(428, 20, 93, 23);
 		panel_3.add(button_2);
 		
 		JButton btnNazad_1 = new JButton("Nazad");
@@ -390,7 +392,7 @@ public class Krediti extends JFrame {
 				SluzbenikGui.Krediti.this.dispose();
 			}
 		});
-		btnNazad_1.setBounds(293, 289, 89, 23);
+		btnNazad_1.setBounds(435, 344, 89, 23);
 		panel_3.add(btnNazad_1);
 		
 		JButton button_4 = new JButton("Izbri\u0161i");
@@ -426,7 +428,7 @@ public class Krediti extends JFrame {
 				}
 			}
 		});
-		button_4.setBounds(192, 289, 91, 23);
+		button_4.setBounds(334, 344, 91, 23);
 		panel_3.add(button_4);
 		
 		
