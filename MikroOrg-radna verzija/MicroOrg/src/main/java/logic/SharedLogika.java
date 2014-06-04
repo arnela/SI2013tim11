@@ -553,7 +553,7 @@ public class SharedLogika {
 		
 		try {
 	        Double.parseDouble(iznos);
-	        return (Double.parseDouble(iznos)<50000);
+	        return ((Double.parseDouble(iznos)<50000)&& Double.parseDouble(iznos)>0);
 	    } catch (NumberFormatException e) {
 	        return false;
 	    }

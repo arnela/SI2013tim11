@@ -196,7 +196,7 @@ public List<TipKreditaSluzbenik> getAll()
 			return "Iznos nije validan";
 		if(!_sharedLogika.validirajKamatnuStopu(stopa))
 			return "Kamatna stopa nije validna";
-		if(!isNumeric(troskovi))
+		if(!isNumeric(troskovi) || Double.parseDouble(troskovi)<0)
 			return "Troskovi obrade nisu validni";
 
 		return "OK";
