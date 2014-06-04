@@ -557,7 +557,8 @@ public class Ponude extends JFrame {
 					panel_5.repaint();
 					textField_10.setText("");
 					}
-					else JOptionPane.showMessageDialog(null, "Ne postoji ponuda izdata unesenom klijentu.");
+					else if(textField_10.getText().equals(""))  JOptionPane.showMessageDialog(null, "Unesite nešto u polje za pretragu!");
+					else JOptionPane.showMessageDialog(null, "Ne postoji tražena ponuda!");
 				}
 				catch(HeadlessException e1) {
 					JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
