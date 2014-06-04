@@ -128,7 +128,7 @@ public class Uposlenici extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 			
-				//TODO: Uraditi validaciju jmbg-a, datuma , email-a
+	
 				
 				String _status="Nije ok";
 				UposlenikLogika _uposlenikLogika = new UposlenikLogika();
@@ -330,6 +330,10 @@ public class Uposlenici extends JFrame {
 		label_12.setBounds(-14, 109, 102, 14);
 		panel_1.add(label_12);
 		
+		JLabel label_4 = new JLabel("061-123-123");
+		label_4.setBounds(375, 186, 79, 14);
+		panel_1.add(label_4);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
 		panel_2.setBackground(Color.WHITE);
@@ -380,6 +384,7 @@ public class Uposlenici extends JFrame {
 		JButton button_2 = new JButton("Promijeni informacije");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				java.sql.Date _datum = null;
 				SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 				java.util.Date _date;
@@ -421,6 +426,7 @@ public class Uposlenici extends JFrame {
 				catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr0mjen4 3rr0r");
 				}
+		
 	
 				
 				
@@ -491,6 +497,7 @@ public class Uposlenici extends JFrame {
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					if(!tf_pretraga.getText().equals("")){
 					_kreditniSluzbenici=new UposlenikLogika().getByName(tf_pretraga.getText());
 					if(_kreditniSluzbenici.size()!=0){
 
@@ -508,6 +515,8 @@ public class Uposlenici extends JFrame {
 						panel_3.repaint();
 					}
 					else JOptionPane.showMessageDialog(null, "Ne postoji uposlenik sa tim imenom.");
+					}
+					else JOptionPane.showMessageDialog(null, "Niste unijeli ime i prezime uposlenika.");
 				} catch (HeadlessException e1) {
 					 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 				}

@@ -108,7 +108,7 @@ public class UposlenikLogika {
 					 );
 			 criteria = _session.createCriteria(Uposlenik.class);
 			 Uposlenik _u =(Uposlenik) criteria.add(Restrictions.eq("osobaId", osoba.getOsobaId())).uniqueResult();
-			if(_u!=null&&osoba.getAktivan()!=false){
+			if(_u!=null&&osoba.getAktivan()!=false&&_u.getPrivilegije()==false){
 				_kreditniSluzbenik.setMjestoRodjenja(_u.getMjestoRodjenja());
 				_kreditniSluzbenik.setPlata(_u.getPlata());
 				_kreditniSluzbenik.setPassword(_u.getPassword());
