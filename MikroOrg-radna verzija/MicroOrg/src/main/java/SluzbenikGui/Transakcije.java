@@ -448,14 +448,14 @@ public class Transakcije extends JFrame {
 		radioButton_4.setBounds(6, 85, 177, 23);
 		panel_5.add(radioButton_4);
 		
-		final JRadioButton radioButton_5 = new JRadioButton("Klijent - Ime&Prezime");
-		radioButton_5.setBounds(6, 33, 177, 23);
-		panel_5.add(radioButton_5);
+		final JRadioButton rdbtnImeIPrezime = new JRadioButton("Ime i prezime klijenta");
+		rdbtnImeIPrezime.setBounds(6, 33, 177, 23);
+		panel_5.add(rdbtnImeIPrezime);
 		
 		grupa2.add(radioButton_2);
 		grupa2.add(radioButton_3);
 		grupa2.add(radioButton_4);
-		grupa2.add(radioButton_5);
+		grupa2.add(rdbtnImeIPrezime);
 		
 		JButton button_6 = new JButton("Nazad");
 		button_6.addActionListener(new ActionListener() {
@@ -508,7 +508,7 @@ public class Transakcije extends JFrame {
 				{
 					 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 					}
-				}else if(radioButton_5.isSelected()){
+				}else if(rdbtnImeIPrezime.isSelected()){
 					try{
 					_transakcije=_transakcijaLogika.getByKlijent(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
