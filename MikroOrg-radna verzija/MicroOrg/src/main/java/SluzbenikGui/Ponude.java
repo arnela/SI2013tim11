@@ -116,7 +116,7 @@ public class Ponude extends JFrame {
 		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Ponude");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 554, 441);
+		setBounds(100, 100, 690, 441);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -124,7 +124,7 @@ public class Ponude extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 528, 398);
+		tabbedPane.setBounds(0, 0, 664, 398);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -422,7 +422,7 @@ public class Ponude extends JFrame {
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(68, Short.MAX_VALUE)
+					.addContainerGap(119, Short.MAX_VALUE)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
 							.addComponent(button_1)
@@ -430,15 +430,15 @@ public class Ponude extends JFrame {
 							.addComponent(btnNazad)
 							.addContainerGap())
 						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 395, GroupLayout.PREFERRED_SIZE)
-							.addGap(60))))
+							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE)
+							.addGap(128))))
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-					.addGap(22)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(30)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 288, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNazad)
 						.addComponent(button_1))
@@ -455,7 +455,7 @@ public class Ponude extends JFrame {
 		panel_3.setLayout(null);
 		panel_3.setBorder(new LineBorder(new Color(165, 42, 42), 1, true));
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(10, 11, 378, 32);
+		panel_3.setBounds(10, 11, 508, 32);
 		panel_2.add(panel_3);
 		
 		JLabel label_11 = new JLabel("Unesi podatke:");
@@ -464,7 +464,7 @@ public class Ponude extends JFrame {
 		
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
-		textField_10.setBounds(98, 6, 268, 20);
+		textField_10.setBounds(98, 6, 400, 20);
 		panel_3.add(textField_10);
 		
 		JLabel label_12 = new JLabel("");
@@ -473,7 +473,7 @@ public class Ponude extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setLayout(null);
-		panel_4.setBounds(398, 67, 121, 91);
+		panel_4.setBounds(528, 65, 121, 91);
 		panel_2.add(panel_4);
 		
 		ButtonGroup grupa = new ButtonGroup();
@@ -498,7 +498,7 @@ public class Ponude extends JFrame {
 		final JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_5.setBackground(Color.WHITE);
-		panel_5.setBounds(10, 54, 378, 283);
+		panel_5.setBounds(10, 54, 508, 283);
 		panel_2.add(panel_5);
 		
 		JButton btnPretraiPo = new JButton("Pretra\u017Ei po:");
@@ -564,7 +564,7 @@ public class Ponude extends JFrame {
 			}
 			
 		});
-		btnPretraiPo.setBounds(398, 11, 121, 23);
+		btnPretraiPo.setBounds(528, 20, 121, 23);
 		panel_2.add(btnPretraiPo);
 		
 		JButton btnNazad_1 = new JButton("Nazad");
@@ -573,7 +573,7 @@ public class Ponude extends JFrame {
 				SluzbenikGui.Ponude.this.dispose();
 			}
 		});
-		btnNazad_1.setBounds(426, 340, 93, 23);
+		btnNazad_1.setBounds(538, 340, 93, 23);
 		panel_2.add(btnNazad_1);
 		
 		JButton button_4 = new JButton("Izbri\u0161i");

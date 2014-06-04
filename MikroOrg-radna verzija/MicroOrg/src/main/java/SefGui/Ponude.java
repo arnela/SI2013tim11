@@ -87,7 +87,7 @@ public class Ponude extends JFrame {
 		setTitle("MicroOrg - Ponude");
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 602, 468);
+		setBounds(100, 100, 701, 468);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,7 +95,7 @@ public class Ponude extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 586, 430);
+		tabbedPane.setBounds(0, 0, 675, 430);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -107,7 +107,7 @@ public class Ponude extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setBorder(new LineBorder(new Color(165, 42, 42), 1, true));
 		panel_1.setBackground(Color.WHITE);
-		panel_1.setBounds(23, 11, 416, 32);
+		panel_1.setBounds(23, 11, 506, 32);
 		panel.add(panel_1);
 		
 		JLabel label = new JLabel("Unesi podatke:");
@@ -116,7 +116,7 @@ public class Ponude extends JFrame {
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(98, 6, 293, 20);
+		textField.setBounds(98, 6, 383, 20);
 		panel_1.add(textField);
 		
 		JLabel label_1 = new JLabel("");
@@ -125,7 +125,7 @@ public class Ponude extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setLayout(null);
-		panel_2.setBounds(449, 64, 121, 61);
+		panel_2.setBounds(539, 64, 121, 61);
 		panel.add(panel_2);
 		
 		final JRadioButton radioButton = new JRadioButton("Ime klijenta");
@@ -146,7 +146,7 @@ public class Ponude extends JFrame {
 		final JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(new Color(128, 0, 0), 1, true));
 		panel_3.setBackground(Color.WHITE);
-		panel_3.setBounds(23, 64, 416, 298);
+		panel_3.setBounds(23, 64, 506, 298);
 		panel.add(panel_3);
 		
 		JButton button = new JButton("Pretra\u017Ei po:");
@@ -199,7 +199,7 @@ public class Ponude extends JFrame {
 				} 
 			}
 		});
-		button.setBounds(449, 11, 121, 23);
+		button.setBounds(539, 11, 121, 23);
 		panel.add(button);
 		
 		
@@ -210,7 +210,7 @@ public class Ponude extends JFrame {
 				SefGui.Ponude.this.dispose();
 			}
 		});
-		btnNazad.setBounds(478, 373, 93, 23);
+		btnNazad.setBounds(567, 373, 93, 23);
 		panel.add(btnNazad);
 		
 		JButton button_2 = new JButton("PDF prikaz");

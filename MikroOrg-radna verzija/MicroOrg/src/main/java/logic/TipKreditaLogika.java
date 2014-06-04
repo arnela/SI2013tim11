@@ -198,7 +198,8 @@ public List<TipKreditaSluzbenik> getAll()
 			return "Kamatna stopa nije validna";
 		if(!isNumeric(troskovi) || Double.parseDouble(troskovi)<0)
 			return "Troskovi obrade nisu validni";
-
+		if (grace.contains("-"))
+			return "Grace period nije validan";
 		return "OK";
 	}
  private boolean isNumeric(String str)  
