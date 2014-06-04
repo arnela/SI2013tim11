@@ -199,9 +199,10 @@ String _status="Nije ok";
 		lblKamatnaStopa.setToolTipText("Mora biti manja od 20%");
 		
 		JLabel label_2 = new JLabel("Rok vra\u0107anja kredita:");
+		label_2.setToolTipText("X mjeseci/godina");
 		
 		JLabel label_3 = new JLabel("Garancija:");
-		label_3.setToolTipText("X godina/mjeseci");
+		label_3.setToolTipText("X mjeseci/godina");
 		
 		JLabel label_4 = new JLabel("Grace period:");
 		
