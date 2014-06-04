@@ -201,6 +201,7 @@ String _status="Nije ok";
 		JLabel label_2 = new JLabel("Rok vra\u0107anja kredita:");
 		
 		JLabel label_3 = new JLabel("Garancija:");
+		label_3.setToolTipText("X godina/mjeseci");
 		
 		JLabel label_4 = new JLabel("Grace period:");
 		

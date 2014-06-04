@@ -200,6 +200,9 @@ public List<TipKreditaSluzbenik> getAll()
 			return "Troskovi obrade nisu validni";
 		if (grace.contains("-"))
 			return "Grace period nije validan";
+		if (!garancija.matches(".*\\d.*") || !(garancija.contains("godin")  || garancija.contains("mjesec")))
+			return "Garancija nije validna";
+
 		return "OK";
 	}
  private boolean isNumeric(String str)  
