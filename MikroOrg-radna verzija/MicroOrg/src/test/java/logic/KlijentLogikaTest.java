@@ -134,5 +134,25 @@ public void testGetByDateKlijentTest(){
 			));
 	List<KlijentSluzbenik> _klijentSluzbenici=_klijentLogika.getByDate(new java.sql.Date(_date.getTime()));
 	assertEquals(1,_klijentSluzbenici.size());
+	
 }
+/*
+ private boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
+	}*/
+	public void testisNumeric(){
+		KlijentLogika _klijentLogika= new KlijentLogika();
+		String s="1768";
+		assertEquals((Boolean)true,(Boolean) _klijentLogika.isNumeric(s));
+	}
+ 
 }

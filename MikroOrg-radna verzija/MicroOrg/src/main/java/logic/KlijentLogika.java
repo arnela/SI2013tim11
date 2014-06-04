@@ -308,7 +308,7 @@ public class KlijentLogika {
 		}
 		return _datum;
 	}
-	private boolean isNumeric(String str)  
+	public boolean isNumeric(String str)  
 	{  
 	  try  
 	  {  
