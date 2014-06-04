@@ -74,6 +74,7 @@ public class Krediti extends JFrame {
 	private List<TipKreditaSluzbenik> _krediti = null;
 	private JTable _table = null;
 	private JScrollPane _scrollPane = null;
+	private JTextField tf_instrumenti;
 	/**
 	 * Launch the application.
 	 */
@@ -146,7 +147,8 @@ String _status="Nije ok";
 								tf_stopa.getText(),
 								tf_garancija.getText(),
 								tf_grace.getText(),
-								tf_troskovi.getText()
+								tf_troskovi.getText(),
+								tf_instrumenti.getText()
 							 );
 				} catch (Exception e2) {
 					// TODO: handle exception
@@ -162,7 +164,8 @@ String _status="Nije ok";
 						Double.parseDouble(tf_stopa.getText()),
 						tf_garancija.getText(),
 						tf_grace.getText(),
-						Double.parseDouble(tf_troskovi.getText())
+						Double.parseDouble(tf_troskovi.getText()),
+						tf_instrumenti.getText()
 						);
 
 				try {
@@ -177,6 +180,7 @@ String _status="Nije ok";
 						tf_garancija.setText("");
 						tf_grace.setText("");
 						tf_troskovi.setText("");
+						tf_instrumenti.setText("");
 						JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
 			//		}
 			//		else{
@@ -235,31 +239,39 @@ String _status="Nije ok";
 		
 		tf_troskovi = new JTextField();
 		tf_troskovi.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Instrumenti obezbjeđenja:");
+		
+		tf_instrumenti = new JTextField();
+		tf_instrumenti.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addComponent(label)
-						.addComponent(lblKamatnaStopa)
-						.addComponent(label_2)
-						.addComponent(label_3)
-						.addComponent(label_4)
-						.addComponent(lblTrokoviObradekm)
-						.addComponent(lblIznosKreditakm)
-						.addComponent(label_7))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(label, Alignment.TRAILING)
+						.addComponent(lblKamatnaStopa, Alignment.TRAILING)
+						.addComponent(label_2, Alignment.TRAILING)
+						.addComponent(label_3, Alignment.TRAILING)
+						.addComponent(label_4, Alignment.TRAILING)
+						.addComponent(lblTrokoviObradekm, Alignment.TRAILING)
+						.addComponent(lblIznosKreditakm, Alignment.TRAILING)
+						.addComponent(label_7, Alignment.TRAILING)
+						.addComponent(lblNewLabel, Alignment.TRAILING))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(tf_troskovi)
-						.addComponent(tf_grace)
-						.addComponent(tf_garancija)
-						.addComponent(tf_stopa)
-						.addComponent(tf_rok)
-						.addComponent(tf_iznos)
-						.addComponent(tf_namjena)
-						.addComponent(tf_naziv, GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
-					.addContainerGap(54, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(tf_troskovi)
+							.addComponent(tf_grace)
+							.addComponent(tf_garancija)
+							.addComponent(tf_stopa)
+							.addComponent(tf_rok)
+							.addComponent(tf_iznos)
+							.addComponent(tf_namjena)
+							.addComponent(tf_naziv, GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
+						.addComponent(tf_instrumenti))
+					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -296,29 +308,31 @@ String _status="Nije ok";
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTrokoviObradekm)
 						.addComponent(tf_troskovi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(19, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel)
+						.addComponent(tf_instrumenti, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(31, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(38, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap(35, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 462, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(button_1)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNazad)
-							.addGap(69))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 462, GroupLayout.PREFERRED_SIZE)
-							.addGap(66))))
+							.addComponent(btnNazad)))
+					.addGap(69))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(49, Short.MAX_VALUE)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 236, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(28, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 257, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(button_1)
@@ -420,7 +434,7 @@ String _status="Nije ok";
 						_krediti.remove(_toBeDeleted);
 						_table.setModel(new TipKreditaTableModel(_krediti));
 						JOptionPane.showMessageDialog(null, "Uspješno obrisano!");
-						
+						tf_pretraga.setText("");
 						//refresh tabele
 						_table.invalidate();
 						_table.revalidate();
@@ -439,5 +453,4 @@ String _status="Nije ok";
 		
 		
 	}
-
 }

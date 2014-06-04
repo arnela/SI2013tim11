@@ -23,7 +23,7 @@ public class TipKreditaTableModel extends AbstractTableModel {
 	}
 
 	private String[] columnNames = { "Naziv", "Namjena", "Iznos",
-           "Rok", "kamatnaStopa", "Garancija", "gracePeriod", "troskoviObrade"};
+           "Rok", "kamatnaStopa", "Garancija", "gracePeriod", "troskoviObrade", "instrumentiObezbjedjenja"};
 
 	
 	private static final long serialVersionUID = 1L;
@@ -38,7 +38,7 @@ public class TipKreditaTableModel extends AbstractTableModel {
          return columnNames[columnIndex];
     }
 	public int getColumnCount() {
-		return 8;
+		return 9;
 	}
 	public int getRowCount() {
 		return li.size();
@@ -62,6 +62,8 @@ public class TipKreditaTableModel extends AbstractTableModel {
 	                return _kredit.getGracePeriod();
 	            case 7:
 	            	return _kredit.getTroskoviObrade();
+	            case 8:
+	            	return _kredit.getInstrumentiObezbjedjenja();
 	           }
 	           return null;
 	}
@@ -85,6 +87,8 @@ public class TipKreditaTableModel extends AbstractTableModel {
 	               return String.class;
 	             case 7:
 	               return Double.class;
+	             case 8:
+	               return String.class;
 	             }
 	             return null;
 	      }

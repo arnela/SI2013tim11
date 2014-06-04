@@ -29,7 +29,8 @@ public void testDaLiPostoji() {
 				new Double(20),
 				"nemagarancije",
 				"period",
-				new Double(1000)
+				new Double(1000),
+				"brava"
 				));
 		
 		//ako se ovaj test pozove 2 puta za redom doci ce do neprirodne situacije u bazi a to je da se nalaze 2 tipaKredita
@@ -52,7 +53,8 @@ public void testDaLiPostoji() {
 			new Double(20),
 			"nemagarancije",
 			"period",
-			new Double(1000)
+			new Double(1000),
+			"nadzor"
 			));
 	
 	List<TipKreditaSluzbenik> _tipovi=_tipKreditaLogika.getAll();
@@ -77,7 +79,8 @@ public void testDaLiPostoji() {
 						new Double(20),
 						"nemagarancije",
 						"period",
-						new Double(1000)
+						new Double(1000),
+						"izjava"
 						));
 		List<TipKreditaSluzbenik> _tipovi=_tipKreditaLogika.getByName2("TipZ");
 		assertEquals(1,_tipovi.size());
@@ -92,7 +95,8 @@ public void testDaLiPostoji() {
 				new Double(20),
 				"nemagarancije",
 				"period",
-				new Double(1000)
+				new Double(1000),
+				"instrument"
 				));
 		_tipKreditaLogika.deleteByName("AAAATip");
 		assertEquals((Boolean)false,(Boolean) _tipKreditaLogika.daLiPostoji("AAAATip"));	
@@ -112,7 +116,8 @@ public void testDaLiPostoji() {
 				new Double(20),
 				"nemagarancije",
 				"period",
-				new Double(1000)
+				new Double(1000),
+				"instrumenti"
 				));
 		
 		List<TipKredita> _tipovi=_tipKreditaLogika.dajSveKredite();

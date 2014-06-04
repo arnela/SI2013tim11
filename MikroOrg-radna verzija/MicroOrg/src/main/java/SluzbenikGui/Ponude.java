@@ -370,7 +370,7 @@ public class Ponude extends JFrame {
 						String garancijaTipaKredita = textField_6.getText();
 						String graceTipaKredita = textField_7.getText();
 						Double troskoviTipaKredita = Double.parseDouble(textField_8.getText());
-						String instrumeniTipaKredita = textField.getText();
+						String instrumentiTipaKredita = textField.getText();
 						
 						
 						TipKreditaLogika _tk = new TipKreditaLogika();
@@ -383,7 +383,8 @@ public class Ponude extends JFrame {
 								null,
 								garancijaTipaKredita,
 								graceTipaKredita,
-								troskoviTipaKredita
+								troskoviTipaKredita,
+								instrumentiTipaKredita
 								);
 
 						try {

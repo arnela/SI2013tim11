@@ -10,6 +10,7 @@ public class TipKreditaSluzbenik {
 	private String garancija;
 	private String gracePeriod;
 	private Double troskoviObrade;
+	private String instrumentiObezbjedjenja;
 
 public TipKreditaSluzbenik(){}
 public TipKreditaSluzbenik (
@@ -20,7 +21,8 @@ public TipKreditaSluzbenik (
 		Double kamatnaStopa,
 		String garancija,
 		String gracePeriod,
-		Double troskoviObrade
+		Double troskoviObrade,
+		String instrumentiObezbjedjenja
 		){
 		this.setNaziv(naziv);
 		this.setNamjena(namjena);
@@ -30,7 +32,7 @@ public TipKreditaSluzbenik (
 		this.setGarancija(garancija);
 		this.setGracePeriod(gracePeriod);
 		this.setTroskoviObrade(troskoviObrade);
-	
+		this.setInstrumentiObezbjedjenja(instrumentiObezbjedjenja);
 }
 
 
@@ -111,5 +113,11 @@ public Double getTroskoviObrade() {
 
 public void setTroskoviObrade(Double troskoviObrade) {
 	this.troskoviObrade = troskoviObrade;
+}
+public String getInstrumentiObezbjedjenja() {
+	return instrumentiObezbjedjenja;
+}
+public void setInstrumentiObezbjedjenja(String instrumentiObezbjedjenja) {
+	this.instrumentiObezbjedjenja = instrumentiObezbjedjenja;
 }
 }

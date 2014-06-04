@@ -57,6 +57,7 @@ public class Krediti extends JFrame {
 	private List<TipKreditaSluzbenik> _krediti = null;
 	private JTable _table = null;
 	private JScrollPane _scrollPane = null;
+	private JTextField tf_instrumenti;
 	
 	/**
 	 * Launch the application.
@@ -130,7 +131,8 @@ public class Krediti extends JFrame {
 								tf_stopa.getText(),
 								tf_garancija.getText(),
 								tf_grace.getText(),
-								tf_troskovi.getText()
+								tf_troskovi.getText(),
+								tf_instrumenti.getText()
 							 );
 				} catch (Exception e2) {
 					// TODO: handle exception
@@ -146,7 +148,8 @@ public class Krediti extends JFrame {
 						Double.parseDouble(tf_stopa.getText()),
 						tf_garancija.getText(),
 						tf_grace.getText(),
-						Double.parseDouble(tf_troskovi.getText())
+						Double.parseDouble(tf_troskovi.getText()),
+						tf_instrumenti.getText()
 						);
 
 				try {
@@ -161,6 +164,7 @@ public class Krediti extends JFrame {
 						tf_garancija.setText("");
 						tf_grace.setText("");
 						tf_troskovi.setText("");
+						tf_instrumenti.setText("");
 						JOptionPane.showMessageDialog(null, "Uspješno evidentirano !");
 			//		}
 			//		else{
@@ -219,22 +223,34 @@ public class Krediti extends JFrame {
 		
 		tf_troskovi = new JTextField();
 		tf_troskovi.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Instrumenti obezbjeđenja:");
+		
+		tf_instrumenti = new JTextField();
+		tf_instrumenti.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-						.addComponent(label)
-						.addComponent(lblKamatnaStopa)
-						.addComponent(label_2)
-						.addComponent(label_3)
-						.addComponent(label_4)
-						.addComponent(lblTrokoviObradekm)
-						.addComponent(lblIznosKreditakm)
-						.addComponent(label_7))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addGap(20))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(26)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+								.addComponent(label_4)
+								.addComponent(lblTrokoviObradekm)
+								.addComponent(label_3)
+								.addComponent(lblKamatnaStopa)
+								.addComponent(label_2)
+								.addComponent(lblIznosKreditakm)
+								.addComponent(label_7)
+								.addComponent(label))
+							.addGap(18)))
+					.addGap(0, 0, Short.MAX_VALUE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(tf_instrumenti)
 						.addComponent(tf_namjena)
 						.addComponent(tf_iznos)
 						.addComponent(tf_rok)
@@ -243,44 +259,48 @@ public class Krediti extends JFrame {
 						.addComponent(tf_grace)
 						.addComponent(tf_troskovi)
 						.addComponent(tf_naziv, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(49))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label)
-						.addComponent(tf_naziv, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_naziv, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_7)
-						.addComponent(tf_namjena, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_namjena, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_7))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblIznosKreditakm)
-						.addComponent(tf_iznos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_iznos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblIznosKreditakm))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_2)
-						.addComponent(tf_rok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_rok, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_2))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblKamatnaStopa)
-						.addComponent(tf_stopa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_stopa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblKamatnaStopa))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_3)
-						.addComponent(tf_garancija, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_garancija, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_3))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_4)
-						.addComponent(tf_grace, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tf_grace, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label_4))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTrokoviObradekm)
-						.addComponent(tf_troskovi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(19, Short.MAX_VALUE))
+						.addComponent(tf_troskovi, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblTrokoviObradekm))
+					.addGap(8)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(tf_instrumenti, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel))
+					.addContainerGap(23, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(gl_panel_1);
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -288,22 +308,21 @@ public class Krediti extends JFrame {
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(73, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(button_1)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNazad)
-							.addGap(23))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 452, GroupLayout.PREFERRED_SIZE)
-							.addGap(51))))
+					.addComponent(button_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnNazad)
+					.addGap(23))
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addGap(73)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 452, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(51, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(61, Short.MAX_VALUE)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(60)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
+					.addGap(28)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNazad)
 						.addComponent(button_1))
@@ -416,7 +435,7 @@ public class Krediti extends JFrame {
 						_krediti.remove(_toBeDeleted);
 						_table.setModel(new TipKreditaTableModel(_krediti));
 						JOptionPane.showMessageDialog(null, "Uspješno obrisano!");
-						
+						tf_pretraga.setText("");
 						//refresh tabele
 						_table.invalidate();
 						_table.revalidate();

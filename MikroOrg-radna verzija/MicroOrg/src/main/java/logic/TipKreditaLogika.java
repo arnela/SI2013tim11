@@ -55,7 +55,7 @@ public Long dodajTipKredita(TipKreditaSluzbenik tipKredita) {
 				 tipKredita.getRok(),
 				 tipKredita.getKamatnaStopa(),
 				 tipKredita.getGarancija(),
-				 null,
+				 tipKredita.getInstrumentiObezbjedjenja(),
 				 tipKredita.getGracePeriod(),
 				 tipKredita.getTroskoviObrade()
 				 
@@ -85,7 +85,8 @@ public List<TipKreditaSluzbenik> getAll()
 				    tip.getKamatnaStopa(),
 				    tip.getGarancija(),
 				    tip.getGracePeriod(),
-				    tip.getTroskoviObrade()
+				    tip.getTroskoviObrade(),
+				    tip.getInstrumentiObezbjedjenja()
 				 );
 		 tipovi.add(klijent);
 	 }
@@ -132,7 +133,8 @@ public List<TipKreditaSluzbenik> getAll()
 					tk.getKamatnaStopa(),
 					tk.getGarancija(),
 					tk.getGracePeriod(),
-					tk.getTroskoviObrade()
+					tk.getTroskoviObrade(),
+					tk.getInstrumentiObezbjedjenja()
 				 );
 		 
 			 _krediti.add(_kredit);
@@ -181,14 +183,14 @@ public List<TipKreditaSluzbenik> getAll()
 }
  public String validirajPodatke(String naziv, String namjena, String iznos,
 			String rok, String stopa, String garancija, String grace,
-			String troskovi) {
+			String troskovi, String instrumenti) {
 		
 		SharedLogika _sharedLogika= new SharedLogika();
 		
 		//provjera da li su popunjena sva polja
 		if(naziv.equals("")||namjena.equals("")|| iznos.equals("")||
 			rok.equals("")|| stopa.equals("")|| garancija.equals("")||
-			grace.equals("")||troskovi.equals("")) 
+			grace.equals("")||troskovi.equals("") || instrumenti.equals("")) 
 			return "Nisu popunjena sva polja";
 		
 		//sivrina metode za validaciju
