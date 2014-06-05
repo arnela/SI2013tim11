@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import viewModels.KlijentSluzbenik;
+import viewModels.KreditniSluzbenik;
 import junit.framework.TestCase;
 
 public class KlijentLogikaTest extends TestCase {
@@ -52,15 +53,15 @@ public void testGetByNameKlijentTest(){
 				e.printStackTrace();
 			}
 	_klijentLogika.dodajKlijenta(new KlijentSluzbenik(
-			"Enver",
-			"1112223334440",
+			"Envera",
+			"1112223334498",
 			new java.sql.Date(_date.getTime()),
 			"061-111-333",
 			"Neka Adresa 133",
 			"mail@mail.mail",
 			null
 			));
-	List<KlijentSluzbenik> _klijentSluzbenici=_klijentLogika.getByName("Enver");
+	List<KlijentSluzbenik> _klijentSluzbenici=_klijentLogika.getByName("Envera");
 	assertEquals(1,_klijentSluzbenici.size());
 }
 
@@ -112,9 +113,41 @@ public void testGetByAdressKlijentTest(){
 	assertEquals(1,_klijentSluzbenici.size());
 }
 
-public void testGetByDateKlijentTest(){
-	KlijentLogika _klijentLogika= new KlijentLogika();
-			//parsiranje datuma
+
+	public void testisNumeric(){
+		KlijentLogika _klijentLogika= new KlijentLogika();
+		String s="1768";
+		assertEquals((Boolean)true,(Boolean) _klijentLogika.isNumeric(s));
+	}
+	public void testPromijeniKlijenta(){
+		KlijentLogika _klijentLogika= new KlijentLogika();
+		//parsiranje datuma
+			SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+			java.util.Date _date = null;
+			try {
+				_date = _sdf1.parse("01-09-1991");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			KlijentSluzbenik _klijentSluzbenik= new KlijentSluzbenik(
+					"Jaa",
+					"1234567891011",
+					new java.sql.Date(_date.getTime()),
+					"061-111-333",
+					"aaaaaa",
+					"arnela@mail.mail",
+					null
+					);
+	   _klijentLogika.dodajKlijenta(_klijentSluzbenik);
+	   _klijentSluzbenik.setImePrezime("Ena");
+	   _klijentSluzbenik.setTelefon("061-133 371");
+	   _klijentLogika.promijeniKlijenta(_klijentSluzbenik);
+	   assertEquals("Ena",_klijentLogika.getOsobaByJMBG("1234567891011").getImePrezime());
+	}
+	public void testSoftDeleteByJMBGTest(){
+		KlijentLogika _klijentLogika= new KlijentLogika();
+		//parsiranje datuma
 			SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
 			java.util.Date _date = null;
 			try {
@@ -123,36 +156,38 @@ public void testGetByDateKlijentTest(){
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	_klijentLogika.dodajKlijenta(new KlijentSluzbenik(
-			"Azra",
-			"1112223334566",
-			new java.sql.Date(_date.getTime()),
-			"061-111-333",
-			"aaaaaa",
-			"arnela@mail.mail",
-			null
+	   _klijentLogika.dodajKlijenta(new KlijentSluzbenik(
+			   "Hanifa",
+				"9876543212125",
+				new java.sql.Date(_date.getTime()),
+				"061-111-333",
+				"aaaaaa",
+				"arnela@mail.mail",
+				null
 			));
-	List<KlijentSluzbenik> _klijentSluzbenici=_klijentLogika.getByDate(new java.sql.Date(_date.getTime()));
-	assertEquals(1,_klijentSluzbenici.size());
-	
-}
-/*
- private boolean isNumeric(String str)  
-	{  
-	  try  
-	  {  
-	    double d = Double.parseDouble(str);  
-	  }  
-	  catch(NumberFormatException nfe)  
-	  {  
-	    return false;  
-	  }  
-	  return true;  
-	}*/
-	public void testisNumeric(){
-		KlijentLogika _klijentLogika= new KlijentLogika();
-		String s="1768";
-		assertEquals((Boolean)true,(Boolean) _klijentLogika.isNumeric(s));
+	   _klijentLogika.softDeleteByJMBG("9876543212125");
+	   assertEquals((Boolean)false,(Boolean)_klijentLogika.getOsobaByJMBG("9876543212125").getAktivan());
 	}
- 
+	public void testGetOsobaByJMBG(){
+		KlijentLogika _klijentLogika= new KlijentLogika();
+		//parsiranje datuma
+			SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+			java.util.Date _date = null;
+			try {
+				_date = _sdf1.parse("07-09-1992");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   _klijentLogika.dodajKlijenta(new KlijentSluzbenik(
+			   "Merima",
+				"5432112345999",
+				new java.sql.Date(_date.getTime()),
+				"061-111-333",
+				"aaaaaa",
+				"arnela@mail.mail",
+				null
+			));
+	   assertEquals("Merima",_klijentLogika.getOsobaByJMBG("5432112345999").getImePrezime());
+	}
 }
