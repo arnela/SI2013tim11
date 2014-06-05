@@ -190,4 +190,30 @@ public void testGetByAdressKlijentTest(){
 			));
 	   assertEquals("Merima",_klijentLogika.getOsobaByJMBG("5432112345999").getImePrezime());
 	}
+	public void testValidirajPodatke(){
+		KlijentLogika _klijentLogika= new KlijentLogika();
+		String ime="Ajla";
+		String prezime="Turkovic";
+		String jmbg="1110990193053";
+		String datum="11-10-1990";
+		String telefon="111-111-111";
+		String adresa="Sarajevo";
+		String email="asd@sda.com";
+		String status="aktivan";
+		assertEquals("OK", _klijentLogika.validirajPodatke(ime, prezime, jmbg,
+				datum, telefon, adresa, email, status));
+	}
+	public void testValidirajPodatke2(){
+		KlijentLogika _klijentLogika= new KlijentLogika();
+		String ime="Ajla";
+		String prezime="Turkovic";
+		String datum="11-10-1990";
+		String telefon="111-111-111";
+		String adresa="Sarajevo";
+		String email="asd@sdaf.com";
+		String status="aktivan";
+		assertEquals("OK", _klijentLogika.validirajPodatke2(ime, prezime,
+				datum, telefon, adresa, email, status));
+	}
+	
 }
