@@ -506,6 +506,7 @@ public class Ponude extends JFrame {
 		btnPretraiPo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
+					SharedLogika _sharedLogika=new SharedLogika();
 					PonudeLogika _pl = new PonudeLogika();
 					List<KreditnaPonuda> _ponude = new ArrayList<KreditnaPonuda>();
 					if(radioButton.isSelected()) {
@@ -558,6 +559,8 @@ public class Ponude extends JFrame {
 					textField_10.setText("");
 					}
 					else if(textField_10.getText().equals(""))  JOptionPane.showMessageDialog(null, "Unesite nešto u polje za pretragu!");
+					else if(radioButton.isSelected() && !(_sharedLogika.validirajImePrezime(textField_10.getText())))  JOptionPane.showMessageDialog(null, "Nije validno ime i prezime!");
+					else if(radioButton_2.isSelected() && !(_sharedLogika.validirajDatum(textField_10.getText())))  JOptionPane.showMessageDialog(null, "Nije validan datum, treba biti u formatu dd/MM/yyyy hh:mm)!");
 					else JOptionPane.showMessageDialog(null, "Ne postoji tražena ponuda!");
 				}
 				catch(HeadlessException e1) {
