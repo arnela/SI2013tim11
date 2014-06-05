@@ -96,38 +96,6 @@ public class KlijentLogika {
 		 return _klijenti;
 	}
 
-	public List<KlijentSluzbenik> getByDate(Date datum) {
-		 List<KlijentSluzbenik> _klijenti= new ArrayList<KlijentSluzbenik>();
-			
-		 Session _session= HibernateUtil.getSessionFactory().openSession();
-		 Transaction _t = _session.beginTransaction(); 
-		 
-		 Criteria criteria = _session.createCriteria(Osoba.class);
-		 @SuppressWarnings("unchecked")
-		 List<Osoba> _osobe =(List<Osoba>) criteria.add(Restrictions.eq("datumUnosa", datum)).list();
-		 for(Osoba osoba : _osobe){
-	
-			 KlijentSluzbenik _klijent= new KlijentSluzbenik(
-					    osoba.getImePrezime(),
-					 	osoba.getJmbg(),
-					 	osoba.getDatumRodjenja(),
-						osoba.getTelefon(),
-						osoba.getAdresa(),
-						osoba.getEmail()
-					 );
-			 criteria = _session.createCriteria(Klijent.class);
-			 Klijent _k =(Klijent) criteria.add(Restrictions.eq("osobaId", osoba.getOsobaId())).uniqueResult();
-			 if(_k!=null&&osoba.getAktivan()!=false){
-				 _klijent.setStatus(_k.getStatus());
-				 _klijenti.add(_klijent);
-			} 
-		 }
-		 _t.commit();
-		 _session.close();
-		 
-		 return _klijenti;
-		
-	}
 	public List<KlijentSluzbenik> getByEmail(String email) {
 		 List<KlijentSluzbenik> _klijenti= new ArrayList<KlijentSluzbenik>();
 		
@@ -193,7 +161,18 @@ public class KlijentLogika {
 		 
 		 return _klijenti;
 	}
-	
+	public Osoba getOsobaByJMBG(String jmbg) {
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 Criteria criteria = _session.createCriteria(Osoba.class);
+		 Osoba _o =(Osoba) criteria.add(Restrictions.eq("jmbg", jmbg)).uniqueResult();
+		 
+		 _t.commit();
+		 _session.close();
+		 return _o;
+		 
+	} 
 	public void softDeleteByJMBG(String jmbg) {
 		 Session _session= HibernateUtil.getSessionFactory().openSession();
 		 Transaction _t = _session.beginTransaction(); 
