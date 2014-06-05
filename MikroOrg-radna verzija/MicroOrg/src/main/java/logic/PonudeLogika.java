@@ -180,18 +180,20 @@ public Boolean postojiKlijent (String ime, String prezime){
 }
 
 public String validirajPodatke(String namjena,
-		String iznos, String rok, String garancija, String grace, String troskovi, String instrumenti) {
+		String iznos, String rok, String kamatna, String garancija, String grace, String troskovi, String instrumenti) {
 	
 	SharedLogika _sharedLogika= new SharedLogika();
 	//provjera da li su popunjena sva polja
 	if(
 		namjena.equals("")||iznos.equals("")||
-		rok.equals("")||garancija.equals("")||grace.equals("")||troskovi.equals("") || instrumenti.equals("")
+		rok.equals("")||garancija.equals("")||kamatna.equals("")||grace.equals("")||troskovi.equals("") || instrumenti.equals("")
 			) 
 		return "Nisu popunjena sva polja";
 	
 	if(!_sharedLogika.validirajIznosKredita(iznos))
 		return "Iznos nije validan";
+	if(!_sharedLogika.validirajKamatnuStopu(kamatna))
+		return "Kamatna stopa nije validna";
 	if(!isNumeric(troskovi))
 		return "Troskovi obrade nisu validni";
 
