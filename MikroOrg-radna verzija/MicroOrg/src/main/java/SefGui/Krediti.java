@@ -209,6 +209,7 @@ String _status="Nije ok";
 		label_3.setToolTipText("X mjeseci/godina");
 		
 		JLabel label_4 = new JLabel("Grace period:");
+		label_4.setToolTipText("X dana");
 		
 		JLabel lblTrokoviObradekm = new JLabel("Troškovi obrade(KM):");
 		

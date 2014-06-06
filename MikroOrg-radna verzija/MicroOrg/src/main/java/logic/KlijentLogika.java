@@ -17,6 +17,7 @@ import viewModels.KreditniSluzbenik;
 import domainModels.HibernateUtil;
 import domainModels.Osoba;
 import domainModels.Klijent;
+import domainModels.TipKredita;
 import domainModels.Uposlenik;
 
 
@@ -240,12 +241,15 @@ public class KlijentLogika {
 			return "Datum nije validan";
 		if(!_sharedLogika.validirajEmail(email))
 			return "Email nije validan";
+		if (daLiPostojiEmail(email))
+			return "Neispravni podaci. Email  već postoji!";
 		if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
 			return "JMBG nije validan";
 		if(!_sharedLogika.validirajTelefon(telefon))
 			return "Telefon nije validan";
 		if (!isAlphaNumeric(status))
 			return "Status nije validan";
+		
 		return "OK";
 	}
 	
@@ -278,6 +282,16 @@ public class KlijentLogika {
 	
 		return "OK";
 	}
+	
+	public String validirajPretragu(String imePrezime) {
+		SharedLogika _sharedLogika= new SharedLogika();
+		if (imePrezime.equals(""))
+			return "Unesite ime i prezime klijenta !";
+		if (!isAlphaNumeric2(imePrezime))
+			return "Unos nije validan.";
+		return "OK";
+	}
+	
 	private java.util.Date StringToDate(String datum) {
 		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date _datum=null;
@@ -302,14 +316,37 @@ public class KlijentLogika {
 	  return true;  
 	}
 	
+	//provjera da li je alfanumericki string s tim da je i razmak dozvoljen
 	 public boolean isAlphaNumeric(String str) {
 	        for (int i=0; i<str.length(); i++) {
 	            char c = str.charAt(i);
-	            if (!Character.isDigit(c) && !Character.isLetter(c) && !Character.isSpace(c))
+	            if (!Character.isLetter(c) && !Character.isSpace(c))
 	                return false;
 	        }
 
 	        return true;
 	    }
+	 
+		//provjera da li je string sastavljen od slova, razmaka, ali je i dozvoljen '-' u slucaju da 
+	 public boolean isAlphaNumeric2(String str) {
+	        for (int i=0; i<str.length(); i++) {
+	            char c = str.charAt(i);
+	            if (!Character.isLetter(c) && !Character.isSpace(c) && c!='-')
+	                return false;
+	        }
+
+	        return true;
+	    }
+	 public Boolean daLiPostojiEmail(String mail) {
+			Session _session= HibernateUtil.getSessionFactory().openSession();
+			 Transaction _t = _session.beginTransaction(); 
+			 
+			 Criteria criteria = _session.createCriteria(Osoba.class);
+			 Osoba _o =(Osoba) criteria.add(Restrictions.eq("email", mail)).uniqueResult();
+			 
+			 _t.commit();
+			 _session.close();
+			 return _o!=null;
+		} 
 
 }

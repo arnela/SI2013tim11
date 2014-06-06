@@ -206,9 +206,10 @@ public class Klijenti extends JFrame {
 		JLabel label = new JLabel("Adresa:");
 		
 		JLabel label_1 = new JLabel("Telefon:");
-		label_1.setToolTipText("111-111-111");
+		label_1.setToolTipText("111-222-333");
 		
 		JLabel label_2 = new JLabel("Email:");
+		label_2.setToolTipText("Sadrzi '@' i '.' karaktere");
 		
 		JLabel label_3 = new JLabel("JMBG:");
 		
@@ -501,8 +502,19 @@ public class Klijenti extends JFrame {
 		JButton button_6 = new JButton("Pretraga");
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{
+				String _status="Nije ok";
 				KlijentLogika _klijentLogika= new KlijentLogika();
+				//VALIDACIJA
+				try {
+					 _status=_klijentLogika.validirajPretragu(tf_pretraga.getText());
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Validacija error !");
+				}
+				
+				if (_status == "OK"){
+				try{
+				
 				List<KlijentSluzbenik> _klijenti=_klijentLogika.getByName(tf_pretraga.getText());
 				_sviKlijenti= new ArrayList<KlijentSluzbenik>();
 				for(KlijentSluzbenik k : _klijenti){
@@ -529,11 +541,14 @@ public class Klijenti extends JFrame {
 				}
 				else JOptionPane.showMessageDialog(null, "Ne postoji klijent sa tim imenom.");
 			}
+				
 			catch(HeadlessException e1)
 			{
 			 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 			}}
-		});
+				else JOptionPane.showMessageDialog(null, _status);
+			}
+			});
 		button_6.setBounds(364, 20, 121, 23);
 		panel_2.add(button_6);
 		
