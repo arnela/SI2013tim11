@@ -19,6 +19,7 @@ import org.hibernate.criterion.Restrictions;
 
 
 
+
 import viewModels.KreditniSluzbenik;
 import domainModels.HibernateUtil;
 import viewModels.TipKreditaSluzbenik;
@@ -200,12 +201,14 @@ public List<TipKreditaSluzbenik> getAll()
 			return "Kamatna stopa nije validna";
 		if(!isNumeric(troskovi) || Double.parseDouble(troskovi)<0)
 			return "Troskovi obrade nisu validni";
-		if (grace.contains("-"))
+		if (grace.contains("-") || !grace.matches(".*\\d.*") || !grace.contains("dan"))
 			return "Grace period nije validan";
 		if (!garancija.matches(".*\\d.*") || !(garancija.contains("godin")  || garancija.contains("mjesec")))
 			return "Garancija nije validna";
 		if (!rok.matches(".*\\d.*") || !(rok.contains("godin")  || rok.contains("mjesec")))
 			return "Rok nije validan";
+		if (daLiPostojiKredit(naziv))
+			return "Naziv tipa kredita već postoji!";
 			return "OK";
 	}
  private boolean isNumeric(String str)  
@@ -220,4 +223,16 @@ public List<TipKreditaSluzbenik> getAll()
 	  }  
 	  return true;  
 	}
+ 
+ public Boolean daLiPostojiKredit(String naziv) {
+		Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 Criteria criteria = _session.createCriteria(TipKredita.class);
+		 TipKredita _tk =(TipKredita) criteria.add(Restrictions.eq("naziv", naziv)).uniqueResult();
+		 
+		 _t.commit();
+		 _session.close();
+		 return _tk!=null;
+	} 
 }
