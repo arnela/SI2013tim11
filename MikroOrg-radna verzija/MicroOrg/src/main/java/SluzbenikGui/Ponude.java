@@ -390,9 +390,10 @@ public class Ponude extends JFrame {
 						
 						
 						TipKreditaLogika _tk = new TipKreditaLogika();
+						String nazivTipaKredita = comboBox.getSelectedItem().toString();
 						
 						TipKreditaSluzbenik _tipKredita = new TipKreditaSluzbenik(
-								null,
+								nazivTipaKredita,
 								namjenaTipaKredita,
 								iznosTipaKredita,
 								rokTipaKredita,
