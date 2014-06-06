@@ -83,6 +83,7 @@ public class Ponude extends JFrame {
 	List<KlijentSluzbenik> klijenti = new ArrayList<KlijentSluzbenik>();
 	private List<KreditnaPonuda> _svePonude = null;
 	private JTextField textField_11;
+	private JTextField textField_12;
 
 	/**
 	 * Launch the application.
@@ -117,7 +118,7 @@ public class Ponude extends JFrame {
 		trenutni=Spremnik.getTrenutni();
 		setTitle("MicroOrg - Ponude");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 690, 453);
+		setBounds(100, 100, 690, 465);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -125,7 +126,7 @@ public class Ponude extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 664, 415);
+		tabbedPane.setBounds(0, 0, 664, 427);
 		contentPane.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -200,6 +201,7 @@ public class Ponude extends JFrame {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				if (comboBox.getSelectedIndex() != -1)
+					textField_12.setEnabled(false);
 					textField_3.setEnabled(false);
 					textField_4.setEnabled(false);
 					textField_5.setEnabled(false);
@@ -220,49 +222,51 @@ public class Ponude extends JFrame {
 		
 		textField_11 = new JTextField();
 		textField_11.setColumns(10);
+		
+		JLabel lblNazivTipa = new JLabel("Naziv tipa:");
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGap(27)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(55)
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+							.addGap(4)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-									.addGap(4)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-										.addComponent(label_3)
-										.addComponent(label_4)
-										.addComponent(label_5)
-										.addComponent(label_6)
-										.addComponent(label_7)
-										.addComponent(label_8)
-										.addComponent(lblKamatnaStopa)
-										.addComponent(label_9)
-										.addComponent(label_10)
-										.addComponent(label_2))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-										.addComponent(textField_8, 149, 149, 149)
-										.addComponent(textField_7, 149, 149, 149)
-										.addComponent(textField_6, 149, 149, 149)
-										.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-											.addComponent(textField_11)
-											.addComponent(textField_2)
-											.addComponent(textField_3)
-											.addComponent(textField_4)
-											.addComponent(textField_5)
-											.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(textField_9, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))))))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(22)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_5)
+								.addComponent(label_3)
+								.addComponent(label_4)
+								.addComponent(lblKamatnaStopa)
+								.addComponent(label_9)
+								.addComponent(label_10)
+								.addComponent(label_2)
+								.addComponent(label_6)
+								.addComponent(label_7)
+								.addComponent(label_8)
+								.addComponent(lblNazivTipa))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(87, Short.MAX_VALUE))
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField_3, 149, 149, 149)
+								.addComponent(textField_12, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+								.addComponent(textField_4, 149, 149, Short.MAX_VALUE)
+								.addComponent(textField_5, 149, 149, Short.MAX_VALUE)
+								.addComponent(textField_11, 149, 149, Short.MAX_VALUE)
+								.addComponent(textField_6, 149, 149, Short.MAX_VALUE)
+								.addComponent(textField_7, 149, 149, Short.MAX_VALUE)
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(textField_2)
+									.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(textField_9, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
+								.addComponent(textField_8, 149, 149, Short.MAX_VALUE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))))
+					.addGap(82))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -279,6 +283,10 @@ public class Ponude extends JFrame {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_6)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNazivTipa)
+						.addComponent(textField_12, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_5)
@@ -309,9 +317,9 @@ public class Ponude extends JFrame {
 						.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(225)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(label))
+					.addGap(194)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(190)
@@ -348,6 +356,7 @@ public class Ponude extends JFrame {
 						textField_9.setText("");
 						textField_2.setText("");
 						comboBox.setSelectedIndex(-1);
+						textField_12.setEnabled(true);
 						textField_3.setEnabled(true);
 						textField_4.setEnabled(true);
 						textField_5.setEnabled(true);
@@ -363,6 +372,7 @@ public class Ponude extends JFrame {
 						//VALIDACIJA
 						try {
 							 _status=p.validirajPodatke(
+									 	textField_12.getText(),
 									 	textField_3.getText(),
 										textField_4.getText(),
 										textField_5.getText(),
@@ -378,7 +388,8 @@ public class Ponude extends JFrame {
 						}
 						if (_status == "OK"){
 						
-						if(!(textField_3.getText().equals("") || textField_4.getText().equals("") || textField_5.getText().equals("") || textField_11.getText().equals("") || textField_6.getText().equals("") || textField_7.getText().equals("") || textField_8.getText().equals("") || textField.getText().equals(""))){
+						if(!(textField_12.getText().equals("") || textField_3.getText().equals("") || textField_4.getText().equals("") || textField_5.getText().equals("") || textField_11.getText().equals("") || textField_6.getText().equals("") || textField_7.getText().equals("") || textField_8.getText().equals("") || textField.getText().equals(""))){
+						String nazivTipaKredita = textField_12.getText();
 						String namjenaTipaKredita = textField_3.getText();
 						Double iznosTipaKredita = Double.parseDouble(textField_4.getText());
 						String rokTipaKredita = textField_5.getText();
@@ -390,7 +401,6 @@ public class Ponude extends JFrame {
 						
 						
 						TipKreditaLogika _tk = new TipKreditaLogika();
-						String nazivTipaKredita = comboBox.getSelectedItem().toString();
 						
 						TipKreditaSluzbenik _tipKredita = new TipKreditaSluzbenik(
 								nazivTipaKredita,
@@ -408,6 +418,9 @@ public class Ponude extends JFrame {
 						 
 								Long idTipaKredita = _tk.dodajTipKredita(_tipKredita);
 								//ocisti formu
+								textField_9.setText("");
+								textField_2.setText("");
+								textField_12.setText("");
 								textField_3.setText("");
 								textField_4.setText("");
 								textField_5.setText("");
@@ -437,11 +450,31 @@ public class Ponude extends JFrame {
 				
 			}
 		});
+		
+		JButton btnPoniti = new JButton("Poništi");
+		btnPoniti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textField_9.setText("");
+				textField_2.setText("");
+				comboBox.setSelectedIndex(-1);
+				textField_12.setEnabled(true);
+				textField_3.setEnabled(true);
+				textField_4.setEnabled(true);
+				textField_5.setEnabled(true);
+				textField_11.setEnabled(true);
+				textField_6.setEnabled(true);
+				textField_7.setEnabled(true);
+				textField_8.setEnabled(true);
+				textField.setEnabled(true);
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(465, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap(368, Short.MAX_VALUE)
+					.addComponent(btnPoniti, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
 					.addComponent(button_1)
 					.addGap(18)
 					.addComponent(btnNazad)
@@ -455,11 +488,12 @@ public class Ponude extends JFrame {
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE)
-					.addGap(35)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 337, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNazad)
-						.addComponent(button_1))
+						.addComponent(button_1)
+						.addComponent(btnPoniti))
 					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);

@@ -179,13 +179,13 @@ public Boolean postojiKlijent (String ime, String prezime){
 	return !(_klijenti.isEmpty());
 }
 
-public String validirajPodatke(String namjena,
+public String validirajPodatke(String naziv, String namjena,
 		String iznos, String rok, String kamatna, String garancija, String grace, String troskovi, String instrumenti) {
 	
 	SharedLogika _sharedLogika= new SharedLogika();
 	//provjera da li su popunjena sva polja
 	if(
-		namjena.equals("")||iznos.equals("")||
+		naziv.equals("") || namjena.equals("")||iznos.equals("")||
 		rok.equals("")||garancija.equals("")||kamatna.equals("")||grace.equals("")||troskovi.equals("") || instrumenti.equals("")
 			) 
 		return "Nisu popunjena sva polja";

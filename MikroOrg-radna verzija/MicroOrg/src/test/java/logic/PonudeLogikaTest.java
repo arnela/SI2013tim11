@@ -5,6 +5,7 @@ import junit.framework.TestCase;
 public class PonudeLogikaTest extends TestCase {
 	public void testValidirajPodatke(){
 		PonudeLogika _ponudeLogika= new PonudeLogika();
+		String naziv="Nekii";
 		String namjena="Namjena";
 		String iznos="1000";
 		String rok="subota";
@@ -13,7 +14,7 @@ public class PonudeLogikaTest extends TestCase {
 		String grace="Sarajevo";
 		String troskovi="50";
 		String instrumenti="instrumenti";
-		assertEquals("OK", _ponudeLogika.validirajPodatke(namjena, iznos, rok, kamatna, garancija, grace, troskovi, instrumenti));
+		assertEquals("OK", _ponudeLogika.validirajPodatke(naziv, namjena, iznos, rok, kamatna, garancija, grace, troskovi, instrumenti));
 	}
 	public void testPostojiKlijent(){
 		// Klijent k=new Klijent() nećemo dodavati novog klijenta zbog baze jer kad bi se test ponovio 2 puta desio bi se error u bazi
