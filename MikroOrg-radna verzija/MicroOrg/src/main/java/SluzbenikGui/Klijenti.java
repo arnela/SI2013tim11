@@ -242,6 +242,7 @@ public class Klijenti extends JFrame {
 		tf_telefon.setColumns(10);
 		
 		JLabel lblStatus = new JLabel("Status:");
+		lblStatus.setToolTipText("Alfanumerički opis statusa klijenta");
 		
 		tf_status = new JTextField();
 		tf_status.setColumns(10);

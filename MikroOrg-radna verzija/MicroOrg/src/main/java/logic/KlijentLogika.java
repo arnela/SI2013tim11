@@ -244,7 +244,8 @@ public class KlijentLogika {
 			return "JMBG nije validan";
 		if(!_sharedLogika.validirajTelefon(telefon))
 			return "Telefon nije validan";
-
+		if (!isAlphaNumeric(status))
+			return "Status nije validan";
 		return "OK";
 	}
 	
@@ -270,10 +271,11 @@ public class KlijentLogika {
 			return "Datum nije validan";
 		if(!_sharedLogika.validirajEmail(email))
 			return "Email nije validan";
-		
 		if(!_sharedLogika.validirajTelefon(telefon))
 			return "Telefon nije validan";
-
+		if (!isAlphaNumeric(status))
+			return "Status nije validan";
+	
 		return "OK";
 	}
 	private java.util.Date StringToDate(String datum) {
@@ -299,6 +301,15 @@ public class KlijentLogika {
 	  }  
 	  return true;  
 	}
+	
+	 public boolean isAlphaNumeric(String str) {
+	        for (int i=0; i<str.length(); i++) {
+	            char c = str.charAt(i);
+	            if (!Character.isDigit(c) && !Character.isLetter(c) && !Character.isSpace(c))
+	                return false;
+	        }
 
+	        return true;
+	    }
 
 }
