@@ -58,7 +58,7 @@ public class SharedLogika {
             		+ "_________________________________________________________________________________"
             		+ "_________________________",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD)));
             
-            Paragraph naslov=new Paragraph("\n Izvještaj kreditnog službenika",new Font(Font.FontFamily.HELVETICA  , 18, Font.BOLD));
+            Paragraph naslov=new Paragraph("\n Izvjestaj kreditnog sluzbenika",new Font(Font.FontFamily.HELVETICA  , 18, Font.BOLD));
             naslov.setAlignment(Element.ALIGN_CENTER);
             document.add(naslov);
             Font pisanje=new Font(Font.FontFamily.HELVETICA  , 14, Font.NORMAL);
@@ -68,15 +68,15 @@ public class SharedLogika {
             UposlenikLogika ulogika=new UposlenikLogika(); 
             
             document.add(new Chunk("\n Ime i Prezime: "+novi.getImePrezimeSluzbenika(),pisanje)); 
-            document.add(new Chunk("\n Datum generisanja izvještaja: "+novi.getDatumGenerisanja(),pisanje)); 
+            document.add(new Chunk("\n Datum generisanja izvjestaja: "+novi.getDatumGenerisanja(),pisanje)); 
             document.add(new Chunk("\n Za vremenski period: "+novi.getVremenskiPeriod(),pisanje));
             document.add(new Chunk("\n Broj izdatih kredita: "+novi.getBrIzdatihKredita(),pisanje));
             document.add(new Chunk("\n Broj evidentiranih transakcija: "+novi.getBrEvidentiranihTransakcija(),pisanje));
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
             //spisak svih izdatih kredita i svih evidentiranih transakcija... nije implementirano...
-            document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
+            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
 
-            Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavača ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
+            Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavaca ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
             potpis.setAlignment(Element.ALIGN_RIGHT);
             document.add(potpis);
             Paragraph footer= new Paragraph("________________________________________________________________________"
@@ -116,7 +116,7 @@ public class SharedLogika {
             		+ "_________________________________________________________________________________"
             		+ "_________________________",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD)));
             
-            Paragraph naslov=new Paragraph("\n Izvještaj poslovanja organizacije",new Font(Font.FontFamily.HELVETICA  , 18, Font.BOLD));
+            Paragraph naslov=new Paragraph("\n Izvjestaj poslovanja organizacije",new Font(Font.FontFamily.HELVETICA  , 18, Font.BOLD));
             naslov.setAlignment(Element.ALIGN_CENTER);
             document.add(naslov);
             Font pisanje=new Font(Font.FontFamily.HELVETICA  , 14, Font.NORMAL);
@@ -126,18 +126,18 @@ public class SharedLogika {
             UposlenikLogika ulogika=new UposlenikLogika(); 
             
             document.add(new Chunk("\n Naziv: "+novi.getNazivOrganizacije(),pisanje)); 
-            document.add(new Chunk("\n Datum generisanja izvještaja: "+novi.getDatumGenerisanja(),pisanje)); 
+            document.add(new Chunk("\n Datum generisanja izvjestaja: "+novi.getDatumGenerisanja(),pisanje)); 
             document.add(new Chunk("\n Za vremenski period: "+novi.getVremenskiPeriod(),pisanje));
             document.add(new Chunk("\n Broj kredita koji su aktivni: "+novi.getBrojKredita(),pisanje));
             document.add(new Chunk("\n Broj transakcija: "+novi.getBrojTransakcija(),pisanje));
-            document.add(new Chunk("\n Količina izdatog novca: "+novi.getKolicinaIzdatogNovca(),pisanje));
+            document.add(new Chunk("\n Kolicina izdatog novca: "+novi.getKolicinaIzdatogNovca(),pisanje));
             document.add(new Chunk("\n Broj trenutnih uposlenika: "+novi.getBrojUposlenih(),pisanje));
     
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
             //spisak svih izdatih kredita i svih evidentiranih transakcija... nije implementirano...
-            document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
+            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
             
-            Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavača ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
+            Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavaca ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
             potpis.setAlignment(Element.ALIGN_RIGHT);
             document.add(potpis);
             Paragraph footer= new Paragraph("________________________________________________________________________"
@@ -193,7 +193,7 @@ public class SharedLogika {
             document.add(new Chunk("\n Kamatna stopa: "+novi.getTk().getKamatnaStopa(),pisanje));
             document.add(new Chunk("\n Garancija: "+novi.getTk().getGarancija(),pisanje));
             document.add(new Chunk("\n Grace period: "+novi.getTk().getGracePeriod(),pisanje));
-            document.add(new Chunk("\n Instrumenti obezbjeđenja: "+novi.getTk().getInstrumentiObezbjedjenja(),pisanje));
+            document.add(new Chunk("\n Instrumenti obezbjedjenja: "+novi.getTk().getInstrumentiObezbjedjenja(),pisanje));
             document.add(new Chunk("\n Troskovi obrade: "+novi.getTk().getTroskoviObrade(),pisanje));
             document.add(new Chunk("\n Datum izdavanja: "+novi.getDatumUpisa(),pisanje));
             
@@ -204,7 +204,7 @@ public class SharedLogika {
             document.add(new Chunk("\n JMBG: "+klogika.getOsoba((novi.getK().getOsobaId())).getJmbg(),pisanje));
             document.add(new Chunk("\n E-mail: "+klogika.getOsoba((novi.getK().getOsobaId())).getEmail(),pisanje));
             document.add(new Chunk("\n Telefon: "+klogika.getOsoba((novi.getK().getOsobaId())).getTelefon(),pisanje));
-            podnaslov=new Paragraph("\n \n Izdavač ponude:",new Font(Font.FontFamily.HELVETICA  , 14, Font.BOLD));
+            podnaslov=new Paragraph("\n \n Izdavac ponude:",new Font(Font.FontFamily.HELVETICA  , 14, Font.BOLD));
             podnaslov.setAlignment(Element.ALIGN_CENTER);
             document.add(podnaslov);
             document.add(new Chunk("\n Ime i prezime: "+ulogika.getOsoba(novi.getU().getOsobaId()).getImePrezime(),pisanje));
@@ -212,7 +212,7 @@ public class SharedLogika {
 
             
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
-            document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
+            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
             
             Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavača ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
             potpis.setAlignment(Element.ALIGN_RIGHT);
@@ -253,7 +253,7 @@ public class SharedLogika {
             		+ "_________________________________________________________________________________"
             		+ "_________________________",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD)));
             
-            Paragraph p=new Paragraph("\n Izvještaj o izvršenoj transakciji",new Font(Font.FontFamily.HELVETICA  , 18, Font.BOLD));
+            Paragraph p=new Paragraph("\n Izvjestaj o izvrsenoj transakciji",new Font(Font.FontFamily.HELVETICA  , 18, Font.BOLD));
             p.setAlignment(Element.ALIGN_CENTER);
             document.add(p);
             Font pisanje=new Font(Font.FontFamily.HELVETICA  , 14, Font.NORMAL);
@@ -268,14 +268,14 @@ public class SharedLogika {
             document.add(new Chunk("\n Datum uplate: "+novi.getDatumUplate(),pisanje)); 
             document.add(new Chunk("\n Vrsta uplate: "+novi.getNacinUplate(),pisanje));
             document.add(new Chunk("\n Iznos uplate: "+novi.getIznosUplate()+" KM",pisanje));
-            document.add(new Chunk("\n Iznos je uplaćen za: '"+plogika.dajTipKredita(novi.getKredit().getKreditId()).getNaziv()+"'",pisanje));
-            document.add(new Chunk(", odobrenog od strane kreditnog službenika:"+ulogika.getOsoba(Spremnik.getTrenutni().getOsobaId()).getImePrezime(),pisanje));
+            document.add(new Chunk("\n Iznos je uplacen za: '"+plogika.dajTipKredita(novi.getKredit().getKreditId()).getNaziv()+"'",pisanje));
+            document.add(new Chunk(", odobrenog od strane kreditnog sluzbenika:"+ulogika.getOsoba(Spremnik.getTrenutni().getOsobaId()).getImePrezime(),pisanje));
             document.add(new Chunk(", datuma: "+novi.getKredit().getDatumUpisa(),pisanje));
             
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
-            document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
+            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
            
-            Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavača ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
+            Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavaca ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
             potpis.setAlignment(Element.ALIGN_RIGHT);
             document.add(potpis);
             Paragraph footer= new Paragraph("________________________________________________________________________"
@@ -324,7 +324,7 @@ public class SharedLogika {
             
             document.add(new Chunk("\n Ime i Prezime: "+novi.getImePrezime(),pisanje)); 
             document.add(new Chunk("\n Adresa stanovanja: "+novi.getAdresa(),pisanje)); 
-            document.add(new Chunk("\n Datum rođenja: "+novi.getDatumRodjenja(),pisanje));
+            document.add(new Chunk("\n Datum rodjenja: "+novi.getDatumRodjenja(),pisanje));
             document.add(new Chunk("\n JMBG: "+novi.getJmbg(),pisanje));
             document.add(new Chunk("\n Broj telefona: "+novi.getTelefon(),pisanje));
             document.add(new Chunk("\n E-mail adresa: "+novi.getEmail(),pisanje));
@@ -333,7 +333,7 @@ public class SharedLogika {
             //tabela svih kredita... nije implementirano...
             
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
-            document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
+            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
             
             Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavača ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
             potpis.setAlignment(Element.ALIGN_RIGHT);
@@ -387,8 +387,8 @@ public class SharedLogika {
             document.add(new Chunk("\n Ime i Prezime: "+novi.getImePrezime(),pisanje)); 
             document.add(new Chunk("\n Adresa stanovanja: "+novi.getAdresa(),pisanje)); 
             document.add(new Chunk("\n JMBG: "+novi.getJmbg(),pisanje));
-            document.add(new Chunk("\n Datum rođenja: "+novi.getDatumRodjenja(),pisanje));
-            document.add(new Chunk("\n Mjesto rođenja: "+novi.getMjestoRodjenja(),pisanje));
+            document.add(new Chunk("\n Datum rodjenja: "+novi.getDatumRodjenja(),pisanje));
+            document.add(new Chunk("\n Mjesto rodjenja: "+novi.getMjestoRodjenja(),pisanje));
             document.add(new Chunk("\n Obrazovanje: "+novi.getObrazovanje(),pisanje));
             document.add(new Chunk("\n Telefon: "+novi.getTelefon(),pisanje));
             document.add(new Chunk("\n E-mail adresa: "+novi.getEmail(),pisanje));
@@ -398,7 +398,7 @@ public class SharedLogika {
             document.add(new Chunk("\n Broj evidentiranih transakcija: "+novi.getBrojTransakcija(),pisanje));
 
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
-            document.add(new Phrase("\n \n Ovim dokumentom je potvrđena uplata date transakcije za dati kredit, te je odobreno korištenje navedenih podataka u slične svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
+            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
             
             Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavača ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
             potpis.setAlignment(Element.ALIGN_RIGHT);
