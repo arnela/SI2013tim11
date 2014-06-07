@@ -89,4 +89,22 @@ public class PonudeLogikaTest extends TestCase {
 		assertNotNull(_ponudeLogika.dajTipKredita("Test"+tmp));
 		
 	}
+	public void testDajKlijenta(){
+		KlijentSluzbenik novi=new KlijentSluzbenik();
+		long b=(long) 150;
+		novi.setAdresa("test");
+		novi.setDatumRodjenja(null);
+		novi.setEmail("test");
+		novi.setImePrezime("Test Test");
+		novi.setJmbg("111111111111");
+		novi.setStatus("aktivan");
+	KlijentLogika klogika=new KlijentLogika();
+	klogika.dodajKlijenta(novi);
+	PonudeLogika log=new PonudeLogika();
+	UposlenikLogika ulog=new UposlenikLogika();
+	assertNotNull(log.dajKlijenta("Test", "Test"));
+	assertEquals("Test Test", ulog.getOsoba(log.dajKlijenta("Test", "Test").getOsobaId()).getImePrezime());
+		
+		
+	}
 }
