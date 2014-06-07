@@ -469,7 +469,9 @@ public class Transakcije extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				
+				Spremnik.setTransakcije(SluzbenikGui.Transakcije.this);
+				Spremnik.getTransakcije().hide();
+				Spremnik.getPocetni().show();
 			}
 			
 			@Override
