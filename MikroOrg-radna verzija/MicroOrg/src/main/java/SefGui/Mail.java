@@ -220,6 +220,10 @@ public class Mail extends JFrame {
 		});
 		btnOdustani.setBounds(267, 269, 108, 23);
 		contentPane.add(btnOdustani);
-	}
 		
+		JLabel lblzaEmail = new JLabel("(za e-mail)");
+		lblzaEmail.setHorizontalAlignment(SwingConstants.LEFT);
+		lblzaEmail.setBounds(249, 11, 126, 14);
+		contentPane.add(lblzaEmail);
+	}
 }

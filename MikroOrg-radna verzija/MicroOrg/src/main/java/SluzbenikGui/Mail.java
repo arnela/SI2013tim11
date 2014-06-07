@@ -53,6 +53,7 @@ public class Mail extends JFrame {
 	private JLabel lblNaslov;
 	private JTextField naslovfield;
 	private Object objekat;
+	private JLabel label;
 	/**
 	 * Launch the application.
 	 */
@@ -220,6 +221,11 @@ public class Mail extends JFrame {
 		});
 		btnOdustani.setBounds(267, 269, 108, 23);
 		contentPane.add(btnOdustani);
+		
+		label = new JLabel("(za e-mail)");
+		label.setHorizontalAlignment(SwingConstants.LEFT);
+		label.setBounds(249, 11, 126, 14);
+		contentPane.add(label);
 	}
 		
 }

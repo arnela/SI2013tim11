@@ -254,6 +254,7 @@ public class Poslovanje extends JFrame {
 				IzvjestajOrganizacije izvjestaj = _i.generisiIzvjestajOrganizacije((String)comboBox.getSelectedItem());
 				try {
 						SharedLogika _sharedLogika= new SharedLogika();
+						//_sharedLogika.generisiPDF(izvjestaj);
 						Spremnik.setObjekatPDF(izvjestaj);
 						Mail m = new Mail();
 						m.setVisible(true);
