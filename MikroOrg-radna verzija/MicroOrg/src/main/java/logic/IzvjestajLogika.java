@@ -62,7 +62,7 @@ public class IzvjestajLogika {
 	            else if(period.equals("sest mjeseci")) {
 	            	cal.set(Calendar.MONTH, -6);
 	            }
-	            else if(period.equals("sest mjeseci")) {
+	            else if(period.equals("godina")) {
 	            	cal.set(Calendar.YEAR, -1);
 	            }
 	            
