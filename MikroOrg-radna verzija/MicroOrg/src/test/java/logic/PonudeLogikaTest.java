@@ -107,4 +107,15 @@ public class PonudeLogikaTest extends TestCase {
 		
 		
 	}
+	public void testTraziPoImenuKlijenta(){
+		long b=(long) 150;
+		Osoba o=new Osoba();
+		o.setImePrezime("Test1 Test1");
+		KlijentLogika l=new KlijentLogika();
+		KlijentSluzbenik kl=new KlijentSluzbenik();
+		kl.setImePrezime(o.getImePrezime());
+		l.dodajKlijenta(kl);
+		PonudeLogika plogika=new PonudeLogika();
+		assertNotNull(plogika.traziPoImenuKlijenta("Test1 Test1"));
+	}
 }
