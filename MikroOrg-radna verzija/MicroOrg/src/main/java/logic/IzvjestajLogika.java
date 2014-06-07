@@ -136,7 +136,7 @@ public class IzvjestajLogika {
 	            else if(period.equals("sest mjeseci")) {
 	            	cal.set(Calendar.MONTH, -6);
 	            }
-	            else if(period.equals("sest mjeseci")) {
+	            else if(period.equals("godina")) {
 	            	cal.set(Calendar.YEAR, -1);
 	            }
 	            
@@ -206,7 +206,10 @@ public class IzvjestajLogika {
 	            
 	            int iznos = 0;
 	            for(Kredit k : krediti) {
+	            	try{
 	            	iznos += k.getTipKredita().getIznos();
+	            	}
+	            	catch(Exception e){}
 	            }
 	            
 	            IzvjestajOrganizacije _izvjestaj = new IzvjestajOrganizacije(organizacija, brojUposlenih, datum, vremenskiPeriod, brKredita, brTransakcija, iznos);
