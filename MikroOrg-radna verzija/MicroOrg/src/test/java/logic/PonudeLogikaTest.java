@@ -118,4 +118,12 @@ public class PonudeLogikaTest extends TestCase {
 		PonudeLogika plogika=new PonudeLogika();
 		assertNotNull(plogika.traziPoImenuKlijenta("Test1 Test1"));
 	}
+	public void testTraziPoDatumu(){
+		KreditnaPonuda p=new KreditnaPonuda();
+		p.setDatumUpisa("03-05-2014");
+		PonudeLogika plogika=new PonudeLogika();
+		plogika.dodajPonudu(p);
+		assertNotNull(plogika.traziPoDatumu("03-05-2014"));
+		
+	}
 }
