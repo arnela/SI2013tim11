@@ -1,5 +1,6 @@
 package logic;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -215,5 +216,13 @@ public void testGetByAdressKlijentTest(){
 		assertEquals("OK", _klijentLogika.validirajPodatke2(ime, prezime,
 				datum, telefon, adresa, email, status));
 	}
-	
+	public void testStringToDate() throws ParseException{
+		KlijentLogika pokusaj=new KlijentLogika();
+		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date _datum=null;
+		_datum=formatter.parse("03-05-2014");
+		assertEquals(_datum,pokusaj.StringToDate("03-05-2014"));
+		
+		
+	}
 }

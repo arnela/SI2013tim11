@@ -292,7 +292,7 @@ public class KlijentLogika {
 		return "OK";
 	}
 	
-	private java.util.Date StringToDate(String datum) {
+	public java.util.Date StringToDate(String datum) {
 		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date _datum=null;
 		try {
