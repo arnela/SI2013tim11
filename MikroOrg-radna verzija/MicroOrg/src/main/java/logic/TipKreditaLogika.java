@@ -20,6 +20,7 @@ import org.hibernate.criterion.Restrictions;
 
 
 
+
 import viewModels.KreditniSluzbenik;
 import domainModels.HibernateUtil;
 import viewModels.TipKreditaSluzbenik;
@@ -209,8 +210,22 @@ public List<TipKreditaSluzbenik> getAll()
 			return "Rok nije validan";
 		if (daLiPostojiKredit(naziv))
 			return "Naziv tipa kredita već postoji!";
+		if (!isAlphaNumeric(namjena))
+			return "Polje namjena nije validno!";
 			return "OK";
 	}
+ 
+ //vraca true ako se string sastoji samo od slova i razmaka, u suprotnom vraca false
+
+ public boolean isAlphaNumeric(String str) {
+     for (int i=0; i<str.length(); i++) {
+         char c = str.charAt(i);
+         if (!Character.isLetter(c) && !Character.isSpace(c))
+             return false;
+     }
+
+     return true;
+ }
  private boolean isNumeric(String str)  
 	{  
 	  try  
