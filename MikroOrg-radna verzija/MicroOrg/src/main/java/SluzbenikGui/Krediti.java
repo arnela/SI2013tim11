@@ -198,6 +198,7 @@ public class Krediti extends JFrame {
 		JLabel lblTrokoviObradekm = new JLabel("Troškovi obrade(KM):");
 		
 		JLabel lblIznosKreditakm = new JLabel("Iznos kredita(KM):");
+		lblIznosKreditakm.setToolTipText("Iznos kredita u KM, mora biti manji od 50000");
 		
 		JLabel label_7 = new JLabel("Namjena kredita:");
 		
