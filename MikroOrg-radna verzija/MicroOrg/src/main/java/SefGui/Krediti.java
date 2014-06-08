@@ -198,6 +198,7 @@ String _status="Nije ok";
 		panel_1.setBackground(Color.WHITE);
 		
 		JLabel label = new JLabel("Naziv tipa kredita:");
+		label.setToolTipText("Počinje sa velikim slovom, sastoji se samo od slova i razmaka");
 		
 		JLabel lblKamatnaStopa = new JLabel("Kamatna stopa(%):");
 		lblKamatnaStopa.setToolTipText("Mora biti manja od 20%");

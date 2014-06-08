@@ -21,6 +21,7 @@ import org.hibernate.criterion.Restrictions;
 
 
 
+
 import viewModels.KreditniSluzbenik;
 import domainModels.HibernateUtil;
 import viewModels.TipKreditaSluzbenik;
@@ -212,6 +213,8 @@ public List<TipKreditaSluzbenik> getAll()
 			return "Naziv tipa kredita već postoji!";
 		if (!isAlphaNumeric(namjena))
 			return "Polje namjena nije validno!";
+		if (!isAlphaNumeric2(naziv))
+			return "Naziv nije validan";
 			return "OK";
 	}
  
@@ -221,6 +224,17 @@ public List<TipKreditaSluzbenik> getAll()
      for (int i=0; i<str.length(); i++) {
          char c = str.charAt(i);
          if (!Character.isLetter(c) && !Character.isSpace(c))
+             return false;
+     }
+
+     return true;
+ }
+ //
+  
+ public boolean isAlphaNumeric2(String str) {
+     for (int i=0; i<str.length(); i++) {
+         char c = str.charAt(i);
+         if (!Character.isLetter(c) && !Character.isSpace(c) || Character.isSpace(str.charAt(0)))
              return false;
      }
 
