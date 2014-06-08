@@ -217,9 +217,11 @@ public class Klijenti extends JFrame {
 		label_4.setToolTipText("dd-MM-yyyy");
 		
 		JLabel label_5 = new JLabel("Ime:");
+		label_5.setToolTipText("Početno slovo je veliko, ne smije sadržavati karaktere koji nisu slova ");
 		label_5.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JLabel label_6 = new JLabel("Prezime:");
+		label_6.setToolTipText("Početno slovo je veliko, ne smije sadržavati karaktere koji nisu slova ");
 		
 		tf_adresa = new JTextField();
 		tf_adresa.setColumns(10);
