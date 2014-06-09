@@ -351,6 +351,70 @@ public class TransakcijaLogika {
 		return "OK";
 	}
 	
+	public List<Transakcija> getByUposlenik(String ime) {
+		 Session _session= HibernateUtil.getSessionFactory().openSession();
+		 Transaction _t = _session.beginTransaction(); 
+		 
+		 	 Criteria criteria = _session.createCriteria(Osoba.class);
+			 @SuppressWarnings("unchecked")
+			 Osoba _o =(Osoba) criteria.add(Restrictions.eq("imePrezime", ime)).uniqueResult();
+			 
+		/*
+				 KlijentSluzbenik _klijent= new KlijentSluzbenik(
+						    _o.getImePrezime(),
+						 	_o.getJmbg(),
+						 	_o.getDatumRodjenja(),
+						 	null,
+							_o.getTelefon(),
+							_o.getAdresa(),
+							_o.getEmail()
+						 );*/
+			 	KreditniSluzbenik _ks = new KreditniSluzbenik(
+			 			_o.getImePrezime(),
+			 			_o.getJmbg(),
+			 			_o.getDatumRodjenja(),
+			 			_o.getObrazovanje(),
+			 			_o.getTelefon(),
+			 			_o.getAdresa(),
+			 			_o.getEmail()
+			 			);
+			 
+				// criteria = _session.createCriteria(Uposlenik.class);
+				// Uposlenik _u =(Uposlenik) criteria.add(Restrictions.eq("osobaId", _o.getOsobaId())).uniqueResult();
+		
+		 
+		 criteria = _session.createCriteria(domainModels.Transakcija.class);
+		 @SuppressWarnings("unchecked")
+		 List<domainModels.Transakcija> _transakcije =(List<domainModels.Transakcija>) criteria.add(Restrictions.eq("kreditniSluzbenik", _ks)).list();
+		 List<Transakcija> _lt = new ArrayList<Transakcija>();
+		 
+		 for(domainModels.Transakcija _t1 : _transakcije){
+			 
+			 Transakcija _tr = new Transakcija(
+						_t1.getDatumUplate(),
+						 _t1.getIznosUplate(),
+						_t1.getNacinUplate(),
+						_t1.getKlijent(),
+						_t1.getKredit(),
+						_t1.getKreditniSluzbenik()
+						 );	 
+			 _lt.add(_tr);
+		 }
+		 _t.commit();
+		 _session.close();
+		 
+		 return _lt;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private boolean isNumeric(String str)  
 	{  
 	  try  
