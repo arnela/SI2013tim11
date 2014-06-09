@@ -352,12 +352,12 @@ public class SharedLogika {
 
            //izracunava ostatak
             Double iznos= log.traziPoImenuKlijenta(novi.getImePrezime()).get(0).getTk().getIznos();
-            document.add(new Chunk("\n Početni iznos kredita:"+iznos));
+            document.add(new Chunk("\n Pocetni iznos kredita:"+iznos));
             document.add(new Chunk("\n Kamatna stopa:"+log.traziPoImenuKlijenta(novi.getImePrezime()).get(0).getTk().getKamatnaStopa()));
             for(int i=0;i<lista.size();i++){
             	iznos=iznos-lista.get(i).getIznosUplate();	
             }
-            document.add(new Chunk("\n Broj uplaćenih transakcija:"+lista.size()));
+            document.add(new Chunk("\n Broj uplacenih transakcija:"+lista.size()));
             for(int i=0;i<lista.size();i++){
             	document.add(new Chunk("\n Datum uplate:"+lista.get(i).getDatumUplate()));
             	document.add(new Chunk("\n Iznos uplate:"+lista.get(i).getIznosUplate()));
