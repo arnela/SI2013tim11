@@ -233,19 +233,11 @@ public class Transakcije extends JFrame {
 				}
 				//END VALIDACIJA
 				
-				
-				
-                PonudeLogika _ponudeLogika = new PonudeLogika();                                                                                                                    
- 				
+                PonudeLogika _ponudeLogika = new PonudeLogika();
 				double _iznos = Double.parseDouble(tf_iznos.getText());
-				
-				
-				//TODO:još kredit dobaviti iz comboBoxa! a prije toga smjestiti u comboBox :) 
-
 				Klijent _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
-				
-				
-				Kredit _kredit =  (Kredit) comboBox.getSelectedItem();
+				Kredit _kredit = _transakcijaLogika.traziPoTipuKreditaIKlijenta(tf_jmbg.getText());
+
 				if(_status=="OK"){
 
 				Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
@@ -311,11 +303,14 @@ public class Transakcije extends JFrame {
 				double _iznos = Double.parseDouble(tf_iznos.getText());
 				Klijent _k = _transakcijaLogika.dajKlijenta(tf_jmbg.getText());
 				Kredit _kredit = _transakcijaLogika.traziPoTipuKreditaIKlijenta(tf_jmbg.getText());
-				
+				if(tf_iznos.getText()=="" || tf_jmbg.getText()=="") JOptionPane.showMessageDialog(null, "Niste popunili sva polja");
+
+
 				if(_status=="OK"){
 
 					Transakcija _transakcija = new Transakcija(_datum, _iznos, _nacin, _k, _kredit, Spremnik.getTrenutni()); 
 				try {
+					
 					_transakcijaLogika.dodajTransakciju(_transakcija); 
 					//ocisti formu
 					tf_jmbg.setText("");
@@ -379,12 +374,12 @@ public class Transakcije extends JFrame {
 					int _foo= _table.getSelectedRow();
 					if(_foo==-1) throw new NullPointerException();
 					
-					
 					for(Transakcija t : _transakcije){
 						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4)))){
 							_toBePDFGenerated=t;
 						}	
 					}
+
 					SharedLogika _sharedLogika= new SharedLogika();
 					_sharedLogika.generisiPDF(_toBePDFGenerated);
 					_sharedLogika.otvoriPDF(_toBePDFGenerated);
@@ -394,7 +389,7 @@ public class Transakcije extends JFrame {
 					JOptionPane.showMessageDialog(null, "Niste odabrali transakciju čije podatke želite prikazati u pdf formatu!");
 				} 
 				catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Nešto je krenulo po zlu! ERROR: pr1k4z 3rr0r");
+					JOptionPane.showMessageDialog(null, e1);
 				}
 				
 			}
@@ -448,14 +443,14 @@ public class Transakcije extends JFrame {
 		radioButton_4.setBounds(6, 85, 177, 23);
 		panel_5.add(radioButton_4);
 		
-		final JRadioButton rdbtnImeIPrezime = new JRadioButton("Ime i prezime klijenta");
-		rdbtnImeIPrezime.setBounds(6, 33, 177, 23);
-		panel_5.add(rdbtnImeIPrezime);
+		final JRadioButton radioButton_5 = new JRadioButton("Klijent - Ime&Prezime");
+		radioButton_5.setBounds(6, 33, 177, 23);
+		panel_5.add(radioButton_5);
 		
 		grupa2.add(radioButton_2);
 		grupa2.add(radioButton_3);
 		grupa2.add(radioButton_4);
-		grupa2.add(rdbtnImeIPrezime);
+		grupa2.add(radioButton_5);
 		
 		JButton button_6 = new JButton("Nazad");
 		button_6.addActionListener(new ActionListener() {
@@ -469,9 +464,7 @@ public class Transakcije extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				Spremnik.setTransakcije(SluzbenikGui.Transakcije.this);
-				Spremnik.getTransakcije().hide();
-				Spremnik.getPocetni().show();
+				
 			}
 			
 			@Override
@@ -491,7 +484,7 @@ public class Transakcije extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				TransakcijaLogika _transakcijaLogika= new TransakcijaLogika();
-				//neka stoji ovo
+				
 				if(radioButton_2.isSelected()){
 				try{
 				_transakcije=_transakcijaLogika.getByDate(tf_pretraga.getText());
@@ -510,7 +503,7 @@ public class Transakcije extends JFrame {
 				{
 					 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
 					}
-				}else if(rdbtnImeIPrezime.isSelected()){
+				}else if(radioButton_5.isSelected()){
 					try{
 					_transakcije=_transakcijaLogika.getByKlijent(tf_pretraga.getText());
 					if(_transakcije.size()!=0){
@@ -561,7 +554,7 @@ public class Transakcije extends JFrame {
 					panel_3.revalidate();
 					panel_3.repaint();
 					}
-					else JOptionPane.showMessageDialog(null, "Ne transakcija sa tim nazivom tipa kredita.");
+					else JOptionPane.showMessageDialog(null, "Ne postoji transakcija sa tim nazivom tipa kredita.");
 					}catch(HeadlessException e1)
 					{
 						 JOptionPane.showMessageDialog(null, "Nešto je pošlo po zlu! ERROR: pr3tr4g4");
@@ -603,7 +596,7 @@ public class Transakcije extends JFrame {
 						_table.repaint();
 				}
 				catch (NullPointerException e1) {
-					JOptionPane.showMessageDialog(null, "Niste odabrali tip kredita koji želite obrisati!!!!");
+					JOptionPane.showMessageDialog(null, "Niste odabrali transakcije koji želite obrisati!!!!");
 
 				} 
 				catch (Exception e1) {

@@ -42,7 +42,7 @@ public class Transakcije extends JFrame {
 	private JTextField tf_podaciPretrage;
 	private Uposlenik trenutni;
 	private  List<Transakcija> _transakcije=null;
-	JTable _table = null;
+	private JTable _table = null;
 	
 	/**
 	 * Launch the application.
@@ -128,37 +128,30 @@ public class Transakcije extends JFrame {
 		panel.add(panel_3);
 		
 		ButtonGroup grupa = new ButtonGroup();
-
-		
-		final JRadioButton radioButton = new JRadioButton("Ime i Prezime uposlenika");
-		radioButton.setBounds(6, 7, 170, 23);
-		panel_3.add(radioButton);
 		
 		final JRadioButton radioButton_1 = new JRadioButton("Klijent - Ime&Prezime");
-		radioButton_1.setBounds(6, 33, 160, 23);
+		radioButton_1.setBounds(6, 7, 160, 23);
 		panel_3.add(radioButton_1);
 		
 		final JRadioButton radioButton_2 = new JRadioButton("Naziv tipa kredita");
 		radioButton_2.setBounds(6, 58, 160, 23);
 		panel_3.add(radioButton_2);
-		
-		grupa.add(radioButton);
 		grupa.add(radioButton_1);
 		grupa.add(radioButton_2);
 		
 		JButton button_1 = new JButton("Pretra\u017Ei po:");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				SharedLogika _sharedLogika = new SharedLogika();
 				TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
 				
-				if(radioButton.isSelected()){
-					
-					
-				}
-				else if(radioButton_1.isSelected()){
+				if(radioButton_1.isSelected()){
 					try{
-						List<Transakcija> _transakcije=_transakcijaLogika.getByKlijent(tf_podaciPretrage.getText());
+						if(!_sharedLogika.validirajImePrezime(tf_podaciPretrage.getText())){
+							JOptionPane.showMessageDialog(null, "Nevalidno ime klijenta.");
+
+						}
+						_transakcije=_transakcijaLogika.getByKlijent(tf_podaciPretrage.getText());
 						if(_transakcije.size()!=0){
 						 _table = new JTable();
 						_table.setModel(new TransakcijaTableModel(_transakcije));
@@ -179,7 +172,7 @@ public class Transakcije extends JFrame {
 				}
 				else if(radioButton_2.isSelected()){
 					try{
-						List<Transakcija> _transakcije = _transakcijaLogika.getByTipKredita(tf_podaciPretrage.getText());
+						_transakcije = _transakcijaLogika.getByTipKredita(tf_podaciPretrage.getText());
 						if(_transakcije.size()!=0){
 						_table = new JTable();
 						_table.setModel(new TransakcijaTableModel(_transakcije));
@@ -207,21 +200,21 @@ public class Transakcije extends JFrame {
 		JButton button = new JButton("PDF prikaz");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				Transakcija _toBePDFGenerated=null;
 				try{
 					int _foo= _table.getSelectedRow();
 					if(_foo==-1) throw new NullPointerException();
-					
 					
 					for(Transakcija t : _transakcije){
 						if( (t.getDatumUplate().equals((String)_table.getValueAt(_foo, 4)))){
 							_toBePDFGenerated=t;
 						}	
 					}
-					SharedLogika _sharedLogika= new SharedLogika();
+					SharedLogika _sharedLogika = new SharedLogika();
 					_sharedLogika.generisiPDF(_toBePDFGenerated);
 					_sharedLogika.otvoriPDF(_toBePDFGenerated);
-					
+										
 				}
 				catch (NullPointerException e1) {
 					JOptionPane.showMessageDialog(null, "Niste odabrali transakciju čije podatke želite prikazati u pdf formatu!");
