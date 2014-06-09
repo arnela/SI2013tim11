@@ -9,7 +9,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import domainModels.*;
 
 import javax.swing.JOptionPane;
 import javax.swing.Spring;
@@ -330,10 +334,45 @@ public class SharedLogika {
             document.add(new Chunk("\n E-mail adresa: "+novi.getEmail(),pisanje));
             document.add(new Chunk("\n Status klijenta: "+novi.getStatus(),pisanje));
             
-            //tabela svih kredita... nije implementirano...
+            
+            //Ako ima kredita... ako nema samo ce preskociti ovaj dio
+            try{
+            document.add(new Chunk("\n \n \n Krediti "));
+            TipKreditaLogika tlog=new TipKreditaLogika();
+            PonudeLogika log=new PonudeLogika();
+            TransakcijaLogika tranlog=new TransakcijaLogika();
+            KreditLogika klogika=new KreditLogika();
+            
+            if (log.traziPoImenuKlijenta(novi.getImePrezime())!=null)
+            {
+            document.add(new Chunk("\n Naziv kredita:"+log.traziPoImenuKlijenta(novi.getImePrezime()).get(0).getTk().getNaziv()));
+            document.add(new Chunk("\n Datum kreiranja kredita:"+log.traziPoImenuKlijenta(novi.getImePrezime()).get(0).getDatumUpisa()));
+            List<viewModels.Transakcija> lista = new ArrayList<viewModels.Transakcija>();
+            lista=tranlog.getByKlijent(tranlog.dajOsobu(novi.getJmbg()).getImePrezime());
+
+           //izracunava ostatak
+            Double iznos= log.traziPoImenuKlijenta(novi.getImePrezime()).get(0).getTk().getIznos();
+            document.add(new Chunk("\n Početni iznos kredita:"+iznos));
+            document.add(new Chunk("\n Kamatna stopa:"+log.traziPoImenuKlijenta(novi.getImePrezime()).get(0).getTk().getKamatnaStopa()));
+            for(int i=0;i<lista.size();i++){
+            	iznos=iznos-lista.get(i).getIznosUplate();	
+            }
+            document.add(new Chunk("\n Broj uplaćenih transakcija:"+lista.size()));
+            for(int i=0;i<lista.size();i++){
+            	document.add(new Chunk("\n Datum uplate:"+lista.get(i).getDatumUplate()));
+            	document.add(new Chunk("\n Iznos uplate:"+lista.get(i).getIznosUplate()));
+            	document.add(new Chunk("\n Nacin uplate:"+lista.get(i).getNacinUplate()));
+            }
+            document.add(new Chunk("\n \n Ostatak kredita:"+iznos));
+            document.add(new Chunk("\n Rok otplate:"+log.traziPoImenuKlijenta(novi.getImePrezime()).get(0).getTk().getRok()));
+            }
+            }catch(Exception e){document.add(new Chunk("\n Nema nijednog kredita... "));}
+            
+            
+            
             
             Font pisanje2=new Font(Font.FontFamily.HELVETICA  , 14, Font.ITALIC);
-            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n \n \n \n \n  \n \n \n \n \n ",pisanje2)); //tekstualne fraze
+            document.add(new Phrase("\n \n Ovim dokumentom je potvrdjena uplata date transakcije za dati kredit, te je odobreno koristenje navedenih podataka u slicne svrhe! \n  ",pisanje2)); //tekstualne fraze
             
             Paragraph potpis=new Paragraph("__________________________________________  \n \n Potpis izdavača ",new Font(Font.FontFamily.HELVETICA  , 5, Font.BOLD));
             potpis.setAlignment(Element.ALIGN_RIGHT);
