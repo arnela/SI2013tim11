@@ -209,7 +209,7 @@ public class UposlenikLogika {
 			return "Email nije validan";
 		if(!isNumeric(plata))
 			return "Plata nije validna";
-		if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
+		if(!_sharedLogika.validirajJMB(jmbg))
 			return "JMBG nije validan";
 		if(!_sharedLogika.validirajTelefon(telefon))
 			return "Telefon nije validan";

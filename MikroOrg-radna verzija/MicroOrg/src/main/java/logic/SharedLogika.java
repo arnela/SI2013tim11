@@ -2,6 +2,7 @@
 
 package logic;
 
+import java.awt.Color;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,8 +16,11 @@ import java.util.List;
 
 import domainModels.*;
 
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.Spring;
+import javax.swing.border.Border;
 
 import aplikacija.MicroOrg.Spremnik;
 
@@ -37,6 +41,7 @@ import domainModels.Uposlenik;
 import viewModels.*;
 
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.mail.*;
@@ -553,13 +558,15 @@ public class SharedLogika {
 			int d = cal.get(Calendar.DAY_OF_MONTH);
 			int m = cal.get(Calendar.MONTH);
 			int g = cal.get(Calendar.YEAR);
-			if(/*_jmbg.length()==13 && */dan == d && mjesec == m && godina == g || _jmbg.matches("\\d{13}")) return true;
+			if(/*_jmbg.length()==13  &&*/  dan == d && mjesec == m && godina == g && _jmbg.matches("\\d{13}"))
+			return true;
 			
 			else return false;
 		} catch (Exception e) {
 			return false;
 		}
 }
+ 
 	//implementirano
 	public boolean validirajDatum(String datum){
 		 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -620,10 +627,23 @@ public class SharedLogika {
 		return telefon.matches("\\d{3}-\\d{3}-\\d{3}");
 	}
 	//implementirano
-	public boolean validirajJMB(String jmbg){
-		if(jmbg.length()==13 && jmbg.matches("\\d{13}"))return true;
-		else return false;
+public Boolean validirajJMB(String polje) {
+		
+		final Pattern EMAIL_ADDRESS_REGEX =  Pattern.compile("^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])[0-9]{9}$", Pattern.CASE_INSENSITIVE);
+        Matcher matcher = EMAIL_ADDRESS_REGEX .matcher(polje);
+
+        if ( matcher.find() ) {
+			Border border = BorderFactory.createLineBorder(Color.GRAY, 1);
+			 
+			return true;
+        } else {
+			Border border = BorderFactory.createLineBorder(Color.RED, 1);
+		 
+			return false;
+        }
+        
 	}
+	
 	public void ispitajSQL(String upad){}
 	
 }

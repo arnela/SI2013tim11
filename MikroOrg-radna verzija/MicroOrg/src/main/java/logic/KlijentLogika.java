@@ -243,7 +243,7 @@ public class KlijentLogika {
 			return "Email nije validan";
 		if (daLiPostojiEmail(email))
 			return "Neispravni podaci. Email  već postoji!";
-		if(!_sharedLogika.validirajJMB(jmbg, StringToDate(datum)))
+		if(!_sharedLogika.validirajJMB(jmbg))
 			return "JMBG nije validan";
 		if(!_sharedLogika.validirajTelefon(telefon))
 			return "Telefon nije validan";
