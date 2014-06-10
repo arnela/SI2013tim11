@@ -336,5 +336,74 @@ public class TransakcijaLogikaTest extends TestCase{
 		boolean pom = _transakcijaLogika.daLiPostojiT("nazivjaje123");	
 		assertTrue(pom);	
 }
+	
+	public void testSoftDeleteByDatum(){
 		
+		TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
+		SimpleDateFormat _sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+		java.util.Date _date = null;
+		try {
+			_date = _sdf1.parse("07-09-1992");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		try{
+		KlijentSluzbenik _klijent = new KlijentSluzbenik(
+				"Adnan Sivro",
+				"111222333444",
+				new java.sql.Date(_date.getTime()),
+				"061-111-222",
+				"Neka Adresa 1337",
+				"mail@mail.mail",
+				null
+				);
+		Klijent _kl = new Klijent(
+				"aktivan",
+				Long.parseLong("0", 10)
+				);
+		
+		TipKredita _tipkredita = new TipKredita(
+				"PrviTip",
+				"namjena",
+				new Double(5000),
+				"neki rok",
+				new Double(20),
+				"nemagarancije",
+				"obezbjedjenje",
+				"period",
+				new Double(1000)
+				);
+		
+		Uposlenik _u= new Uposlenik(
+				 false,
+				 "01011990123123",
+				 "dsadasd",
+				 0,
+				 0,
+				 Long.parseLong("0", 10),
+				 "Sarajevo",
+				 10000.00
+				 );
+		
+		Kredit _kredit1 = new Kredit(
+				_u,
+				_kl,
+				_tipkredita,
+				"datum"
+				);
+		
+		
+		_transakcijaLogika.dodajTransakciju(new Transakcija(
+				"22-11-2013",
+				111.00,
+				"gotovina",
+				_kl,
+				_kredit1,
+				_u
+				));
+	   _transakcijaLogika.softDeleteByDatum("22-11-2013"); 
+	   assertNotNull(_transakcijaLogika.getByDate("22-11-2013").get(0));
+	  }catch(Exception e){}
+	}
 }
