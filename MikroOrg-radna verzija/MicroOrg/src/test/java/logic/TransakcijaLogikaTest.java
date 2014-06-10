@@ -320,6 +320,12 @@ public class TransakcijaLogikaTest extends TestCase{
 		assertEquals(1,_transakcije.size());
 		
 	}
-	
+	public void testValidirajPodatke(){
+		TransakcijaLogika _transakcijaLogika = new TransakcijaLogika();
+			String datum="11-10-1990";
+			String iznos="10000";
+			String nacin="Nacin";
+			assertEquals("OK", _transakcijaLogika.validirajPodatke(datum, iznos, nacin));
+		}
 		
 }
