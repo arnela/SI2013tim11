@@ -1,63 +1,57 @@
 package logic;
 
-import java.sql.Date;
-import java.util.Calendar;
-import java.text.ParseException;
-
 import junit.framework.TestCase;
 
-public class SharedLogikaTest extends TestCase{
+public class SharedLogikaTest extends TestCase {
 
-	public void validirajJMBTest(){
-		SharedLogika _sharedLogika =  new SharedLogika();
-		
-		Calendar cal = Calendar.getInstance();
-		cal.set(1990, 10, 11);
-		java.util.Date dt = cal.getTime();
-		
-		assertEquals(true, _sharedLogika.validirajJMB("1110990193053", dt));
-	}
-	
-	public void validirajDatumTest(){
+
+	public void testValidirajDatum() {
 		SharedLogika _sharedLogika =  new SharedLogika();
 		assertEquals(true, _sharedLogika.validirajDatum("11-10-1990"));
+
 	}
-	
-	public void validirajEmailTest(){
+
+	public void testValidirajEmail() {
 		SharedLogika _sharedLogika =  new SharedLogika();
 		assertEquals(true, _sharedLogika.validirajEmail("asd@sdaf.com"));
+
 	}
-	
-	public void validirajImePrezimeTest(){
+
+	public void testValidirajImePrezime() {
 		SharedLogika _sharedLogika =  new SharedLogika();
-		assertEquals(true, _sharedLogika.validirajDatum("Adnan Sivro"));
+		assertEquals(true, _sharedLogika.validirajImePrezime("Adnan Sivro"));
+
 	}
-	
-	public void validirajIznosKreditaTest(){
+
+	public void testValidirajIznosKredita() {
 		SharedLogika _sharedLogika =  new SharedLogika();
 		assertEquals(true, _sharedLogika.validirajIznosKredita("10000"));
-	}
 	
-	public void validirajKamatnuStopuTest(){
+	}
+
+	public void testValidirajKamatnuStopu() {
 		SharedLogika _sharedLogika =  new SharedLogika();
 		assertEquals(true, _sharedLogika.validirajKamatnuStopu("10"));
+
 	}
-	
-	public void validirajImeTest(){
+
+	public void testValidirajIme() {
 		SharedLogika _sharedLogika =  new SharedLogika();
 		assertEquals(true, _sharedLogika.validirajIme("Adnan"));
+
 	}
-	
-	public void validirajPrezimeTest(){
+
+	public void testValidirajPrezime() {
 		SharedLogika _sharedLogika =  new SharedLogika();
 		assertEquals(true, _sharedLogika.validirajPrezime("Sivro"));
+
 	}
-	
-	public void validirajTelefonTest(){
+
+	public void testValidirajTelefon() {
 		SharedLogika _sharedLogika =  new SharedLogika();
 		assertEquals(true, _sharedLogika.validirajTelefon("111-111-111"));
 	}
-	
-	
-	
+
+
+
 }
