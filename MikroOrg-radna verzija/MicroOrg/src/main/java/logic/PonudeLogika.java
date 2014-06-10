@@ -91,11 +91,16 @@ public class PonudeLogika {
 		List<TipKredita> _tipovi = (List<TipKredita>)_criteria.add(Restrictions.eq("naziv", nazivTipa)).list();
 		
 		List<Kredit> _krediti = new ArrayList<Kredit>();
-		Kredit _kredit_ = new Kredit();
+		//Kredit _kredit_ = new Kredit();
+		List<Kredit> tmp = new ArrayList();
+		
 		for(TipKredita tk : _tipovi) {
 			Criteria criteria = _session.createCriteria(Kredit.class);
-			_kredit_ = (Kredit)criteria.add(Restrictions.eq("tipKredita",tk)).uniqueResult();
-			_krediti.add(_kredit_);
+			//_kredit_ = (Kredit)criteria.add(Restrictions.eq("tipKredita",tk)).uniqueResult();
+			//_krediti.add(_kredit_);
+			tmp = (List<Kredit>) criteria.add(Restrictions.eq("tipKredita",tk)).list();
+			for(Kredit krd : tmp) _krediti.add(krd);
+			
 		}
 		List<KreditnaPonuda> _kp = new ArrayList<KreditnaPonuda>();
 		for(Kredit kredit : _krediti) {

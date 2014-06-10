@@ -126,4 +126,16 @@ public class PonudeLogikaTest extends TestCase {
 		assertNotNull(plogika.traziPoDatumu("03-05-2014"));
 		
 	}
+	public void testTraziPoTipuKredita() {
+		TipKredita tk = new TipKredita();
+		tk.setNaziv("TestTipa");
+		
+		TipKreditaLogika tkl = new TipKreditaLogika();
+		TipKreditaSluzbenik _tipKreditaSluzbenik = new TipKreditaSluzbenik();
+		_tipKreditaSluzbenik.setNaziv(tk.getNaziv());
+		tkl.dodajTipKredita(_tipKreditaSluzbenik);
+		
+		PonudeLogika plogika = new PonudeLogika();
+		assertNotNull(plogika.traziPoTipuKredita("TestTipa"));
+	}
 }
