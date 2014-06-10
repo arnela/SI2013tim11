@@ -327,5 +327,10 @@ public class TransakcijaLogikaTest extends TestCase{
 			String nacin="Nacin";
 			assertEquals("OK", _transakcijaLogika.validirajPodatke(datum, iznos, nacin));
 		}
+	public void testDaLiPostojiT() {
+		TransakcijaLogika _transakcijaLogika =  new TransakcijaLogika();
+		boolean pom = _transakcijaLogika.daLiPostojiT("nazivjaje123");	
+		assertTrue(pom);	
+}
 		
 }
